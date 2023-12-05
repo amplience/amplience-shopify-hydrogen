@@ -1,11 +1,8 @@
 import type {ContentItem} from '~/clients/amplience/create-dc-content-client.types';
-
+import Text
+ from '../text/Text';
 type AmplienceWrapperProps = {
   content: ContentItem;
-};
-
-const Text = ({content}: {content: ContentItem}) => {
-  return <>Text: {content._meta.name}</>;
 };
 
 const COMPONENT_MAPPING: {
