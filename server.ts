@@ -14,6 +14,7 @@ import {
   type SessionStorage,
   type Session,
 } from '@shopify/remix-oxygen';
+import {createDcContentClient} from './app/clients/amplience/create-dc-content-client';
 
 /**
  * Export a fetch handler in module format.
@@ -64,13 +65,25 @@ export default {
       });
 
       /**
+       * Create a DC Content client
+       */
+      const {ampContentClient} = createDcContentClient({hubName: env.HUB_NAME});
+
+      /**
        * Create a Remix request handler and pass
        * Hydrogen's Storefront client to the loader context.
        */
       const handleRequest = createRequestHandler({
         build: remixBuild,
         mode: process.env.NODE_ENV,
-        getLoadContext: () => ({session, storefront, cart, env, waitUntil}),
+        getLoadContext: () => ({
+          session,
+          storefront,
+          cart,
+          env,
+          waitUntil,
+          ampContentClient,
+        }),
       });
 
       const response = await handleRequest(request);
