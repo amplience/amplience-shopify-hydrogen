@@ -45,7 +45,10 @@ declare global {
   };
 
   type ContentClient = {
-    fetchContent: (items: ContentItemRequest[]) => Promise<ContentItem[]>;
+    fetchContent: (
+      items: ContentItemRequest[],
+      params: any,
+    ) => Promise<ContentItem[]>;
   };
 }
 

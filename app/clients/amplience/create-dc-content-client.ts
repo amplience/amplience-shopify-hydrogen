@@ -7,7 +7,7 @@ interface DcContentClientOptions {
   hubName: string;
 }
 
-const DEFAULT_PARAMS = {depth: 'all', format: 'inlined'};
+const DEFAULT_PARAMS = {depth: 'all', format: 'inlined', locale: 'en-US'};
 
 export function createDcContentClient({hubName}: DcContentClientOptions) {
   const host = `https://${hubName}.cdn.content.amplience.net/content`;

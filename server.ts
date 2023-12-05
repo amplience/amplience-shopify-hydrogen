@@ -39,13 +39,15 @@ export default {
         HydrogenSession.init(request, [env.SESSION_SECRET]),
       ]);
 
+      const i18n = getLocaleFromRequest(request);
+
       /**
        * Create Hydrogen's Storefront client.
        */
       const {storefront} = createStorefrontClient({
         cache,
         waitUntil,
-        i18n: getLocaleFromRequest(request),
+        i18n,
         publicStorefrontToken: env.PUBLIC_STOREFRONT_API_TOKEN,
         privateStorefrontToken: env.PRIVATE_STOREFRONT_API_TOKEN,
         storeDomain: env.PUBLIC_STORE_DOMAIN,
@@ -69,6 +71,8 @@ export default {
        */
       const {ampContentClient} = createDcContentClient({hubName: env.HUB_NAME});
 
+      const locale = `${i18n.language.toLocaleLowerCase()}-${i18n.country}`;
+
       /**
        * Create a Remix request handler and pass
        * Hydrogen's Storefront client to the loader context.
@@ -83,6 +87,7 @@ export default {
           env,
           waitUntil,
           ampContentClient,
+          locale,
         }),
       });
 

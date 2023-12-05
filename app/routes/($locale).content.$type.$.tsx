@@ -8,11 +8,13 @@ export const meta: MetaFunction<typeof loader> = ({data}) => {
 export async function loader({params, context}: LoaderFunctionArgs) {
   const {type} = params;
   const handle = params['*'];
-  const {ampContentClient} = context;
+  const {
+    ampContentClient: {fetchContent},
+    locale,
+  } = context;
 
   const requestItem = type === 'key' ? {key: handle} : {id: handle};
-
-  const content = await ampContentClient.fetchContent([requestItem]);
+  const content = await fetchContent([requestItem], {locale});
 
   return defer({content});
 }

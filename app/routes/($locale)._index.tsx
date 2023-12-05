@@ -10,9 +10,9 @@ export const meta: MetaFunction = () => {
 export async function loader({context}: LoaderFunctionArgs) {
   const {
     ampContentClient: {fetchContent},
+    locale,
   } = context;
-
-  const textContent = (await fetchContent([{key: 'text'}]))[0];
+  const textContent = (await fetchContent([{key: 'text'}], {locale}))[0];
   return defer({textContent});
 }
 
