@@ -6,7 +6,8 @@ export const meta: MetaFunction<typeof loader> = ({data}) => {
 };
 
 export async function loader({params, context}: LoaderFunctionArgs) {
-  const {handle, type} = params;
+  const {type} = params;
+  const handle = params['*'];
   const {ampContentClient} = context;
 
   const requestItem = type === 'key' ? {key: handle} : {id: handle};
