@@ -2,6 +2,7 @@ import type {ContentItem} from '~/clients/amplience/create-dc-content-client.typ
 import Text from '../text/Text';
 import Image from '../image/Image';
 import Video from '../video/Video';
+import SplitBlock from '../split-block/SplitBlock';
 /**
  * Amplience Wrapper props
  */
@@ -18,6 +19,7 @@ const COMPONENT_MAPPING: {
   'https://demostore.amplience.com/content/text': Text,
   'https://demostore.amplience.com/content/image': Image,
   'https://demostore.amplience.com/content/video': Video,
+  'https://demostore.amplience.com/content/split-block': SplitBlock,
 };
 
 /**

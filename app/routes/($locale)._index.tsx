@@ -25,19 +25,25 @@ export async function loader({context}: LoaderFunctionArgs) {
   const textContent = (await fetchContent([{key: 'text'}], {locale}))[0];
   const imageContent = (await fetchContent([{key: 'image/example1'}], {locale}))[0];
   const videoContent = (await fetchContent([{key: 'docs/story/video/video1'}], {locale}))[0];
-  return defer({featuredCollection, recommendedProducts, textContent, videoContent, imageContent});
+  const splitBlockContent = (await fetchContent([{key: 'split-block/example4'}], {locale}))[0];
+  return defer({featuredCollection, recommendedProducts, textContent, videoContent, imageContent, splitBlockContent});
 }
 
 export default function Homepage() {
-  const {featuredCollection, recommendedProducts, textContent, videoContent, imageContent} =
+  const {featuredCollection, recommendedProducts, textContent, videoContent, imageContent, splitBlockContent} =
     useLoaderData<typeof loader>();
   return (
     <div className="home">
       <FeaturedCollection collection={featuredCollection} />
       <RecommendedProducts products={recommendedProducts} />
+      <h2 style={{paddingTop: '20px'}}>Image Component</h2>
       <AmplienceWrapper content={imageContent}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Text Component</h2>
       <AmplienceWrapper content={textContent}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Video Component</h2>
       <AmplienceWrapper content={videoContent}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Split Block Component</h2>
+      <AmplienceWrapper content={splitBlockContent}></AmplienceWrapper>
     </div>
   );
 }
