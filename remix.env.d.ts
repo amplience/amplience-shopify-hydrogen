@@ -44,6 +44,9 @@ declare global {
     pathPrefix: string;
   };
 
+  /**
+   * Content client containing a fetch by id or key method
+   */
   type ContentClient = {
     fetchContent: (
       items: ContentItemRequest[],
