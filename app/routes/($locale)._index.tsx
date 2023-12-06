@@ -23,12 +23,24 @@ export async function loader({context}: LoaderFunctionArgs) {
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
   const textContent = (await fetchContent([{key: 'text'}], {locale}))[0];
-  const imageContent = (await fetchContent([{key: 'image/example1'}], {locale}))[0];
-  const videoContent = (await fetchContent([{key: 'docs/story/video/video1'}], {locale}))[0];
-  const splitBlockContent = (await fetchContent([{key: 'split-block/example4'}], {locale}))[0];
-  const cardContent = (await fetchContent([{key: 'card/example1'}], {locale}))[0];
-  const cardListContent = (await fetchContent([{key: 'card-list/example1'}], {locale}))[0];
-  const containerContent = (await fetchContent([{key: 'container/example1'}], {locale}))[0];
+  const imageContent = (
+    await fetchContent([{key: 'image/example1'}], {locale})
+  )[0];
+  const videoContent = (
+    await fetchContent([{key: 'docs/story/video/video1'}], {locale})
+  )[0];
+  const splitBlockContent = (
+    await fetchContent([{key: 'split-block/example4'}], {locale})
+  )[0];
+  const cardContent = (
+    await fetchContent([{key: 'card/example1'}], {locale})
+  )[0];
+  const cardListContent = (
+    await fetchContent([{key: 'card-list/example1'}], {locale})
+  )[0];
+  const containerContent = (
+    await fetchContent([{key: 'container/example1'}], {locale})
+  )[0];
   return defer({
     featuredCollection,
     recommendedProducts,
@@ -53,8 +65,7 @@ export default function Homepage() {
     cardContent,
     cardListContent,
     containerContent,
-  } =
-    useLoaderData<typeof loader>();
+  } = useLoaderData<typeof loader>();
   return (
     <div className="home">
       <FeaturedCollection collection={featuredCollection} />

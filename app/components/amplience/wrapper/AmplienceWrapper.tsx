@@ -18,7 +18,7 @@ type AmplienceWrapperProps = {
  * Component Mapping matching schemas and React components
  */
 const COMPONENT_MAPPING: {
-  [key: string]: React.FC<any>
+  [key: string]: React.FC<any>;
 } = {
   'https://demostore.amplience.com/content/text': Text,
   'https://demostore.amplience.com/content/image': Image,

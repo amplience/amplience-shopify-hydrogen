@@ -2,9 +2,16 @@ import type {ContentItem} from '~/clients/amplience/create-dc-content-client.typ
 import ReactMarkdown from 'markdown-to-jsx';
 
 type TextProps = {
-    text: string;
-    align: 'start' | 'end' | 'left' | 'right' | 'center' | 'justify' | 'match-parent';
-}
+  text: string;
+  align:
+    | 'start'
+    | 'end'
+    | 'left'
+    | 'right'
+    | 'center'
+    | 'justify'
+    | 'match-parent';
+};
 
 /**
  * Text component
@@ -12,13 +19,11 @@ type TextProps = {
  * @returns Text component using markdown to HTML
  */
 const Text: React.FC<TextProps> = ({text, align}) => {
-    return (
-        <div className="markdown" style={{textAlign: align}}>
-            {
-              text && <ReactMarkdown>{text}</ReactMarkdown>
-            }
-        </div>
-    )
-}
+  return (
+    <div className="markdown" style={{textAlign: align}}>
+      {text && <ReactMarkdown>{text}</ReactMarkdown>}
+    </div>
+  );
+};
 
 export default Text;
