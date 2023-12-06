@@ -1,31 +1,39 @@
 import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
-import {Await, useLoaderData, Link, type MetaFunction} from '@remix-run/react';
-import {Suspense} from 'react';
-import {Image, Money} from '@shopify/hydrogen';
+import {useLoaderData, type MetaFunction, Link, Await} from '@remix-run/react';
+
+import AmplienceWrapper from '~/components/amplience/wrapper/AmplienceWrapper';
 import type {
   FeaturedCollectionFragment,
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
+import {Suspense} from 'react';
+import {Image, Money} from '@shopify/hydrogen';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
 };
 
 export async function loader({context}: LoaderFunctionArgs) {
-  const {storefront} = context;
+  const {
+    storefront,
+    ampContentClient: {fetchContent},
+    locale,
+  } = context;
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
-
-  return defer({featuredCollection, recommendedProducts});
+  const textContent = (await fetchContent([{key: 'text'}], {locale}))[0];
+  return defer({featuredCollection, recommendedProducts, textContent});
 }
 
 export default function Homepage() {
-  const data = useLoaderData<typeof loader>();
+  const {featuredCollection, recommendedProducts, textContent} =
+    useLoaderData<typeof loader>();
   return (
     <div className="home">
-      <FeaturedCollection collection={data.featuredCollection} />
-      <RecommendedProducts products={data.recommendedProducts} />
+      <FeaturedCollection collection={featuredCollection} />
+      <RecommendedProducts products={recommendedProducts} />
+      <AmplienceWrapper content={textContent}></AmplienceWrapper>
     </div>
   );
 }

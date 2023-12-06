@@ -12,6 +12,10 @@ import type {
 } from '@shopify/hydrogen/storefront-api-types';
 import type {CustomerAccessToken} from '@shopify/hydrogen/storefront-api-types';
 import type {HydrogenSession} from './server';
+import type {
+  ContentItem,
+  ContentItemRequest,
+} from '~/clients/amplience/create-dc-content-client.types';
 
 declare global {
   /**
@@ -28,6 +32,7 @@ declare global {
     PRIVATE_STOREFRONT_API_TOKEN: string;
     PUBLIC_STORE_DOMAIN: string;
     PUBLIC_STOREFRONT_ID: string;
+    HUB_NAME: string;
   }
 
   /**
@@ -37,6 +42,16 @@ declare global {
     language: LanguageCode;
     country: CountryCode;
     pathPrefix: string;
+  };
+
+  /**
+   * Content client containing a fetch by id or key method
+   */
+  type ContentClient = {
+    fetchContent: (
+      items: ContentItemRequest[],
+      params: any,
+    ) => Promise<ContentItem[]>;
   };
 }
 
@@ -50,6 +65,7 @@ declare module '@shopify/remix-oxygen' {
     storefront: Storefront<I18nLocale>;
     session: HydrogenSession;
     waitUntil: ExecutionContext['waitUntil'];
+    ampContentClient: ContentClient;
   }
 
   /**

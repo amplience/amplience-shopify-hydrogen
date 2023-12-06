@@ -19,6 +19,16 @@ Hydrogen is Shopify’s stack for headless commerce. Hydrogen is designed to dov
 
 ## Getting started
 
+## Configure
+
+Copy the `.env.example` and rename to be `.env` and populate the environment variables.
+
+| Env var             | Description                 |
+| ------------------- | --------------------------- |
+| SESSION_SECRET      | Shopify session secret      |
+| PUBLIC_STORE_DOMAIN | Shopify public store domain |
+| HUB_NAME            | Dynamic Content hub name    |
+
 ## Install
 
 ```bash
