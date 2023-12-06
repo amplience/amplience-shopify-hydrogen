@@ -33,7 +33,7 @@ const CardList: React.FC<CardListProps> = ({
               <div style={{display: "flex"}}>
                   {
                       cards.map((card: any, index: number) => {
-                          return <Card key={ Math.random().toString(36).substr(2, 9) } {...card} />
+                          return <Card key={index} {...card} />
                       })
                   }
               </div>
