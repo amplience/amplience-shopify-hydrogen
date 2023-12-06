@@ -1,5 +1,6 @@
 import type {ContentItem} from '~/clients/amplience/create-dc-content-client.types';
 import Text from '../text/Text';
+import Image from '../image/Image';
 
 /**
  * Amplience Wrapper props
@@ -12,9 +13,10 @@ type AmplienceWrapperProps = {
  * Component Mapping matching schemas and React components
  */
 const COMPONENT_MAPPING: {
-  [key: string]: ({content}: {content: ContentItem}) => JSX.Element;
+  [key: string]: React.FC<any>
 } = {
   'https://demostore.amplience.com/content/text': Text,
+  'https://demostore.amplience.com/content/image': Image,
 };
 
 /**
@@ -38,7 +40,7 @@ const MappingNotFound = ({content}: {content: ContentItem}) => {
 const AmplienceWrapper = ({content}: AmplienceWrapperProps) => {
   const contentSchema = content?._meta?.schema;
   const Component = COMPONENT_MAPPING[contentSchema] ?? MappingNotFound;
-  return <>{Component && <Component content={content}></Component>}</>;
+  return <>{Component && <Component {...content}></Component>}</>;
 };
 
 export default AmplienceWrapper;
