@@ -28,6 +28,7 @@ export async function loader({context}: LoaderFunctionArgs) {
   const splitBlockContent = (await fetchContent([{key: 'split-block/example4'}], {locale}))[0];
   const cardContent = (await fetchContent([{key: 'card/example1'}], {locale}))[0];
   const cardListContent = (await fetchContent([{key: 'card-list/example1'}], {locale}))[0];
+  const containerContent = (await fetchContent([{key: 'container/example1'}], {locale}))[0];
   return defer({
     featuredCollection,
     recommendedProducts,
@@ -36,7 +37,8 @@ export async function loader({context}: LoaderFunctionArgs) {
     imageContent,
     splitBlockContent,
     cardContent,
-    cardListContent
+    cardListContent,
+    containerContent,
   });
 }
 
@@ -49,7 +51,8 @@ export default function Homepage() {
     imageContent,
     splitBlockContent,
     cardContent,
-    cardListContent
+    cardListContent,
+    containerContent,
   } =
     useLoaderData<typeof loader>();
   return (
@@ -68,6 +71,8 @@ export default function Homepage() {
       <AmplienceWrapper content={cardContent}></AmplienceWrapper>
       <h2 style={{paddingTop: '20px'}}>Card List Component</h2>
       <AmplienceWrapper content={cardListContent}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Container Component</h2>
+      <AmplienceWrapper content={containerContent}></AmplienceWrapper>
     </div>
   );
 }
