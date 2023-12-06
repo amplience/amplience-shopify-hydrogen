@@ -23,17 +23,21 @@ export async function loader({context}: LoaderFunctionArgs) {
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
   const textContent = (await fetchContent([{key: 'text'}], {locale}))[0];
-  return defer({featuredCollection, recommendedProducts, textContent});
+  const imageContent = (await fetchContent([{key: 'image/example1'}], {locale}))[0];
+  const videoContent = (await fetchContent([{key: 'docs/story/video/video1'}], {locale}))[0];
+  return defer({featuredCollection, recommendedProducts, textContent, videoContent, imageContent});
 }
 
 export default function Homepage() {
-  const {featuredCollection, recommendedProducts, textContent} =
+  const {featuredCollection, recommendedProducts, textContent, videoContent, imageContent} =
     useLoaderData<typeof loader>();
   return (
     <div className="home">
       <FeaturedCollection collection={featuredCollection} />
       <RecommendedProducts products={recommendedProducts} />
+      <AmplienceWrapper content={imageContent}></AmplienceWrapper>
       <AmplienceWrapper content={textContent}></AmplienceWrapper>
+      <AmplienceWrapper content={videoContent}></AmplienceWrapper>
     </div>
   );
 }
