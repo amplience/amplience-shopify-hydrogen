@@ -1,7 +1,7 @@
 import type {ContentItem} from '~/clients/amplience/create-dc-content-client.types';
 import Text from '../text/Text';
 import Image from '../image/Image';
-
+import Video from '../video/Video';
 /**
  * Amplience Wrapper props
  */
@@ -17,6 +17,7 @@ const COMPONENT_MAPPING: {
 } = {
   'https://demostore.amplience.com/content/text': Text,
   'https://demostore.amplience.com/content/image': Image,
+  'https://demostore.amplience.com/content/video': Video,
 };
 
 /**
