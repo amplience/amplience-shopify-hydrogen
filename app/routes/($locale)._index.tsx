@@ -26,11 +26,31 @@ export async function loader({context}: LoaderFunctionArgs) {
   const imageContent = (await fetchContent([{key: 'image/example1'}], {locale}))[0];
   const videoContent = (await fetchContent([{key: 'docs/story/video/video1'}], {locale}))[0];
   const splitBlockContent = (await fetchContent([{key: 'split-block/example4'}], {locale}))[0];
-  return defer({featuredCollection, recommendedProducts, textContent, videoContent, imageContent, splitBlockContent});
+  const cardContent = (await fetchContent([{key: 'card/example1'}], {locale}))[0];
+  const cardListContent = (await fetchContent([{key: 'card-list/example1'}], {locale}))[0];
+  return defer({
+    featuredCollection,
+    recommendedProducts,
+    textContent,
+    videoContent,
+    imageContent,
+    splitBlockContent,
+    cardContent,
+    cardListContent
+  });
 }
 
 export default function Homepage() {
-  const {featuredCollection, recommendedProducts, textContent, videoContent, imageContent, splitBlockContent} =
+  const {
+    featuredCollection,
+    recommendedProducts,
+    textContent,
+    videoContent,
+    imageContent,
+    splitBlockContent,
+    cardContent,
+    cardListContent
+  } =
     useLoaderData<typeof loader>();
   return (
     <div className="home">
@@ -44,6 +64,10 @@ export default function Homepage() {
       <AmplienceWrapper content={videoContent}></AmplienceWrapper>
       <h2 style={{paddingTop: '20px'}}>Split Block Component</h2>
       <AmplienceWrapper content={splitBlockContent}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Card Component</h2>
+      <AmplienceWrapper content={cardContent}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Card List Component</h2>
+      <AmplienceWrapper content={cardListContent}></AmplienceWrapper>
     </div>
   );
 }

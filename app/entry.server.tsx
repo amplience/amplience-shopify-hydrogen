@@ -14,6 +14,7 @@ export default async function handleRequest(
     defaultSrc: [
       "'self'",
       'https://cdn.media.amplience.net',
+      'https://cdn.static.amplience.net',
       'https://shopify.com',
       'https://cdn.shopify.com',
     ],
