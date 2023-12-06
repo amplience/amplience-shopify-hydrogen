@@ -1,7 +1,5 @@
-import { FC } from 'react'
 import { CmsContent } from '~/amplience/getImageURL';
 import { ImageTransformations, getImageURL } from "~/amplience/getImageURL";
-import { ContentItem } from '~/clients/amplience/create-dc-content-client.types';
 
 type ImageProps = {
     image: any;
@@ -25,49 +23,6 @@ const Image: React.FC<ImageProps> = ({
         return null;
     }
     
-    const getRoundelConfig = (roundel: any) => {
-        if (roundel &&
-            roundel[0] &&
-            roundel[0].roundel &&
-            roundel[0].roundel.name) {
-            const roundelParams = [];
-            let imageRoundelIndex;
-            for (let x = 0; x < roundel.length; x++) {
-                let roundelParam = '';
-                switch (roundel[x].roundelPosition) {
-                    case 'Bottom Right':
-                        roundelParam = 'p1_img=';
-                        imageRoundelIndex = 1;
-                        break;
-                    case 'Bottom Left':
-                        roundelParam = 'p2_img=';
-                        imageRoundelIndex = 2;
-                        break;
-                    case 'Top Left':
-                        roundelParam = 'p3_img=';
-                        imageRoundelIndex = 3;
-                        break;
-                    case 'Top Right':
-                        roundelParam = 'p4_img=';
-                        imageRoundelIndex = 4;
-                        break;
-                }
-
-                const roundelRatio = roundel[x].roundelRatio;
-                roundelParam +=
-                    roundel[x].roundel.name +
-                    (roundelRatio
-                        ? '&roundelRatio' + imageRoundelIndex + '=' + roundelRatio
-                        : '');
-                roundelParams.push(roundelParam);
-            }
-
-            return roundelParams.join('&');
-        } else {
-            return '';
-        }
-    }
-
     const buildSrcUrl = ({ width, poiAspect, format }: any) => {
         let baseUrl = `https://${image.defaultHost}/i/${image.endpoint}/${encodeURIComponent(image.name)}`;
         const transformations: ImageTransformations = {};
@@ -88,9 +43,6 @@ const Image: React.FC<ImageProps> = ({
         if (query) {
             queryString += `&${query}`;
         }
-        if (roundel && roundel[0] && roundel[0].roundel && roundel[0].roundelPosition && roundel[0].roundelRatio) {
-            queryString += `&$roundel$&${getRoundelConfig(roundel)}`
-        }
         return getImageURL(`${baseUrl}?${queryString}`, transformations, false, di);
     };
 
@@ -101,14 +53,20 @@ const Image: React.FC<ImageProps> = ({
     };
 
     const imageTag = display == 'Static' ? (
-        <picture>
+        <picture className="amp-dc-image">
             <img loading="lazy" src={`//${image.endpoint}.a.bigcontent.io/v1/static/${image.name}`} className="amp-dc-image-pic" alt={imageAltText} title={seoText}/>
         </picture>
     ) : (
-        <picture>
-            <img loading="lazy" src={buildSrcUrl({})} alt={imageAltText} title={seoText} width="100%"/>
-        </picture>
-    );
+            <picture className="amp-dc-image">
+                {/* High density widths selected to be below max avif image size at aspect ratio. (2.5mil pixels) */}
+                {source({ minWidth: '1280', width: '1500', highDensityWidth: '2234', poiAspect: '2:1' })}
+                {source({ minWidth: '1024', width: '1280', highDensityWidth: '2234', poiAspect: '2:1' })}
+                {source({ minWidth: '768', width: '1024', highDensityWidth: '1920', poiAspect: '1.5:1' })}
+                {source({ maxWidth: '768', width: '768', highDensityWidth: '1536', poiAspect: '1:1' })}
+
+                <img loading="lazy" src={buildSrcUrl({})} className="amp-dc-image-pic" alt={imageAltText} title={seoText} width="100%"/>
+            </picture>
+        );
 
     return <div style={{position: 'relative', width: 'auto'}}>
         {imageTag}
