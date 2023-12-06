@@ -1,5 +1,6 @@
 import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, type MetaFunction} from '@remix-run/react';
+import {fetchContent} from '~/clients/amplience/fetch-content';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Hydrogen | 'Amplience Content'}`}];
@@ -9,13 +10,11 @@ export async function loader({params, context}: LoaderFunctionArgs) {
   const {type} = params;
   const handle = params['*'];
   const {
-    ampContentClient: {fetchContent},
-    locale,
+    amplience: {hubName, locale},
   } = context;
 
   const requestItem = type === 'key' ? {key: handle} : {id: handle};
-  const content = await fetchContent([requestItem], {locale});
-
+  const content = await fetchContent([requestItem], {hubName}, {locale});
   return defer({content});
 }
 

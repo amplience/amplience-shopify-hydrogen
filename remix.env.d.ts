@@ -65,7 +65,10 @@ declare module '@shopify/remix-oxygen' {
     storefront: Storefront<I18nLocale>;
     session: HydrogenSession;
     waitUntil: ExecutionContext['waitUntil'];
-    ampContentClient: ContentClient;
+    amplience: {
+      hubName: string;
+      locale: string;
+    };
   }
 
   /**

@@ -8,6 +8,7 @@ import type {
 } from 'storefrontapi.generated';
 import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
+import {fetchContent} from '~/clients/amplience/fetch-content';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -16,13 +17,14 @@ export const meta: MetaFunction = () => {
 export async function loader({context}: LoaderFunctionArgs) {
   const {
     storefront,
-    ampContentClient: {fetchContent},
-    locale,
+    amplience: {hubName, locale},
   } = context;
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
-  const textContent = (await fetchContent([{key: 'text'}], {locale}))[0];
+  const textContent = (
+    await fetchContent([{key: 'text'}], {hubName}, {locale})
+  )[0];
   return defer({featuredCollection, recommendedProducts, textContent});
 }
 
