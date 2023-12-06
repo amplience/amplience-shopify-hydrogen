@@ -10,7 +10,14 @@ export default async function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext,
 ) {
-  const {nonce, header, NonceProvider} = createContentSecurityPolicy();
+  const {nonce, header, NonceProvider} =  createContentSecurityPolicy({
+    defaultSrc: [
+      "'self'",
+      'https://cdn.media.amplience.net',
+      'https://shopify.com',
+      'https://cdn.shopify.com',
+    ],
+  });
 
   const body = await renderToReadableStream(
     <NonceProvider>
