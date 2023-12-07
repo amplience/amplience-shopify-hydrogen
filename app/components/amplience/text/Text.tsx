@@ -1,4 +1,4 @@
-import type {ContentItem} from '~/clients/amplience/create-dc-content-client.types';
+import type { ContentItem } from '~/clients/amplience/fetch-content';
 import ReactMarkdown from 'markdown-to-jsx';
 
 /**
