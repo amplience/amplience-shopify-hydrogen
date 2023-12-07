@@ -10,7 +10,12 @@ export default async function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext,
 ) {
-  const {nonce, header, NonceProvider} = createContentSecurityPolicy();
+  const {nonce, header, NonceProvider} = createContentSecurityPolicy({
+    frameAncestors: [
+      "'self'",
+      'https://app.amplience.net',
+    ]
+  });
 
   const body = await renderToReadableStream(
     <NonceProvider>
