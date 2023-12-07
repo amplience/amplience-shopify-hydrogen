@@ -41,6 +41,9 @@ export async function loader({context}: LoaderFunctionArgs) {
   const containerContent = (
     await fetchContent([{key: 'container/example1'}], {locale})
   )[0];
+  const simpleBannerContent = (
+    await fetchContent([{key: 'testing123'}], {locale})
+  )[0];
   return defer({
     featuredCollection,
     recommendedProducts,
@@ -51,6 +54,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     cardContent,
     cardListContent,
     containerContent,
+    simpleBannerContent,
   });
 }
 
@@ -65,6 +69,7 @@ export default function Homepage() {
     cardContent,
     cardListContent,
     containerContent,
+    simpleBannerContent,
   } = useLoaderData<typeof loader>();
   return (
     <div className="home">
@@ -84,6 +89,8 @@ export default function Homepage() {
       <AmplienceWrapper content={cardListContent}></AmplienceWrapper>
       <h2 style={{paddingTop: '20px'}}>Container Component</h2>
       <AmplienceWrapper content={containerContent}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Simple Banner Component</h2>
+      <AmplienceWrapper content={simpleBannerContent}></AmplienceWrapper>
     </div>
   );
 }

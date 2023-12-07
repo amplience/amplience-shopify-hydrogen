@@ -6,6 +6,7 @@ import SplitBlock from '../split-block/SplitBlock';
 import Card from '../card/Card';
 import CardList from '../card-list/CardList';
 import Container from '../container/Container';
+import SimpleBanner from '../simple-banner/SimpleBanner';
 
 /**
  * Amplience Wrapper props
@@ -23,6 +24,7 @@ const COMPONENT_MAPPING: {
   'https://demostore.amplience.com/content/text': Text,
   'https://demostore.amplience.com/content/image': Image,
   'https://demostore.amplience.com/content/video': Video,
+  'https://demostore.amplience.com/content/simple-banner': SimpleBanner,
   'https://demostore.amplience.com/content/card': Card,
   'https://demostore.amplience.com/content/card-list': CardList,
   'https://demostore.amplience.com/content/split-block': SplitBlock,
