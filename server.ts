@@ -66,7 +66,7 @@ export default {
       });
 
       /**
-       * Create a Amplience Context
+       * Create an Amplience Context
        */
 
       const amplience = {

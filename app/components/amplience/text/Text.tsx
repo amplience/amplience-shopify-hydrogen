@@ -1,4 +1,4 @@
-import type { ContentItem } from '~/clients/amplience/fetch-content';
+import type {ContentItem} from '~/clients/amplience/fetch-content';
 import ReactMarkdown from 'markdown-to-jsx';
 
 /**
@@ -7,13 +7,11 @@ import ReactMarkdown from 'markdown-to-jsx';
  * @returns Text component using markdown to HTML
  */
 const Text = ({content}: {content: ContentItem}) => {
-    return (
-        <div className="markdown">
-            {
-              content?.text && <ReactMarkdown>{content.text}</ReactMarkdown>
-            }
-        </div>
-    )
-}
+  return (
+    <div className="markdown">
+      {content?.text && <ReactMarkdown>{content.text}</ReactMarkdown>}
+    </div>
+  );
+};
 
 export default Text;

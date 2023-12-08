@@ -29,7 +29,7 @@ export default function Visualization() {
   const hubName = searchParams.get('hub') || '';
   const stagingHost = searchParams.get('vse') || '';
   const contentId = searchParams.get('content') || '';
-  const vseLocale = searchParams.get('appLocale') || '';
+  const vseLocale = searchParams.get('locale') || '';
 
   useRealtimeVisualization((content) => {
     setContent(content);
@@ -37,12 +37,9 @@ export default function Visualization() {
 
   useEffect(() => {
     const fetch = async () => {
-      const params = vseLocale ? {locale: vseLocale} : {locale};
-      const data = await fetchContent(
-        [{id: contentId}],
-        {hubName, stagingHost},
-        params,
-      );
+      const context = {hubName, stagingHost};
+      const params = {locale: vseLocale ?? locale};
+      const data = await fetchContent([{id: contentId}], context, params);
       setContent(data[0]);
     };
     fetch();
