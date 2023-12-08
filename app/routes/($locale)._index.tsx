@@ -25,19 +25,29 @@ export async function loader({context}: LoaderFunctionArgs) {
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
+  const textContent = (
+    await fetchContent([{key: 'text'}], {hubName}, {locale})
+  )[0];
 
   return defer({
     featuredCollection,
     recommendedProducts,
     hubName,
     appLocale: locale,
+    initialTextContent: textContent,
   });
 }
 
 export default function Homepage() {
-  const {featuredCollection, recommendedProducts, hubName, appLocale} =
-    useLoaderData<typeof loader>();
-  const [textContent, setTextContent] = useState<ContentItem>();
+  const {
+    featuredCollection,
+    recommendedProducts,
+    hubName,
+    appLocale,
+    initialTextContent,
+  } = useLoaderData<typeof loader>();
+  const [textContent, setTextContent] =
+    useState<ContentItem>(initialTextContent);
   const {hub, vse, locale} = useAmplienceSearchParams();
 
   useEffect(() => {
