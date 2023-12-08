@@ -1,8 +1,8 @@
 import { CmsImage, ImageScaleFit, ImageScaleMode, ImageTransformations } from '~/amplience/getImageURL';
-import AmplienceWrapper from '../wrapper/AmplienceWrapper';
 import { useEffect, useRef, useState } from 'react';
 import DefaultAdaptiveImageRef from '../adaptive-image/DefaultAdaptiveImage';
 import DefaultAdaptiveImageSkeleton from '../adaptive-image/DefaultAdaptiveImageSkeleton';
+import clsx from 'clsx';
 
 type SimpleBannerProps = {
     /**
@@ -60,7 +60,7 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
     bannerText,
     ctaSettings,
     opacity = 0.9,
-    textPositioning = { textPositionHorizontal: 'right', textPositionVertical: 'middle' },
+    textPositioning = { textPositionHorizontal: 'center', textPositionVertical: 'middle' },
     ...other
 }) => {
     const [imageLoading, setImageLoading] = useState(true);
@@ -114,15 +114,27 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
                     diParams={image?.di}
                 />
             </div>
-            <div style={{
-                padding: "40px 60px 40px 60px",
-                position: 'absolute',
-                textAlign: 'center',
-                backgroundColor: `rgba(255, 255, 255, ${opacity})`,
-                top: '50%',
-                left: '50%',
-                transform: 'translateX(-50%) translateY(-50%)',
-            }}>
+            <div
+                style={{
+                    padding: "40px 60px 40px 60px",
+                    position: 'absolute',
+                    textAlign: 'center',
+                    backgroundColor: `rgba(255, 255, 255, ${opacity})`,
+                    // top: '50%',
+                    // left: '50%',
+                    // transform: 'translateX(-50%) translateY(-50%)',
+                }}
+                className={
+                    clsx({
+                        ['floatingLeft']: textPositioning.textPositionHorizontal === 'left',
+                        ['floatingCenter']: textPositioning.textPositionHorizontal === 'center',
+                        ['floatingRight']: textPositioning.textPositionHorizontal === 'right',
+                        ['floatingTop']: textPositioning.textPositionVertical === 'top',
+                        ['floatingMiddle']: textPositioning.textPositionVertical === 'middle',
+                        ['floatingBottom']: textPositioning.textPositionVertical === 'bottom'
+                    })
+                }
+            >
                 <h1>{bannerText?.header}</h1>
                 <h2>{bannerText?.subheader}</h2>
                 <p>{bannerText?.description}</p>
