@@ -1,12 +1,5 @@
 import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
-import {
-  useLoaderData,
-  type MetaFunction,
-  Link,
-  Await,
-  useLocation,
-} from '@remix-run/react';
-
+import {useLoaderData, type MetaFunction, Link, Await} from '@remix-run/react';
 import AmplienceWrapper from '~/components/amplience/wrapper/AmplienceWrapper';
 import type {
   FeaturedCollectionFragment,
@@ -18,6 +11,7 @@ import {
   type ContentItem,
   fetchContent,
 } from '~/clients/amplience/fetch-content';
+import {useAmplienceSearchParams} from '~/hooks/useAmplienceSearchParams';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -32,31 +26,32 @@ export async function loader({context}: LoaderFunctionArgs) {
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
 
-  return defer({featuredCollection, recommendedProducts, hubName, locale});
+  return defer({
+    featuredCollection,
+    recommendedProducts,
+    hubName,
+    appLocale: locale,
+  });
 }
 
 export default function Homepage() {
-  const {featuredCollection, recommendedProducts, hubName, locale} =
+  const {featuredCollection, recommendedProducts, hubName, appLocale} =
     useLoaderData<typeof loader>();
   const [textContent, setTextContent] = useState<ContentItem>();
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const vseHubName = searchParams.get('hub');
-  const stagingHost = searchParams.get('vse');
-  const vseLocale = searchParams.get('locale');
+  const {hub, vse, locale} = useAmplienceSearchParams();
 
   useEffect(() => {
     const fetch = async () => {
       const context = {
-        hubName: vseHubName ?? hubName,
-        ...(stagingHost ? {stagingHost} : {}),
+        hubName: hub ?? hubName,
+        ...(vse ? {stagingHost: vse} : {}),
       };
-      const params = {locale: vseLocale ?? locale};
+      const params = {locale: locale ?? appLocale};
       const data = await fetchContent([{key: 'text'}], context, params);
       setTextContent(data[0]);
     };
     fetch();
-  }, [vseHubName, hubName, stagingHost, vseLocale, locale]);
+  }, [appLocale, hub, hubName, locale, vse]);
 
   return (
     <div className="home">

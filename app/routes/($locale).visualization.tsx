@@ -1,4 +1,4 @@
-import {type MetaFunction, useLocation, useLoaderData} from '@remix-run/react';
+import {type MetaFunction, useLoaderData} from '@remix-run/react';
 import {type LoaderFunctionArgs, defer} from '@shopify/remix-oxygen';
 import {useEffect, useState} from 'react';
 import {
@@ -7,6 +7,7 @@ import {
 } from '~/clients/amplience/fetch-content';
 import AmplienceWrapper from '~/components/amplience/wrapper/AmplienceWrapper';
 import {useRealtimeVisualization} from '~/context/RealtimeVisualizationContext';
+import {useAmplienceSearchParams} from '~/hooks/useAmplienceSearchParams';
 
 export const meta: MetaFunction = () => {
   return [{title: `Hydrogen | 'Amplience Content Visualization'}`}];
@@ -17,39 +18,33 @@ export async function loader({context}: LoaderFunctionArgs) {
     amplience: {locale},
   } = context;
 
-  return defer({locale});
+  return defer({appLocale: locale});
 }
 
 export default function Visualization() {
-  const {locale} = useLoaderData<typeof loader>();
-  const [content, setContent] = useState<ContentItem>();
-  const location = useLocation();
+  const {appLocale} = useLoaderData<typeof loader>();
+  const {hub, vse, content, locale} = useAmplienceSearchParams();
+  const [fetchedContent, setFetchedContent] = useState<ContentItem>();
 
-  const searchParams = new URLSearchParams(location.search);
-  const hubName = searchParams.get('hub') || '';
-  const stagingHost = searchParams.get('vse') || '';
-  const contentId = searchParams.get('content') || '';
-  const vseLocale = searchParams.get('locale') || '';
-
-  useRealtimeVisualization((content) => {
-    setContent(content);
+  useRealtimeVisualization((realtimeContent) => {
+    setFetchedContent(realtimeContent);
   });
 
   useEffect(() => {
     const fetch = async () => {
-      const context = {hubName, stagingHost};
-      const params = {locale: vseLocale ?? locale};
-      const data = await fetchContent([{id: contentId}], context, params);
-      setContent(data[0]);
+      const context = {hubName: hub || '', stagingHost: vse || ''};
+      const params = {locale: locale ?? appLocale};
+      const data = await fetchContent([{id: content || ''}], context, params);
+      setFetchedContent(data[0]);
     };
     fetch();
-  }, [hubName, stagingHost, contentId, vseLocale, locale]);
+  }, [appLocale, content, hub, locale, vse]);
 
   return (
     <>
-      {content && (
+      {fetchedContent && (
         <div>
-          <AmplienceWrapper content={content} />
+          <AmplienceWrapper content={fetchedContent} />
         </div>
       )}
     </>
