@@ -22,6 +22,7 @@ import favicon from '../public/favicon.svg';
 import resetStyles from './styles/reset.css';
 import appStyles from './styles/app.css';
 import {Layout} from '~/components/Layout';
+import {RealtimeVisualizationProvider} from './context/RealtimeVisualizationContext';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -120,9 +121,11 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Layout {...data}>
-          <Outlet />
-        </Layout>
+        <RealtimeVisualizationProvider>
+          <Layout {...data}>
+            <Outlet />
+          </Layout>
+        </RealtimeVisualizationProvider>
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
         <LiveReload nonce={nonce} />

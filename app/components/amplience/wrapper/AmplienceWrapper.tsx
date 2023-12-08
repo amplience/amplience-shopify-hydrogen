@@ -1,4 +1,4 @@
-import type { ContentItem } from '~/clients/amplience/fetch-content';
+import type {ContentItem} from '~/clients/amplience/fetch-content';
 import Text from '../text/Text';
 
 /**

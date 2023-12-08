@@ -6,6 +6,7 @@ import {
   fetchContent,
 } from '~/clients/amplience/fetch-content';
 import AmplienceWrapper from '~/components/amplience/wrapper/AmplienceWrapper';
+import {useRealtimeVisualization} from '~/context/RealtimeVisualizationContext';
 
 export const meta: MetaFunction = () => {
   return [{title: `Hydrogen | 'Amplience Content Visualization'}`}];
@@ -23,11 +24,16 @@ export default function Visualization() {
   const {locale} = useLoaderData<typeof loader>();
   const [content, setContent] = useState<ContentItem>();
   const location = useLocation();
+
   const searchParams = new URLSearchParams(location.search);
   const hubName = searchParams.get('hub') || '';
   const stagingHost = searchParams.get('vse') || '';
   const contentId = searchParams.get('content') || '';
   const vseLocale = searchParams.get('appLocale') || '';
+
+  useRealtimeVisualization((content) => {
+    setContent(content);
+  });
 
   useEffect(() => {
     const fetch = async () => {
