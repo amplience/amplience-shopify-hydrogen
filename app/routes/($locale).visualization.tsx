@@ -40,10 +40,7 @@ export default function Visualization() {
       const params = vseLocale ? {locale: vseLocale} : {locale};
       const data = await fetchContent(
         [{id: contentId}],
-        {
-          hubName,
-          stagingHost,
-        },
+        {hubName, stagingHost},
         params,
       );
       setContent(data[0]);

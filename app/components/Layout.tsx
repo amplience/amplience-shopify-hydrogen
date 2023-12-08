@@ -1,4 +1,4 @@
-import {Await} from '@remix-run/react';
+import {Await, useLocation} from '@remix-run/react';
 import {Suspense} from 'react';
 import type {
   CartApiQueryFragment,
@@ -29,18 +29,27 @@ export function Layout({
   header,
   isLoggedIn,
 }: LayoutProps) {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const standaloneMode = searchParams.get('standalone') === 'true';
   return (
     <>
-      <CartAside cart={cart} />
-      <SearchAside />
-      <MobileMenuAside menu={header.menu} shop={header.shop} />
-      <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />
-      <main>{children}</main>
-      <Suspense>
-        <Await resolve={footer}>
-          {(footer) => <Footer menu={footer.menu} shop={header.shop} />}
-        </Await>
-      </Suspense>
+      {standaloneMode ? (
+        <main>{children}</main>
+      ) : (
+        <>
+          <CartAside cart={cart} />
+          <SearchAside />
+          <MobileMenuAside menu={header.menu} shop={header.shop} />
+          <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />
+          <main>{children}</main>
+          <Suspense>
+            <Await resolve={footer}>
+              {(footer) => <Footer menu={footer.menu} shop={header.shop} />}
+            </Await>
+          </Suspense>
+        </>
+      )}
     </>
   );
 }
