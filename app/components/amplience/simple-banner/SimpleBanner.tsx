@@ -103,7 +103,7 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
             {imageLoading ? <DefaultAdaptiveImageSkeleton/> : null}
             <div style={{
                 display: `${imageLoading ? 'none': 'block'}`,
-                backgroundColor: '#ccc'
+                backgroundColor: '#ccc',
             }}>
                 <DefaultAdaptiveImageRef
                     ref={imageRef}
@@ -118,7 +118,7 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
                 padding: "40px 60px 40px 60px",
                 position: 'absolute',
                 textAlign: 'center',
-                backgroundColor: `rgba(255,255,255,${opacity}`,
+                backgroundColor: `rgba(255, 255, 255, ${opacity})`,
                 top: '50%',
                 left: '50%',
                 transform: 'translateX(-50%) translateY(-50%)',
