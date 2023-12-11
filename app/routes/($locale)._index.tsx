@@ -25,16 +25,43 @@ export async function loader({context}: LoaderFunctionArgs) {
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
-  const textContent = (
+  const initialText = (
     await fetchContent([{key: 'text'}], {hubName}, {locale})
   )[0];
-
+  const initialImage = (
+    await fetchContent([{key: 'image/example1'}], {hubName}, {locale})
+  )[0];
+  const initialVideo = (
+    await fetchContent([{key: 'docs/story/video/video1'}], {hubName}, {locale})
+  )[0];
+  const initialSplitBlock = (
+    await fetchContent([{key: 'split-block/example4'}], {hubName}, {locale})
+  )[0];
+  const initialCard = (
+    await fetchContent([{key: 'card/example1'}], {hubName}, {locale})
+  )[0];
+  const initialCardList = (
+    await fetchContent([{key: 'card-list/example1'}], {hubName}, {locale})
+  )[0];
+  const initialContainer = (
+    await fetchContent([{key: 'container/example1'}], {hubName}, {locale})
+  )[0];
+  const initialSimpleBanner = (
+    await fetchContent([{key: 'testing123'}], {hubName}, {locale})
+  )[0];
   return defer({
-    featuredCollection,
-    recommendedProducts,
     hubName,
     locale,
-    initialTextContent: textContent,
+    featuredCollection,
+    recommendedProducts,
+    initialText,
+    initialVideo,
+    initialImage,
+    initialSplitBlock,
+    initialCard,
+    initialCardList,
+    initialContainer,
+    initialSimpleBanner,
   });
 }
 
@@ -44,10 +71,17 @@ export default function Homepage() {
     recommendedProducts,
     hubName,
     locale,
-    initialTextContent,
+    initialText,
+    initialVideo,
+    initialImage,
+    initialSplitBlock,
+    initialCard,
+    initialCardList,
+    initialContainer,
+    initialSimpleBanner,
   } = useLoaderData<typeof loader>();
-  const [textContent, setTextContent] =
-    useState<ContentItem>(initialTextContent);
+  const [simpleBanner, setSimpleBanner] =
+    useState<ContentItem>(initialSimpleBanner);
   const {hub, vse} = useAmplienceSearchParams();
 
   useEffect(() => {
@@ -57,8 +91,8 @@ export default function Homepage() {
         ...(vse ? {stagingHost: vse} : {}),
       };
       const params = {locale};
-      const data = await fetchContent([{key: 'text'}], context, params);
-      setTextContent(data[0]);
+      const data = await fetchContent([{key: 'testing123'}], context, params);
+      setSimpleBanner(data[0]);
     };
     fetch();
   }, [hub, hubName, locale, vse]);
@@ -67,9 +101,22 @@ export default function Homepage() {
     <div className="home">
       <FeaturedCollection collection={featuredCollection} />
       <RecommendedProducts products={recommendedProducts} />
-      {textContent && (
-        <AmplienceWrapper content={textContent}></AmplienceWrapper>
-      )}
+      <h2 style={{paddingTop: '20px'}}>Image Component</h2>
+      <AmplienceWrapper content={initialImage}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Text Component</h2>
+      <AmplienceWrapper content={initialText}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Video Component</h2>
+      <AmplienceWrapper content={initialVideo}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Split Block Component</h2>
+      <AmplienceWrapper content={initialSplitBlock}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Card Component</h2>
+      <AmplienceWrapper content={initialCard}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Card List Component</h2>
+      <AmplienceWrapper content={initialCardList}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Container Component</h2>
+      <AmplienceWrapper content={initialContainer}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Simple Banner Component</h2>
+      <AmplienceWrapper content={simpleBanner}></AmplienceWrapper>
     </div>
   );
 }

@@ -487,3 +487,42 @@ aside li {
   margin-inline-end: 0px;
   padding-inline-start: 40px;
 }
+
+/*
+* --------------------------------------------------
+* components/simple-banner
+* --------------------------------------------------
+*/
+.floatingRight {
+  right: 0;
+}
+
+.floatingLeft {
+  left: 0;
+}
+
+.floatingTop {
+  top: 0;
+}
+
+.floatingBottom {
+  bottom: 0;
+}
+
+.floatingCenter {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.floatingCenter .floatingMiddle {
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.floatingMiddle {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.floatingMiddle .floatingCenter {
+  transform: translateX(-50%) translateY(-50%);
+}

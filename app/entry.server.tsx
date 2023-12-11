@@ -16,6 +16,7 @@ export default async function handleRequest(
       "'self'",
       'https://cdn.media.amplience.net',
       'https://cdn.static.amplience.net',
+      '*.staging.bigcontent.io',
       'https://shopify.com',
       'https://cdn.shopify.com',
     ],
