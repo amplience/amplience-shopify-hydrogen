@@ -4,9 +4,9 @@ import {type CmsContent} from '~/amplience/getImageURL';
 type VideoProps = {} & CmsContent;
 
 /**
- * TODO
- * @param param0 
- * @returns 
+ * Video Component
+ * @param video object containing all video information
+ * @returns Video component
  */
 const Video: FC<VideoProps> = ({video}) => {
   if (!video) {

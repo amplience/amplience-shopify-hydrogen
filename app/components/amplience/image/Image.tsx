@@ -13,8 +13,13 @@ type ImageProps = {
 } & CmsContent;
 
 /**
- * TODO
- * @param param0 
+ * Image component
+ * @param display display type for instance Point of Interest
+ * @param image object containinng all image information
+ * @param imageAltText
+ * @param seoText
+ * @param di
+ * @param query
  * @returns 
  */
 const Image: React.FC<ImageProps> = ({
@@ -24,15 +29,15 @@ const Image: React.FC<ImageProps> = ({
   seoText,
   di = '',
   query,
-  roundel,
 }) => {
   if (!image) {
     return null;
   }
 
   /**
-   * TODO
-   * @param param0 
+   * Build the complete image source using transformations
+   * @param width image witdh
+   * @param poiAspect Point of interest aspect 
    * @returns 
    */
   const buildSrcUrl = ({width, poiAspect, format}: any) => {
@@ -61,9 +66,9 @@ const Image: React.FC<ImageProps> = ({
   };
 
   /**
-   * TODO
+   * Source component
    * @param param0 
-   * @returns 
+   * @returns Source tag with all source set information
    */
   const source = ({
     minWidth,

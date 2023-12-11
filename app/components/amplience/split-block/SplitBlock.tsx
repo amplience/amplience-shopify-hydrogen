@@ -12,15 +12,16 @@ interface SplitBlockProps {
 }
 
 /**
- * TODO
- * @param props 
- * @returns 
+ * Split Block component
+ * @param props component props
+ * @returns Split Block of components using splits for column sizes
  */
 const SplitBlock: React.FC<SplitBlockProps> = (props) => {
   const {split = '50/50', bgcol, content = [], ...other} = props;
 
   /**
-   * TODO
+   * Array of split
+   * @returns Returns an array with the different split
    */
   const splits = useMemo(() => {
     return split.split('/').map((x) => Number(x) / 100);

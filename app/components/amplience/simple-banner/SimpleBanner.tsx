@@ -60,12 +60,15 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
   const imageRef = useRef<any>();
 
   /**
-   * TODO
+   * Method called with the image is loaded
    */
   const handleImageLoaded = () => {
     setImageLoading(false);
   };
 
+  /**
+   * Checking that the image is loaded
+   */
   useEffect(() => {
     if (imageRef?.current?.complete && imageLoading) {
       setImageLoading(false);
@@ -91,6 +94,7 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
         : undefined,
   };
 
+  // Checks if there is any text provided
   const isOverlayVisible =
     bannerText?.header ||
     bannerText?.subheader ||
