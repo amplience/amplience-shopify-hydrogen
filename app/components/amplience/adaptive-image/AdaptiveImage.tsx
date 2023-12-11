@@ -19,7 +19,7 @@ export interface AdaptiveImageProps
 }
 
 /**
- * TODO
+ * Content State with image, transformations and additional parameters
  */
 type ContextState = {
   image: CmsImage;
@@ -31,14 +31,19 @@ type ContextState = {
 };
 
 /**
- * TODO
+ * React context with image, transformations and additional information
  */
 export const AdaptiveImageContext = createContext<ContextState | null>(null);
 
 /**
- * TODO
- * @param props 
- * @returns 
+ * Adaptive Image component
+ * @param image object containint image information
+ * @param imageAltText image alternative text
+ * @param transformations all image transformations
+ * @param diParams additional dynamic image parameters
+ * @param children children components
+ * @param imageRef image reference
+ * @returns adaptive image with all transformations
  */
 const AdaptiveImage: React.FC<AdaptiveImageProps> = (props) => {
   const {
@@ -80,7 +85,7 @@ const AdaptiveImage: React.FC<AdaptiveImageProps> = (props) => {
 };
 
 /**
- * TODO
+ * AdaptiveImage component with forward reference
  */
 const AdaptiveImageRef = forwardRef((props: AdaptiveImageProps, ref) => (
   <AdaptiveImage

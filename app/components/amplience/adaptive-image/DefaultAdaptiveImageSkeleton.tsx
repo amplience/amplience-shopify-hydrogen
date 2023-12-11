@@ -1,8 +1,8 @@
 import React from 'react';
 
 /**
- * TODO
- * @returns 
+ * Default Adaptive Image skeleton
+ * @returns "Loading..." text
  */
 const DefaultAdaptiveImageSkeleton: React.FC = () => {
   return <p>Loading...</p>;
