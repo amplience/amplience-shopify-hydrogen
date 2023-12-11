@@ -23,17 +23,74 @@ export async function loader({context}: LoaderFunctionArgs) {
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
   const textContent = (await fetchContent([{key: 'text'}], {locale}))[0];
-  return defer({featuredCollection, recommendedProducts, textContent});
+  const imageContent = (
+    await fetchContent([{key: 'image/example1'}], {locale})
+  )[0];
+  const videoContent = (
+    await fetchContent([{key: 'docs/story/video/video1'}], {locale})
+  )[0];
+  const splitBlockContent = (
+    await fetchContent([{key: 'split-block/example4'}], {locale})
+  )[0];
+  const cardContent = (
+    await fetchContent([{key: 'card/example1'}], {locale})
+  )[0];
+  const cardListContent = (
+    await fetchContent([{key: 'card-list/example1'}], {locale})
+  )[0];
+  const containerContent = (
+    await fetchContent([{key: 'container/example1'}], {locale})
+  )[0];
+  const simpleBannerContent = (
+    await fetchContent([{key: 'testing123'}], {locale})
+  )[0];
+  return defer({
+    featuredCollection,
+    recommendedProducts,
+    textContent,
+    videoContent,
+    imageContent,
+    splitBlockContent,
+    cardContent,
+    cardListContent,
+    containerContent,
+    simpleBannerContent,
+  });
 }
 
 export default function Homepage() {
-  const {featuredCollection, recommendedProducts, textContent} =
-    useLoaderData<typeof loader>();
+  const {
+    featuredCollection,
+    recommendedProducts,
+    textContent,
+    videoContent,
+    imageContent,
+    splitBlockContent,
+    cardContent,
+    cardListContent,
+    containerContent,
+    simpleBannerContent,
+  } = useLoaderData<typeof loader>();
   return (
     <div className="home">
       <FeaturedCollection collection={featuredCollection} />
       <RecommendedProducts products={recommendedProducts} />
+      <h2 style={{paddingTop: '20px'}}>Image Component</h2>
+      <AmplienceWrapper content={imageContent}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Text Component</h2>
       <AmplienceWrapper content={textContent}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Video Component</h2>
+      <AmplienceWrapper content={videoContent}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Split Block Component</h2>
+      <AmplienceWrapper content={splitBlockContent}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Card Component</h2>
+      <AmplienceWrapper content={cardContent}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Card List Component</h2>
+      <AmplienceWrapper content={cardListContent}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Container Component</h2>
+      <AmplienceWrapper content={containerContent}></AmplienceWrapper>
+      <h2 style={{paddingTop: '20px'}}>Simple Banner Component</h2>
+      <AmplienceWrapper content={simpleBannerContent}></AmplienceWrapper>
     </div>
   );
 }
