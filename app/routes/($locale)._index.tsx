@@ -33,7 +33,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     featuredCollection,
     recommendedProducts,
     hubName,
-    appLocale: locale,
+    locale,
     initialTextContent: textContent,
   });
 }
@@ -43,12 +43,12 @@ export default function Homepage() {
     featuredCollection,
     recommendedProducts,
     hubName,
-    appLocale,
+    locale,
     initialTextContent,
   } = useLoaderData<typeof loader>();
   const [textContent, setTextContent] =
     useState<ContentItem>(initialTextContent);
-  const {hub, vse, locale} = useAmplienceSearchParams();
+  const {hub, vse} = useAmplienceSearchParams();
 
   useEffect(() => {
     const fetch = async () => {
@@ -56,12 +56,12 @@ export default function Homepage() {
         hubName: hub ?? hubName,
         ...(vse ? {stagingHost: vse} : {}),
       };
-      const params = {locale: locale ?? appLocale};
+      const params = {locale};
       const data = await fetchContent([{key: 'text'}], context, params);
       setTextContent(data[0]);
     };
     fetch();
-  }, [appLocale, hub, hubName, locale, vse]);
+  }, [hub, hubName, locale, vse]);
 
   return (
     <div className="home">

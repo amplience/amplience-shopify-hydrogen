@@ -13,6 +13,7 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
+import {useAmplienceSearchParams} from '~/hooks/useAmplienceSearchParams';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -29,12 +30,10 @@ export function Layout({
   header,
   isLoggedIn,
 }: LayoutProps) {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const standaloneMode = searchParams.get('standalone') === 'true';
+  const {standalone} = useAmplienceSearchParams();
   return (
     <>
-      {standaloneMode ? (
+      {standalone === 'true' ? (
         <main>{children}</main>
       ) : (
         <>

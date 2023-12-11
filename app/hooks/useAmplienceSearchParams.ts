@@ -6,7 +6,7 @@ export function useAmplienceSearchParams() {
   const hub = searchParams.get('hub');
   const vse = searchParams.get('vse');
   const content = searchParams.get('content');
-  const locale = searchParams.get('locale');
+  const standalone = searchParams.get('standalone');
 
-  return {hub, vse, content, locale};
+  return {hub, vse, content, standalone};
 }

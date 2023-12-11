@@ -18,12 +18,12 @@ export async function loader({context}: LoaderFunctionArgs) {
     amplience: {locale},
   } = context;
 
-  return defer({appLocale: locale});
+  return defer({locale});
 }
 
 export default function Visualization() {
-  const {appLocale} = useLoaderData<typeof loader>();
-  const {hub, vse, content, locale} = useAmplienceSearchParams();
+  const {locale} = useLoaderData<typeof loader>();
+  const {hub, vse, content} = useAmplienceSearchParams();
   const [fetchedContent, setFetchedContent] = useState<ContentItem>();
 
   useRealtimeVisualization((realtimeContent) => {
@@ -33,12 +33,12 @@ export default function Visualization() {
   useEffect(() => {
     const fetch = async () => {
       const context = {hubName: hub || '', stagingHost: vse || ''};
-      const params = {locale: locale ?? appLocale};
+      const params = {locale};
       const data = await fetchContent([{id: content || ''}], context, params);
       setFetchedContent(data[0]);
     };
     fetch();
-  }, [appLocale, content, hub, locale, vse]);
+  }, [locale, content, hub, vse]);
 
   return (
     <>
