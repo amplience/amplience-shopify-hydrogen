@@ -9,9 +9,6 @@ import DefaultAdaptiveImageRef from '../adaptive-image/DefaultAdaptiveImage';
 import DefaultAdaptiveImageSkeleton from '../adaptive-image/DefaultAdaptiveImageSkeleton';
 import clsx from 'clsx';
 
-/**
- * TODO
- */
 type SimpleBannerProps = {
   image: {
     img: {

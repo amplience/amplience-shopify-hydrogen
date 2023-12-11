@@ -1,8 +1,5 @@
 import ReactMarkdown from 'markdown-to-jsx';
 
-/**
- * TOOD
- */
 type TextProps = {
   text: string;
   align:

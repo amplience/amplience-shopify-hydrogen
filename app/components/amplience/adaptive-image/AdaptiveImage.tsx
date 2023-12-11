@@ -5,9 +5,6 @@ import {
   getImageURL,
 } from '~/amplience/getImageURL';
 
-/**
- * TODO
- */
 export interface AdaptiveImageProps
   extends React.DetailedHTMLProps<
     React.ImgHTMLAttributes<HTMLImageElement>,

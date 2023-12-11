@@ -2,9 +2,6 @@ import React, {useContext, useMemo} from 'react';
 import {type ImageTransformations, getImageURL} from '~/amplience/getImageURL';
 import {AdaptiveImageContext} from './AdaptiveImage';
 
-/**
- * TODO
- */
 interface Props
   extends React.DetailedHTMLProps<
     React.SourceHTMLAttributes<HTMLSourceElement>,

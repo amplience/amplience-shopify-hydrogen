@@ -8,9 +8,6 @@ import CardList from '../card-list/CardList';
 import Container from '../container/Container';
 import SimpleBanner from '../simple-banner/SimpleBanner';
 
-/**
- * Amplience Wrapper props
- */
 type AmplienceWrapperProps = {
   content: ContentItem;
 };

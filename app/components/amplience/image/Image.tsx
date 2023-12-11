@@ -4,9 +4,6 @@ import {
   getImageURL,
 } from '~/amplience/getImageURL';
 
-/**
- * TODO
- */
 type ImageProps = {
   image: any;
   query?: any;

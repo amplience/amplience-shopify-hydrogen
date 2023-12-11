@@ -2,9 +2,6 @@ import React from 'react';
 import {type CmsContent} from '~/amplience/getImageURL';
 import AmplienceWrapper from '../wrapper/AmplienceWrapper';
 
-/**
- * TODO
- */
 interface Props {
   contentTypes: CmsContent[];
 }

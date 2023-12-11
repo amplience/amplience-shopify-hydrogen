@@ -1,14 +1,14 @@
 import {type FC} from 'react';
 import {type CmsContent} from '~/amplience/getImageURL';
 
-type Props = {} & CmsContent;
+type VideoProps = {} & CmsContent;
 
 /**
  * TODO
  * @param param0 
  * @returns 
  */
-const Video: FC<Props> = ({video}) => {
+const Video: FC<VideoProps> = ({video}) => {
   if (!video) {
     return null;
   }
