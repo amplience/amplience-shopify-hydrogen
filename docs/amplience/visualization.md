@@ -4,7 +4,7 @@ To get an idea of what your unpublished content will look like we provide some t
 
 ## Using the visualization route
 
-As the components can be in any location, we have set up a specific Visualisation route which is used to visualize individual content items as you are editing. An example of this would be:
+As the components can be in any location, we have set up a specific Visualization route which is used to visualize individual content items as you are editing. An example of this would be:
 
 `https://<your-app-domain-here>/en-US/visualization?content=<your-content-id>&vse=<your-vse-domain>&hub=<your-hub-name>`
 
@@ -18,4 +18,4 @@ To allow you to see changes as they are made we use the Amplience [Real Time vis
 
 ### Standalone mode
 
-Sometimes it is prefereable to see a component in isolation, without headers, footers, etc. To enable standalone mode you can pass and additional query string param: `standalone=true`.
+Sometimes it is preferable to see a component in isolation, without headers, footers, etc. To enable standalone mode you can pass an additional query string param: `standalone=true`.
