@@ -1,22 +1,13 @@
-/**
- * TODO
- */
 export type CmsImage = {
   defaultHost: string;
   name: string;
   endpoint: string;
 };
 
-/**
- * TODO
- */
 export type CmsContent = {
   [key: string]: any;
 };
 
-/**
- * TODO
- */
 export enum ImageFormat {
   WEBP = 'webp',
   JPEG = 'jpeg',
@@ -26,9 +17,6 @@ export enum ImageFormat {
   DEFAULT = 'default',
 }
 
-/**
- * TODO
- */
 export enum ImageScaleMode {
   ASPECT_RATIO = 'aspect',
   CROP = 'c',
@@ -47,17 +35,11 @@ export enum ImageScaleMode {
   BOTTOM_RIGHT = 'br',
 }
 
-/**
- * TODO
- */
 export enum ImageScaleFit {
   CENTER = 'center',
   POINT_OF_INTEREST = 'poi',
 }
 
-/**
- * TODO
- */
 export type ImageTransformations = {
   format?: ImageFormat;
   seoFileName?: string;
@@ -90,11 +72,11 @@ export type ImageTransformations = {
 const avifMaxPixels = 2500000;
 
 /**
- * TODO
- * @param width 
- * @param height 
- * @param maxPixels 
- * @returns 
+ * Limit overall image size for better AVIF conversion
+ * @param width image witdth
+ * @param height image height
+ * @param maxPixels maximum number of pixels
+ * @returns optimized width and height
  */
 function limitSize(
   width: number,
@@ -119,18 +101,17 @@ function limitSize(
 }
 
 /**
- * TODO
- * @param transformations 
- * @param maxPixels 
- * @returns 
+ * Given a max number of pixels,
+ * Constrain the size of the image, while also keeping its aspect ratio.
+ * If it's not possible, leave it untouched.
+ * @param transformations image transformations
+ * @param maxPixels maximum number of pixels
+ * @returns optimized image transformations
  */
 function constrainMaxSize(
   transformations: ImageTransformations,
   maxPixels: number,
 ): ImageTransformations {
-  // Given a max number of pixels,
-  // Constrain the size of the image, while also keeping its aspect ratio.
-  // If it's not possible, leave it untouched.
   const aspect = transformations.aspectRatio;
 
   if (transformations.width == null && transformations.height == null) {
@@ -202,12 +183,12 @@ function constrainMaxSize(
 }
 
 /**
- * TODO
- * @param image 
- * @param transformations 
- * @param removeAllParams 
- * @param diParams 
- * @returns 
+ * Get complete image URL
+ * @param image object contaning all image information
+ * @param transformations all image transformations
+ * @param removeAllParams should all existing params be removed
+ * @param diParams additional dynamic image parameters
+ * @returns final image URL
  */
 export function getImageURL(
   image: string | CmsImage,
