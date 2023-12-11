@@ -1,11 +1,16 @@
-import React, {forwardRef} from 'react';
-import AdaptiveImage, {type AdaptiveImageProps} from './AdaptiveImage';
+import React, { forwardRef } from 'react';
+import AdaptiveImage, { type AdaptiveImageProps } from './AdaptiveImage';
 import AdaptiveImageSource from './AdaptiveImageSource';
 
+/**
+ * TODO
+ * @param props 
+ * @returns 
+ */
 const DefaultAdaptiveImage: React.FC<Omit<AdaptiveImageProps, 'children'>> = (
   props,
 ) => {
-  const {imageRef} = props;
+  const { imageRef } = props;
   return (
     <AdaptiveImage ref={imageRef} {...props}>
       <AdaptiveImageSource
@@ -40,9 +45,13 @@ const DefaultAdaptiveImage: React.FC<Omit<AdaptiveImageProps, 'children'>> = (
   );
 };
 
+/**
+ * TODO
+ */
 const DefaultAdaptiveImageRef = forwardRef(
   (props: AdaptiveImageProps, ref: any) => (
     <DefaultAdaptiveImage imageRef={ref} {...props} />
   ),
 );
+
 export default DefaultAdaptiveImageRef;

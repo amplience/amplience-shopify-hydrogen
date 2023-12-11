@@ -2,6 +2,9 @@ import React, {useContext, useMemo} from 'react';
 import {type ImageTransformations, getImageURL} from '~/amplience/getImageURL';
 import {AdaptiveImageContext} from './AdaptiveImage';
 
+/**
+ * TODO
+ */
 interface Props
   extends React.DetailedHTMLProps<
     React.SourceHTMLAttributes<HTMLSourceElement>,
@@ -10,6 +13,11 @@ interface Props
   transformations?: ImageTransformations;
 }
 
+/**
+ * TODO
+ * @param props 
+ * @returns 
+ */
 const AdaptiveImageSource: React.FC<Props> = (props) => {
   const {transformations, ...other} = props;
 

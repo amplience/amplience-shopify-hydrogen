@@ -4,11 +4,14 @@ import {
   ImageScaleMode,
   type ImageTransformations,
 } from '~/amplience/getImageURL';
-import {useEffect, useRef, useState} from 'react';
+import { useEffect, useRef, useState } from 'react';
 import DefaultAdaptiveImageRef from '../adaptive-image/DefaultAdaptiveImage';
 import DefaultAdaptiveImageSkeleton from '../adaptive-image/DefaultAdaptiveImageSkeleton';
 import clsx from 'clsx';
 
+/**
+ * TODO
+ */
 type SimpleBannerProps = {
   image: {
     img: {
@@ -59,6 +62,9 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
   const [imageLoading, setImageLoading] = useState(true);
   const imageRef = useRef<any>();
 
+  /**
+   * TODO
+   */
   const handleImageLoaded = () => {
     setImageLoading(false);
   };
@@ -69,7 +75,7 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
     }
   }, [imageRef?.current?.complete, imageLoading]);
 
-  const {img} = image || {};
+  const { img } = image || {};
 
   const transformations: ImageTransformations = {
     ...img?.image,
@@ -81,9 +87,9 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
       : undefined,
     scaleFit:
       !image?.disablePoiAspectRatio &&
-      img?.image?.poi &&
-      img?.image?.poi.x != -1 &&
-      img?.image?.poi.y != -1
+        img?.image?.poi &&
+        img?.image?.poi.x != -1 &&
+        img?.image?.poi.y != -1
         ? ImageScaleFit.POINT_OF_INTEREST
         : undefined,
   };
@@ -95,7 +101,7 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
     ctaSettings?.buttonText;
 
   return (
-    <div style={{position: 'relative'}}>
+    <div style={{ position: 'relative' }}>
       {imageLoading ? <DefaultAdaptiveImageSkeleton /> : null}
       <div
         style={{

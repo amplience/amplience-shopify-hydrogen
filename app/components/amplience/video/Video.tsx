@@ -3,6 +3,11 @@ import {type CmsContent} from '~/amplience/getImageURL';
 
 type Props = {} & CmsContent;
 
+/**
+ * TODO
+ * @param param0 
+ * @returns 
+ */
 const Video: FC<Props> = ({video}) => {
   if (!video) {
     return null;

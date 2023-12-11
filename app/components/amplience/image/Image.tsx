@@ -4,6 +4,9 @@ import {
   getImageURL,
 } from '~/amplience/getImageURL';
 
+/**
+ * TODO
+ */
 type ImageProps = {
   image: any;
   query?: any;
@@ -12,6 +15,11 @@ type ImageProps = {
   di?: string;
 } & CmsContent;
 
+/**
+ * TODO
+ * @param param0 
+ * @returns 
+ */
 const Image: React.FC<ImageProps> = ({
   display,
   image,
@@ -25,6 +33,11 @@ const Image: React.FC<ImageProps> = ({
     return null;
   }
 
+  /**
+   * TODO
+   * @param param0 
+   * @returns 
+   */
   const buildSrcUrl = ({width, poiAspect, format}: any) => {
     let baseUrl = `https://${image.defaultHost}/i/${
       image.endpoint
@@ -50,6 +63,11 @@ const Image: React.FC<ImageProps> = ({
     return getImageURL(`${baseUrl}?${queryString}`, transformations, false, di);
   };
 
+  /**
+   * TODO
+   * @param param0 
+   * @returns 
+   */
   const source = ({
     minWidth,
     maxWidth,

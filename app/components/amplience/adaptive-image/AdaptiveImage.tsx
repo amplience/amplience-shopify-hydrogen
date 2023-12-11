@@ -1,10 +1,13 @@
-import React, {createContext, forwardRef} from 'react';
+import React, { createContext, forwardRef } from 'react';
 import {
   type CmsImage,
   type ImageTransformations,
   getImageURL,
 } from '~/amplience/getImageURL';
 
+/**
+ * TODO
+ */
 export interface AdaptiveImageProps
   extends React.DetailedHTMLProps<
     React.ImgHTMLAttributes<HTMLImageElement>,
@@ -18,6 +21,9 @@ export interface AdaptiveImageProps
   diParams?: string;
 }
 
+/**
+ * TODO
+ */
 type ContextState = {
   image: CmsImage;
   transformations?: ImageTransformations;
@@ -27,8 +33,16 @@ type ContextState = {
   };
 };
 
+/**
+ * TODO
+ */
 export const AdaptiveImageContext = createContext<ContextState | null>(null);
 
+/**
+ * TODO
+ * @param props 
+ * @returns 
+ */
 const AdaptiveImage: React.FC<AdaptiveImageProps> = (props) => {
   const {
     image,
@@ -68,6 +82,9 @@ const AdaptiveImage: React.FC<AdaptiveImageProps> = (props) => {
   );
 };
 
+/**
+ * TODO
+ */
 const AdaptiveImageRef = forwardRef((props: AdaptiveImageProps, ref) => (
   <AdaptiveImage
     {...props}
@@ -76,4 +93,5 @@ const AdaptiveImageRef = forwardRef((props: AdaptiveImageProps, ref) => (
     {props.children}
   </AdaptiveImage>
 ));
+
 export default AdaptiveImageRef;

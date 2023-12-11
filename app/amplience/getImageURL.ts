@@ -1,13 +1,22 @@
+/**
+ * TODO
+ */
 export type CmsImage = {
   defaultHost: string;
   name: string;
   endpoint: string;
 };
 
+/**
+ * TODO
+ */
 export type CmsContent = {
   [key: string]: any;
 };
 
+/**
+ * TODO
+ */
 export enum ImageFormat {
   WEBP = 'webp',
   JPEG = 'jpeg',
@@ -17,6 +26,9 @@ export enum ImageFormat {
   DEFAULT = 'default',
 }
 
+/**
+ * TODO
+ */
 export enum ImageScaleMode {
   ASPECT_RATIO = 'aspect',
   CROP = 'c',
@@ -35,11 +47,17 @@ export enum ImageScaleMode {
   BOTTOM_RIGHT = 'br',
 }
 
+/**
+ * TODO
+ */
 export enum ImageScaleFit {
   CENTER = 'center',
   POINT_OF_INTEREST = 'poi',
 }
 
+/**
+ * TODO
+ */
 export type ImageTransformations = {
   format?: ImageFormat;
   seoFileName?: string;
@@ -49,7 +67,7 @@ export type ImageTransformations = {
 
   quality?: number;
 
-  poi?: {x: number; y: number};
+  poi?: { x: number; y: number };
   scaleMode?: ImageScaleMode;
   scaleFit?: ImageScaleFit;
   aspectRatio?: string;
@@ -71,11 +89,18 @@ export type ImageTransformations = {
 
 const avifMaxPixels = 2500000;
 
+/**
+ * TODO
+ * @param width 
+ * @param height 
+ * @param maxPixels 
+ * @returns 
+ */
 function limitSize(
   width: number,
   height: number,
   maxPixels: number,
-): {width: number; height: number} | undefined {
+): { width: number; height: number } | undefined {
   const pixels = width * height;
 
   if (pixels <= maxPixels) {
@@ -93,6 +118,12 @@ function limitSize(
   };
 }
 
+/**
+ * TODO
+ * @param transformations 
+ * @param maxPixels 
+ * @returns 
+ */
 function constrainMaxSize(
   transformations: ImageTransformations,
   maxPixels: number,
@@ -117,10 +148,10 @@ function constrainMaxSize(
     return newSize == null
       ? transformations
       : {
-          ...transformations,
-          width: newSize.width,
-          height: newSize.height,
-        };
+        ...transformations,
+        width: newSize.width,
+        height: newSize.height,
+      };
   }
 
   // Can only control scale if we know the aspect.
@@ -147,9 +178,9 @@ function constrainMaxSize(
     return newSize == null
       ? transformations
       : {
-          ...transformations,
-          width: newSize.width,
-        };
+        ...transformations,
+        width: newSize.width,
+      };
   } else if (transformations.height != null) {
     // Height must be defined instead.
     const newSize = limitSize(
@@ -161,15 +192,23 @@ function constrainMaxSize(
     return newSize == null
       ? transformations
       : {
-          ...transformations,
-          height: newSize.height,
-        };
+        ...transformations,
+        height: newSize.height,
+      };
   }
 
   // Not really possible to get here, but typescript doesn't know that.
   return transformations;
 }
 
+/**
+ * TODO
+ * @param image 
+ * @param transformations 
+ * @param removeAllParams 
+ * @param diParams 
+ * @returns 
+ */
 export function getImageURL(
   image: string | CmsImage,
   transformations: ImageTransformations = {},
@@ -204,8 +243,8 @@ export function getImageURL(
     typeof image === 'string'
       ? image
       : `https://${image.defaultHost}/i/${encodeURIComponent(
-          image.endpoint,
-        )}/${encodeURIComponent(image.name)}`;
+        image.endpoint,
+      )}/${encodeURIComponent(image.name)}`;
 
   if (seoFileName) {
     url += `/${encodeURIComponent(seoFileName)}`;

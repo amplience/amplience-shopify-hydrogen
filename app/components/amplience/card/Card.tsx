@@ -1,6 +1,9 @@
 import {type CmsContent} from '~/amplience/getImageURL';
 import AmplienceWrapper from '../wrapper/AmplienceWrapper';
 
+/**
+ * TODO
+ */
 type CardProps = {
   className?: string;
   image?: CmsContent;
