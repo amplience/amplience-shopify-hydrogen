@@ -10,7 +10,7 @@ export default async function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext,
 ) {
-  const {nonce, header, NonceProvider} =  createContentSecurityPolicy({
+  const {nonce, header, NonceProvider} = createContentSecurityPolicy({
     defaultSrc: [
       "'self'",
       'https://cdn.media.amplience.net',

@@ -33,7 +33,7 @@ const COMPONENT_MAPPING: {
 
 /**
  * Component used when no matching schema has been found
- * @param param0 object containing content data
+ * @param content object containing content data
  * @returns code block flushing the full content data
  */
 const MappingNotFound = ({content}: {content: ContentItem}) => {
@@ -46,7 +46,7 @@ const MappingNotFound = ({content}: {content: ContentItem}) => {
 
 /**
  * Wrapper component selecting the right component based on schema
- * @param param0 object containing content data
+ * @param content object containing content data
  * @returns matching component or MappingNotFound component
  */
 const AmplienceWrapper = ({content}: AmplienceWrapperProps) => {
