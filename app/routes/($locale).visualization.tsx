@@ -15,14 +15,14 @@ export const meta: MetaFunction = () => {
 
 export async function loader({context}: LoaderFunctionArgs) {
   const {
-    amplience: {locale},
+    amplience: {locale, hubName},
   } = context;
 
-  return defer({locale});
+  return defer({locale, hubName});
 }
 
 export default function Visualization() {
-  const {locale} = useLoaderData<typeof loader>();
+  const {locale, hubName} = useLoaderData<typeof loader>();
   const {hub, vse, content} = useAmplienceSearchParams();
   const [fetchedContent, setFetchedContent] = useState<ContentItem>();
 
@@ -32,13 +32,16 @@ export default function Visualization() {
 
   useEffect(() => {
     const fetch = async () => {
-      const context = {hubName: hub || '', stagingHost: vse || ''};
+      const context = {
+        hubName: hub ?? hubName,
+        ...(vse ? {stagingHost: vse} : {}),
+      };
       const params = {locale};
       const data = await fetchContent([{id: content || ''}], context, params);
       setFetchedContent(data[0]);
     };
     fetch();
-  }, [locale, content, hub, vse]);
+  }, [locale, content, hub, vse, hubName]);
 
   return (
     <>
