@@ -4,7 +4,7 @@ import {
   ImageScaleMode,
   type ImageTransformations,
 } from '~/amplience/getImageURL';
-import { useEffect, useRef, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 import DefaultAdaptiveImageRef from '../adaptive-image/DefaultAdaptiveImage';
 import DefaultAdaptiveImageSkeleton from '../adaptive-image/DefaultAdaptiveImageSkeleton';
 import clsx from 'clsx';
@@ -75,7 +75,7 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
     }
   }, [imageRef?.current?.complete, imageLoading]);
 
-  const { img } = image || {};
+  const {img} = image || {};
 
   const transformations: ImageTransformations = {
     ...img?.image,
@@ -87,9 +87,9 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
       : undefined,
     scaleFit:
       !image?.disablePoiAspectRatio &&
-        img?.image?.poi &&
-        img?.image?.poi.x != -1 &&
-        img?.image?.poi.y != -1
+      img?.image?.poi &&
+      img?.image?.poi.x != -1 &&
+      img?.image?.poi.y != -1
         ? ImageScaleFit.POINT_OF_INTEREST
         : undefined,
   };
@@ -102,10 +102,10 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
     ctaSettings?.buttonText;
 
   return (
-    <div className='amp-simple-banner' style={{ position: 'relative' }}>
+    <div className="amp-simple-banner" style={{position: 'relative'}}>
       {imageLoading ? <DefaultAdaptiveImageSkeleton /> : null}
       <div
-        className='amp-simple-banner-image'
+        className="amp-simple-banner-image"
         style={{
           display: `${imageLoading ? 'none' : 'block'}`,
         }}
@@ -126,18 +126,26 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
         }}
         className={clsx('amp-simple-banner-text', {
           ampfloatingLeft: textPositioning.textPositionHorizontal === 'left',
-          ampfloatingCenter: textPositioning.textPositionHorizontal === 'center' && !(textPositioning.textPositionVertical === 'middle'),
+          ampfloatingCenter:
+            textPositioning.textPositionHorizontal === 'center' &&
+            !(textPositioning.textPositionVertical === 'middle'),
           ampfloatingRight: textPositioning.textPositionHorizontal === 'right',
           ampfloatingTop: textPositioning.textPositionVertical === 'top',
-          ampfloatingMiddle: textPositioning.textPositionVertical === 'middle' && !(textPositioning.textPositionHorizontal === 'center'),
+          ampfloatingMiddle:
+            textPositioning.textPositionVertical === 'middle' &&
+            !(textPositioning.textPositionHorizontal === 'center'),
           ampfloatingBottom: textPositioning.textPositionVertical === 'bottom',
-          ampfloatingCenterMiddle: textPositioning.textPositionHorizontal === 'center' && textPositioning.textPositionVertical === 'middle',
+          ampfloatingCenterMiddle:
+            textPositioning.textPositionHorizontal === 'center' &&
+            textPositioning.textPositionVertical === 'middle',
         })}
       >
         <h1>{bannerText?.header}</h1>
         <h2>{bannerText?.subheader}</h2>
         <p style={{marginBottom: '20px'}}>{bannerText?.description}</p>
-        <a className='amp-button' href={ctaSettings?.linkUrl}>{ctaSettings?.buttonText}</a>
+        <a className="amp-button" href={ctaSettings?.linkUrl}>
+          {ctaSettings?.buttonText}
+        </a>
       </div>
     </div>
   );

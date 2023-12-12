@@ -1,4 +1,4 @@
-import { type CmsContent } from '~/amplience/getImageURL';
+import {type CmsContent} from '~/amplience/getImageURL';
 import AmplienceWrapper from '../wrapper/AmplienceWrapper';
 
 type CardProps = {
@@ -16,14 +16,9 @@ type CardProps = {
  * @param description description
  * @returns Card component
  */
-const Card: React.FC<CardProps> = ({
-  image,
-  cardName,
-  description,
-  links
-}) => {
+const Card: React.FC<CardProps> = ({image, cardName, description, links}) => {
   return (
-    <div className='amp-card' style={{ width: '100%', margin: 4 }}>
+    <div className="amp-card" style={{width: '100%', margin: 4}}>
       <div>
         <AmplienceWrapper content={image as CmsContent} />
       </div>
@@ -36,19 +31,18 @@ const Card: React.FC<CardProps> = ({
           gap: 8,
         }}
       >
-        {
-          links && links.map((link: any, i: number) => {
+        {links &&
+          links.map((link: any, i: number) => {
             if (link.label) {
               return (
-                <a className='amp-button' href={link.value} key={i}>
+                <a className="amp-button" href={link.value} key={i}>
                   {link.label}
                 </a>
-              )
+              );
             } else {
               return null;
             }
-          })
-        }
+          })}
       </div>
     </div>
   );

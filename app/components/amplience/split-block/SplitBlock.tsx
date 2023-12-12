@@ -29,7 +29,7 @@ const SplitBlock: React.FC<SplitBlockProps> = (props) => {
 
   return (
     <div
-      className='amp-split-block'
+      className="amp-split-block"
       style={{
         backgroundColor: bgcol,
       }}

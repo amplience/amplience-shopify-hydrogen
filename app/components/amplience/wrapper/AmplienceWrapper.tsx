@@ -36,7 +36,10 @@ const COMPONENT_MAPPING: {
 const MappingNotFound = (content: ContentItem) => {
   return (
     <pre>
-      <code className='amp-json-code' style={{display: 'block', wordWrap : 'break-word'}}>
+      <code
+        className="amp-json-code"
+        style={{display: 'block', wordWrap: 'break-word'}}
+      >
         {JSON.stringify(content, null, 2)}
       </code>
     </pre>
