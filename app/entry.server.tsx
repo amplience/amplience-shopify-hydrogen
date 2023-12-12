@@ -11,12 +11,19 @@ export default async function handleRequest(
   remixContext: EntryContext,
 ) {
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
+    frameAncestors: ["'self'", 'https://app.amplience.net'],
     defaultSrc: [
       "'self'",
       'https://cdn.media.amplience.net',
       'https://cdn.static.amplience.net',
+      '*.staging.bigcontent.io',
       'https://shopify.com',
       'https://cdn.shopify.com',
+    ],
+    connectSrc: [
+      "'self'",
+      'https://monorail-edge.shopifysvc.com',
+      '*.staging.bigcontent.io',
     ],
   });
 

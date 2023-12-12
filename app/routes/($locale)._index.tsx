@@ -1,13 +1,17 @@
 import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, type MetaFunction, Link, Await} from '@remix-run/react';
-
 import AmplienceWrapper from '~/components/amplience/wrapper/AmplienceWrapper';
 import type {
   FeaturedCollectionFragment,
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
-import {Suspense} from 'react';
+import {Suspense, useEffect, useState} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
+import {
+  type ContentItem,
+  fetchContent,
+} from '~/clients/amplience/fetch-content';
+import {useAmplienceSearchParams} from '~/hooks/useAmplienceSearchParams';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -16,45 +20,48 @@ export const meta: MetaFunction = () => {
 export async function loader({context}: LoaderFunctionArgs) {
   const {
     storefront,
-    ampContentClient: {fetchContent},
-    locale,
+    amplience: {hubName, locale},
   } = context;
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
-  const textContent = (await fetchContent([{key: 'text'}], {locale}))[0];
-  const imageContent = (
-    await fetchContent([{key: 'image/example1'}], {locale})
+  const initialText = (
+    await fetchContent([{key: 'text'}], {hubName}, {locale})
   )[0];
-  const videoContent = (
-    await fetchContent([{key: 'docs/story/video/video1'}], {locale})
+  const initialImage = (
+    await fetchContent([{key: 'image/example1'}], {hubName}, {locale})
   )[0];
-  const splitBlockContent = (
-    await fetchContent([{key: 'split-block/example4'}], {locale})
+  const initialVideo = (
+    await fetchContent([{key: 'docs/story/video/video1'}], {hubName}, {locale})
   )[0];
-  const cardContent = (
-    await fetchContent([{key: 'card/example1'}], {locale})
+  const initialSplitBlock = (
+    await fetchContent([{key: 'split-block/example4'}], {hubName}, {locale})
   )[0];
-  const cardListContent = (
-    await fetchContent([{key: 'card-list/example1'}], {locale})
+  const initialCard = (
+    await fetchContent([{key: 'card/example1'}], {hubName}, {locale})
   )[0];
-  const containerContent = (
-    await fetchContent([{key: 'container/example1'}], {locale})
+  const initialCardList = (
+    await fetchContent([{key: 'card-list/example1'}], {hubName}, {locale})
   )[0];
-  const simpleBannerContent = (
-    await fetchContent([{key: 'testing123'}], {locale})
+  const initialContainer = (
+    await fetchContent([{key: 'container/example1'}], {hubName}, {locale})
+  )[0];
+  const initialSimpleBanner = (
+    await fetchContent([{key: 'testing123'}], {hubName}, {locale})
   )[0];
   return defer({
+    hubName,
+    locale,
     featuredCollection,
     recommendedProducts,
-    textContent,
-    videoContent,
-    imageContent,
-    splitBlockContent,
-    cardContent,
-    cardListContent,
-    containerContent,
-    simpleBannerContent,
+    initialText,
+    initialVideo,
+    initialImage,
+    initialSplitBlock,
+    initialCard,
+    initialCardList,
+    initialContainer,
+    initialSimpleBanner,
   });
 }
 
@@ -62,35 +69,54 @@ export default function Homepage() {
   const {
     featuredCollection,
     recommendedProducts,
-    textContent,
-    videoContent,
-    imageContent,
-    splitBlockContent,
-    cardContent,
-    cardListContent,
-    containerContent,
-    simpleBannerContent,
+    hubName,
+    locale,
+    initialText,
+    initialVideo,
+    initialImage,
+    initialSplitBlock,
+    initialCard,
+    initialCardList,
+    initialContainer,
+    initialSimpleBanner,
   } = useLoaderData<typeof loader>();
+  const [simpleBanner, setSimpleBanner] =
+    useState<ContentItem>(initialSimpleBanner);
+  const {hub, vse} = useAmplienceSearchParams();
+
+  useEffect(() => {
+    const fetch = async () => {
+      const context = {
+        hubName: hub ?? hubName,
+        ...(vse ? {stagingHost: vse} : {}),
+      };
+      const params = {locale};
+      const data = await fetchContent([{key: 'testing123'}], context, params);
+      setSimpleBanner(data[0]);
+    };
+    fetch();
+  }, [hub, hubName, locale, vse]);
+
   return (
     <div className="home">
       <FeaturedCollection collection={featuredCollection} />
       <RecommendedProducts products={recommendedProducts} />
       <h2 style={{paddingTop: '20px'}}>Image Component</h2>
-      <AmplienceWrapper content={imageContent}></AmplienceWrapper>
+      <AmplienceWrapper content={initialImage}></AmplienceWrapper>
       <h2 style={{paddingTop: '20px'}}>Text Component</h2>
-      <AmplienceWrapper content={textContent}></AmplienceWrapper>
+      <AmplienceWrapper content={initialText}></AmplienceWrapper>
       <h2 style={{paddingTop: '20px'}}>Video Component</h2>
-      <AmplienceWrapper content={videoContent}></AmplienceWrapper>
+      <AmplienceWrapper content={initialVideo}></AmplienceWrapper>
       <h2 style={{paddingTop: '20px'}}>Split Block Component</h2>
-      <AmplienceWrapper content={splitBlockContent}></AmplienceWrapper>
+      <AmplienceWrapper content={initialSplitBlock}></AmplienceWrapper>
       <h2 style={{paddingTop: '20px'}}>Card Component</h2>
-      <AmplienceWrapper content={cardContent}></AmplienceWrapper>
+      <AmplienceWrapper content={initialCard}></AmplienceWrapper>
       <h2 style={{paddingTop: '20px'}}>Card List Component</h2>
-      <AmplienceWrapper content={cardListContent}></AmplienceWrapper>
+      <AmplienceWrapper content={initialCardList}></AmplienceWrapper>
       <h2 style={{paddingTop: '20px'}}>Container Component</h2>
-      <AmplienceWrapper content={containerContent}></AmplienceWrapper>
+      <AmplienceWrapper content={initialContainer}></AmplienceWrapper>
       <h2 style={{paddingTop: '20px'}}>Simple Banner Component</h2>
-      <AmplienceWrapper content={simpleBannerContent}></AmplienceWrapper>
+      <AmplienceWrapper content={simpleBanner}></AmplienceWrapper>
     </div>
   );
 }

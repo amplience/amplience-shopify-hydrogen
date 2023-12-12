@@ -1,4 +1,4 @@
-import type {ContentItem} from '~/clients/amplience/create-dc-content-client.types';
+import type {ContentItem} from '~/clients/amplience/fetch-content';
 import Text from '../text/Text';
 import Image from '../image/Image';
 import Video from '../video/Video';
@@ -33,7 +33,7 @@ const COMPONENT_MAPPING: {
  * @param content object containing content data
  * @returns code block flushing the full content data
  */
-const MappingNotFound = ({content}: {content: ContentItem}) => {
+const MappingNotFound = (content: ContentItem) => {
   return (
     <pre>
       <code style={{display: 'block'}}>{JSON.stringify(content, null, 2)}</code>

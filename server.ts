@@ -14,7 +14,6 @@ import {
   type SessionStorage,
   type Session,
 } from '@shopify/remix-oxygen';
-import {createDcContentClient} from './app/clients/amplience/create-dc-content-client';
 
 /**
  * Export a fetch handler in module format.
@@ -67,11 +66,13 @@ export default {
       });
 
       /**
-       * Create a DC Content client
+       * Create an Amplience Context
        */
-      const {ampContentClient} = createDcContentClient({hubName: env.HUB_NAME});
 
-      const locale = `${i18n.language.toLocaleLowerCase()}-${i18n.country}`;
+      const amplience = {
+        locale: `${i18n.language.toLocaleLowerCase()}-${i18n.country}`,
+        hubName: env.HUB_NAME,
+      };
 
       /**
        * Create a Remix request handler and pass
@@ -86,8 +87,7 @@ export default {
           cart,
           env,
           waitUntil,
-          ampContentClient,
-          locale,
+          amplience,
         }),
       });
 

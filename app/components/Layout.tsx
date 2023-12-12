@@ -1,4 +1,4 @@
-import {Await} from '@remix-run/react';
+import {Await, useLocation} from '@remix-run/react';
 import {Suspense} from 'react';
 import type {
   CartApiQueryFragment,
@@ -13,6 +13,7 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
+import {useAmplienceSearchParams} from '~/hooks/useAmplienceSearchParams';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -29,18 +30,25 @@ export function Layout({
   header,
   isLoggedIn,
 }: LayoutProps) {
+  const {standalone} = useAmplienceSearchParams();
   return (
     <>
-      <CartAside cart={cart} />
-      <SearchAside />
-      <MobileMenuAside menu={header.menu} shop={header.shop} />
-      <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />
-      <main>{children}</main>
-      <Suspense>
-        <Await resolve={footer}>
-          {(footer) => <Footer menu={footer.menu} shop={header.shop} />}
-        </Await>
-      </Suspense>
+      {standalone === 'true' ? (
+        <main>{children}</main>
+      ) : (
+        <>
+          <CartAside cart={cart} />
+          <SearchAside />
+          <MobileMenuAside menu={header.menu} shop={header.shop} />
+          <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />
+          <main>{children}</main>
+          <Suspense>
+            <Await resolve={footer}>
+              {(footer) => <Footer menu={footer.menu} shop={header.shop} />}
+            </Await>
+          </Suspense>
+        </>
+      )}
     </>
   );
 }
