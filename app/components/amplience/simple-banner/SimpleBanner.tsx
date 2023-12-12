@@ -105,9 +105,9 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
     <div className='simple-banner' style={{ position: 'relative' }}>
       {imageLoading ? <DefaultAdaptiveImageSkeleton /> : null}
       <div
+        className='simple-banner-image'
         style={{
           display: `${imageLoading ? 'none' : 'block'}`,
-          backgroundColor: '#ccc',
         }}
       >
         <DefaultAdaptiveImageRef
@@ -121,13 +121,9 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
       </div>
       <div
         style={{
-          padding: '25px 40px 25px 40px',
-          position: 'absolute',
-          textAlign: 'center',
           backgroundColor: `rgba(255, 255, 255, ${opacity})`,
-          maxWidth: '500px',
         }}
-        className={clsx({
+        className={clsx('simple-banner-text', {
           floatingLeft: textPositioning.textPositionHorizontal === 'left',
           floatingCenter: textPositioning.textPositionHorizontal === 'center' && !(textPositioning.textPositionVertical === 'middle'),
           floatingRight: textPositioning.textPositionHorizontal === 'right',
