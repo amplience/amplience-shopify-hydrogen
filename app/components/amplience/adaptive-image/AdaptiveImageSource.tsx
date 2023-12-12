@@ -12,7 +12,7 @@ interface Props
 
 /**
  * Adaptive Image Source component
- * @param transformations object containing all image transformations 
+ * @param transformations object containing all image transformations
  * @returns source component with source set and source information
  */
 const AdaptiveImageSource: React.FC<Props> = (props) => {

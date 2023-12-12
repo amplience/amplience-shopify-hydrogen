@@ -8,7 +8,7 @@ interface Props {
 
 /**
  * Container component
- * @param contentTypes list of content items 
+ * @param contentTypes list of content items
  * @returns All content items in the container using AmplienceWrapper
  */
 const Container: React.FC<Props> = ({contentTypes = []}) => {

@@ -20,7 +20,7 @@ type ImageProps = {
  * @param seoText
  * @param di
  * @param query
- * @returns 
+ * @returns
  */
 const Image: React.FC<ImageProps> = ({
   display,
@@ -37,8 +37,8 @@ const Image: React.FC<ImageProps> = ({
   /**
    * Build the complete image source using transformations
    * @param width image witdh
-   * @param poiAspect Point of interest aspect 
-   * @returns 
+   * @param poiAspect Point of interest aspect
+   * @returns
    */
   const buildSrcUrl = ({width, poiAspect, format}: any) => {
     let baseUrl = `https://${image.defaultHost}/i/${
@@ -67,7 +67,7 @@ const Image: React.FC<ImageProps> = ({
 
   /**
    * Source component
-   * @param param0 
+   * @param param0
    * @returns Source tag with all source set information
    */
   const source = ({
@@ -104,7 +104,7 @@ const Image: React.FC<ImageProps> = ({
           loading="lazy"
           src={`//${image.endpoint}.a.bigcontent.io/v1/static/${image.name}`}
           className="amp-dc-image-pic"
-          width='100%'
+          width="100%"
           alt={imageAltText}
           title={seoText}
         />
