@@ -15,10 +15,10 @@ type CardListProps = {
  */
 const CardList: React.FC<CardListProps> = ({header, cards}) => {
   return (
-    <div data-testid="CardList">
+    <div className="amp-card-list" data-testid="CardList">
       {header && <h2>{header}</h2>}
       {cards && (
-        <div style={{display: 'flex'}}>
+        <div className="amp-card-list-container">
           {cards.map((card: any, index: number) => {
             return <Card key={index} {...card} />;
           })}

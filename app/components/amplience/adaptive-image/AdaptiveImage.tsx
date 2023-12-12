@@ -1,4 +1,4 @@
-import React, { createContext, forwardRef } from 'react';
+import React, {createContext, forwardRef} from 'react';
 import {
   type CmsImage,
   type ImageTransformations,

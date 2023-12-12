@@ -8,12 +8,12 @@ interface Props {
 
 /**
  * Container component
- * @param contentTypes list of content items 
+ * @param contentTypes list of content items
  * @returns All content items in the container using AmplienceWrapper
  */
 const Container: React.FC<Props> = ({contentTypes = []}) => {
   return (
-    <div>
+    <div className="amp-container">
       {contentTypes.map((item, index) => {
         return (
           <div key={index}>

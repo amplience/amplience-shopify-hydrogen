@@ -20,7 +20,7 @@ type TextProps = {
  */
 const Text: React.FC<TextProps> = ({text, align}) => {
   return (
-    <div className="markdown" style={{textAlign: align}}>
+    <div className="amp-markdown" style={{textAlign: align}}>
       {text && <ReactMarkdown>{text}</ReactMarkdown>}
     </div>
   );
