@@ -524,3 +524,19 @@ aside li {
   top: 50%;
   transform: translateY(-50%);
 }
+
+.button {
+  margin-top: 15px;
+  font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #333;
+  color: #eee;
+  padding: 10px 15px 10px 15px;
+  border-radius: 5px;
+}
+
+.button:hover {
+  text-decoration: none;
+  background-color: #ccc;
+  color: #333;
+}

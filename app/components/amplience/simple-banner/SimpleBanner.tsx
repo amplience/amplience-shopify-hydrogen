@@ -102,7 +102,7 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
     ctaSettings?.buttonText;
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div className='simple-banner' style={{ position: 'relative' }}>
       {imageLoading ? <DefaultAdaptiveImageSkeleton /> : null}
       <div
         style={{
@@ -139,8 +139,8 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
       >
         <h1>{bannerText?.header}</h1>
         <h2>{bannerText?.subheader}</h2>
-        <p>{bannerText?.description}</p>
-        <a href={ctaSettings?.linkUrl}>{ctaSettings?.buttonText}</a>
+        <p style={{marginBottom: '20px'}} >{bannerText?.description}</p>
+        <a className='button' href={ctaSettings?.linkUrl}>{ctaSettings?.buttonText}</a>
       </div>
     </div>
   );
