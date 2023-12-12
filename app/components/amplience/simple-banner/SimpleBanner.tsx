@@ -121,18 +121,20 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
       </div>
       <div
         style={{
-          padding: '40px 60px 40px 60px',
+          padding: '25px 40px 25px 40px',
           position: 'absolute',
           textAlign: 'center',
           backgroundColor: `rgba(255, 255, 255, ${opacity})`,
+          maxWidth: '500px',
         }}
         className={clsx({
           floatingLeft: textPositioning.textPositionHorizontal === 'left',
-          floatingCenter: textPositioning.textPositionHorizontal === 'center',
+          floatingCenter: textPositioning.textPositionHorizontal === 'center' && !(textPositioning.textPositionVertical === 'middle'),
           floatingRight: textPositioning.textPositionHorizontal === 'right',
           floatingTop: textPositioning.textPositionVertical === 'top',
-          floatingMiddle: textPositioning.textPositionVertical === 'middle',
+          floatingMiddle: textPositioning.textPositionVertical === 'middle' && !(textPositioning.textPositionHorizontal === 'center'),
           floatingBottom: textPositioning.textPositionVertical === 'bottom',
+          floatingCenterMiddle: textPositioning.textPositionHorizontal === 'center' && textPositioning.textPositionVertical === 'middle',
         })}
       >
         <h1>{bannerText?.header}</h1>
