@@ -36,7 +36,9 @@ const COMPONENT_MAPPING: {
 const MappingNotFound = (content: ContentItem) => {
   return (
     <pre>
-      <code className='json-code' style={{display: 'block'}}>{JSON.stringify(content, null, 2)}</code>
+      <code className='json-code' style={{display: 'block', wordWrap : 'break-word'}}>
+        {JSON.stringify(content, null, 2)}
+      </code>
     </pre>
   );
 };
