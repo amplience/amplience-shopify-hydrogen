@@ -122,6 +122,7 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
       <div
         style={{
           backgroundColor: `rgba(255, 255, 255, ${opacity})`,
+          textAlign: textPositioning.textPositionHorizontal,
         }}
         className={clsx('simple-banner-text', {
           floatingLeft: textPositioning.textPositionHorizontal === 'left',

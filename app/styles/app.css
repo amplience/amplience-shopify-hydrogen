@@ -508,38 +508,38 @@ aside li {
   .simple-banner-text {
     position: absolute;
   }
-}
 
-.floatingRight {
-  right: 0;
-}
+  .floatingRight {
+    right: 0;
+  }
 
-.floatingLeft {
-  left: 0;
-}
+  .floatingLeft {
+    left: 0;
+  }
 
-.floatingTop {
-  top: 0;
-}
+  .floatingTop {
+    top: 0;
+  }
 
-.floatingBottom {
-  bottom: 0;
-}
+  .floatingBottom {
+    bottom: 0;
+  }
 
-.floatingCenterMiddle {
-  left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
-}
+  .floatingCenterMiddle {
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
 
-.floatingCenter {
-  left: 50%;
-  transform: translateX(-50%);
-}
+  .floatingCenter {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-.floatingMiddle {
-  top: 50%;
-  transform: translateY(-50%);
+  .floatingMiddle {
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
 .button {
