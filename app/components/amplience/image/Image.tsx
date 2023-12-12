@@ -148,7 +148,7 @@ const Image: React.FC<ImageProps> = ({
       </picture>
     );
 
-  return <div style={{position: 'relative', width: 'auto'}}>{imageTag}</div>;
+  return <div className='amp-image'>{imageTag}</div>;
 };
 
 export default Image;

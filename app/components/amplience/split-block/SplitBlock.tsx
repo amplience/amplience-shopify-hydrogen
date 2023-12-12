@@ -29,12 +29,9 @@ const SplitBlock: React.FC<SplitBlockProps> = (props) => {
 
   return (
     <div
+      className='amp-split-block'
       style={{
         backgroundColor: bgcol,
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'row',
-        flexBasis: 1,
       }}
     >
       {content.map((content, index) => {

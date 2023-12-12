@@ -13,7 +13,7 @@ interface Props {
  */
 const Container: React.FC<Props> = ({contentTypes = []}) => {
   return (
-    <div>
+    <div className='amp-container'>
       {contentTypes.map((item, index) => {
         return (
           <div key={index}>

@@ -102,10 +102,10 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
     ctaSettings?.buttonText;
 
   return (
-    <div className='simple-banner' style={{ position: 'relative' }}>
+    <div className='amp-simple-banner' style={{ position: 'relative' }}>
       {imageLoading ? <DefaultAdaptiveImageSkeleton /> : null}
       <div
-        className='simple-banner-image'
+        className='amp-simple-banner-image'
         style={{
           display: `${imageLoading ? 'none' : 'block'}`,
         }}
@@ -124,20 +124,20 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
           backgroundColor: `rgba(255, 255, 255, ${opacity})`,
           textAlign: textPositioning.textPositionHorizontal,
         }}
-        className={clsx('simple-banner-text', {
-          floatingLeft: textPositioning.textPositionHorizontal === 'left',
-          floatingCenter: textPositioning.textPositionHorizontal === 'center' && !(textPositioning.textPositionVertical === 'middle'),
-          floatingRight: textPositioning.textPositionHorizontal === 'right',
-          floatingTop: textPositioning.textPositionVertical === 'top',
-          floatingMiddle: textPositioning.textPositionVertical === 'middle' && !(textPositioning.textPositionHorizontal === 'center'),
-          floatingBottom: textPositioning.textPositionVertical === 'bottom',
-          floatingCenterMiddle: textPositioning.textPositionHorizontal === 'center' && textPositioning.textPositionVertical === 'middle',
+        className={clsx('amp-simple-banner-text', {
+          ampfloatingLeft: textPositioning.textPositionHorizontal === 'left',
+          ampfloatingCenter: textPositioning.textPositionHorizontal === 'center' && !(textPositioning.textPositionVertical === 'middle'),
+          ampfloatingRight: textPositioning.textPositionHorizontal === 'right',
+          ampfloatingTop: textPositioning.textPositionVertical === 'top',
+          ampfloatingMiddle: textPositioning.textPositionVertical === 'middle' && !(textPositioning.textPositionHorizontal === 'center'),
+          ampfloatingBottom: textPositioning.textPositionVertical === 'bottom',
+          ampfloatingCenterMiddle: textPositioning.textPositionHorizontal === 'center' && textPositioning.textPositionVertical === 'middle',
         })}
       >
         <h1>{bannerText?.header}</h1>
         <h2>{bannerText?.subheader}</h2>
-        <p style={{marginBottom: '20px'}} >{bannerText?.description}</p>
-        <a className='button' href={ctaSettings?.linkUrl}>{ctaSettings?.buttonText}</a>
+        <p style={{marginBottom: '20px'}}>{bannerText?.description}</p>
+        <a className='amp-button' href={ctaSettings?.linkUrl}>{ctaSettings?.buttonText}</a>
       </div>
     </div>
   );

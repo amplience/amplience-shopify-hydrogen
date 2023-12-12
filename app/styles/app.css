@@ -478,7 +478,7 @@ aside li {
 * --------------------------------------------------
 */
 @media only screen and (max-width: 768px) {
-  .json-code {
+  .amp-json-code {
     font-size: 0.7rem;
   }
 }
@@ -488,7 +488,7 @@ aside li {
 * components/text
 * --------------------------------------------------
 */
-.markdown ul {
+.amp-markdown ul {
   display: block;
   list-style-type: disc;
   margin-block-start: 1em;
@@ -498,65 +498,110 @@ aside li {
   padding-inline-start: 40px;
 }
 
-.markdown img {
+.amp-markdown img {
   width: 100%;
 }
 
 /*
 * --------------------------------------------------
-* components/simple-banner
+* components/amplience/image
 * --------------------------------------------------
 */
-.simple-banner-image
+.amp-image {
+  position: relative;
+  width: auto;
+}
+
+/*
+* --------------------------------------------------
+* components/amplience/card
+* --------------------------------------------------
+*/
+@media only screen and (max-width: 768px) {
+  .amp-card {
+    margin-bottom: 30px;
+  }
+}
+
+/*
+* --------------------------------------------------
+* components/amplience/split-block
+* --------------------------------------------------
+*/
+.amp-split-block {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-basis: 1;
+}
+
+/*
+* --------------------------------------------------
+* components/amplience/card-list
+* --------------------------------------------------
+*/
+@media only screen and (min-width: 768px) {
+  .amp-card-list-container {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+/*
+* --------------------------------------------------
+* components/amplience/simple-banner
+* --------------------------------------------------
+*/
+.amp-simple-banner-image
 {
   background-color: #ccc;
 }
 
-.simple-banner-text {
+.amp-simple-banner-text {
   padding: 25px 40px 25px 40px;
   text-align: center;
   max-width: 500px;
 }
 
 @media only screen and (min-width: 768px) {
-  .simple-banner-text {
+  .amp-simple-banner-text {
     position: absolute;
   }
 
-  .floatingRight {
+  .ampfloatingRight {
     right: 0;
   }
 
-  .floatingLeft {
+  .ampfloatingLeft {
     left: 0;
   }
 
-  .floatingTop {
+  .ampfloatingTop {
     top: 0;
   }
 
-  .floatingBottom {
+  .ampfloatingBottom {
     bottom: 0;
   }
 
-  .floatingCenterMiddle {
+  .ampfloatingCenterMiddle {
     left: 50%;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
   }
 
-  .floatingCenter {
+  .ampfloatingCenter {
     left: 50%;
     transform: translateX(-50%);
   }
 
-  .floatingMiddle {
+  .ampfloatingMiddle {
     top: 50%;
     transform: translateY(-50%);
   }
 }
 
-.button {
+.amp-button {
   margin-top: 15px;
   font: bold 11px Arial;
   text-decoration: none;
@@ -566,7 +611,7 @@ aside li {
   border-radius: 5px;
 }
 
-.button:hover {
+.amp-button:hover {
   text-decoration: none;
   background-color: #ccc;
   color: #333;

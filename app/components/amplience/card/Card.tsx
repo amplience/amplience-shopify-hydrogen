@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({
   links
 }) => {
   return (
-    <div style={{ width: '100%', margin: 4 }}>
+    <div className='amp-card' style={{ width: '100%', margin: 4 }}>
       <div>
         <AmplienceWrapper content={image as CmsContent} />
       </div>
@@ -40,7 +40,7 @@ const Card: React.FC<CardProps> = ({
           links && links.map((link: any, i: number) => {
             if (link.label) {
               return (
-                <a className='button' href={link.value} key={i}>
+                <a className='amp-button' href={link.value} key={i}>
                   {link.label}
                 </a>
               )
