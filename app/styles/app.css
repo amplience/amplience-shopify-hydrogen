@@ -472,6 +472,16 @@ aside li {
   display: inline-block;
 }
 
+/*
+* --------------------------------------------------
+* component/AmplienceWrapper
+* --------------------------------------------------
+*/
+@media only screen and (max-width: 768px) {
+  .json-code {
+    font-size: 0.7rem;
+  }
+}
 
 /*
 * --------------------------------------------------
@@ -486,6 +496,10 @@ aside li {
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   padding-inline-start: 40px;
+}
+
+.markdown img {
+  width: 100%;
 }
 
 /*

@@ -104,6 +104,7 @@ const Image: React.FC<ImageProps> = ({
           loading="lazy"
           src={`//${image.endpoint}.a.bigcontent.io/v1/static/${image.name}`}
           className="amp-dc-image-pic"
+          width='100%'
           alt={imageAltText}
           title={seoText}
         />
