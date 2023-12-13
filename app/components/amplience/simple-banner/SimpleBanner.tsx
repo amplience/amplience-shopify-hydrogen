@@ -145,9 +145,12 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
           <h1>{bannerText?.header}</h1>
           <h2>{bannerText?.subheader}</h2>
           <p style={{marginBottom: '20px'}}>{bannerText?.description}</p>
-          <a className="amp-button" href={ctaSettings?.linkUrl}>
-            {ctaSettings?.buttonText}
-          </a>
+          {
+            ctaSettings &&
+            <a className="amp-button" href={ctaSettings?.linkUrl}>
+              {ctaSettings?.buttonText}
+            </a>
+          }
         </div>
       }
     </div>
