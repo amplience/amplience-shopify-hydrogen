@@ -119,34 +119,37 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
           diParams={image?.di}
         />
       </div>
-      <div
-        style={{
-          backgroundColor: `rgba(255, 255, 255, ${opacity})`,
-          textAlign: textPositioning.textPositionHorizontal,
-        }}
-        className={clsx('amp-simple-banner-text', {
-          ampfloatingLeft: textPositioning.textPositionHorizontal === 'left',
-          ampfloatingCenter:
-            textPositioning.textPositionHorizontal === 'center' &&
-            !(textPositioning.textPositionVertical === 'middle'),
-          ampfloatingRight: textPositioning.textPositionHorizontal === 'right',
-          ampfloatingTop: textPositioning.textPositionVertical === 'top',
-          ampfloatingMiddle:
-            textPositioning.textPositionVertical === 'middle' &&
-            !(textPositioning.textPositionHorizontal === 'center'),
-          ampfloatingBottom: textPositioning.textPositionVertical === 'bottom',
-          ampfloatingCenterMiddle:
-            textPositioning.textPositionHorizontal === 'center' &&
-            textPositioning.textPositionVertical === 'middle',
-        })}
-      >
-        <h1>{bannerText?.header}</h1>
-        <h2>{bannerText?.subheader}</h2>
-        <p style={{marginBottom: '20px'}}>{bannerText?.description}</p>
-        <a className="amp-button" href={ctaSettings?.linkUrl}>
-          {ctaSettings?.buttonText}
-        </a>
-      </div>
+      {
+        isOverlayVisible &&
+        <div
+          style={{
+            backgroundColor: `rgba(255, 255, 255, ${opacity})`,
+            textAlign: textPositioning.textPositionHorizontal,
+          }}
+          className={clsx('amp-simple-banner-text', {
+            ampfloatingLeft: textPositioning.textPositionHorizontal === 'left',
+            ampfloatingCenter:
+              textPositioning.textPositionHorizontal === 'center' &&
+              !(textPositioning.textPositionVertical === 'middle'),
+            ampfloatingRight: textPositioning.textPositionHorizontal === 'right',
+            ampfloatingTop: textPositioning.textPositionVertical === 'top',
+            ampfloatingMiddle:
+              textPositioning.textPositionVertical === 'middle' &&
+              !(textPositioning.textPositionHorizontal === 'center'),
+            ampfloatingBottom: textPositioning.textPositionVertical === 'bottom',
+            ampfloatingCenterMiddle:
+              textPositioning.textPositionHorizontal === 'center' &&
+              textPositioning.textPositionVertical === 'middle',
+          })}
+        >
+          <h1>{bannerText?.header}</h1>
+          <h2>{bannerText?.subheader}</h2>
+          <p style={{marginBottom: '20px'}}>{bannerText?.description}</p>
+          <a className="amp-button" href={ctaSettings?.linkUrl}>
+            {ctaSettings?.buttonText}
+          </a>
+        </div>
+      }
     </div>
   );
 };
