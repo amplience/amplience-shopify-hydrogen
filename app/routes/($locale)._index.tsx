@@ -6,12 +6,9 @@ import type {
 } from 'storefrontapi.generated';
 import {Suspense, useEffect, useState} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
-import {
-  fetchContent,
-  type ContentSlot,
-} from '~/clients/amplience/fetch-content';
+import {fetchContent} from '~/clients/amplience/fetch-content';
 import {useAmplienceSearchParams} from '~/hooks/useAmplienceSearchParams';
-import AmplienceSlot from '~/components/amplience/wrapper/AmplienceSlot';
+import AmplienceContent from '~/components/amplience/wrapper/AmplienceContent';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -25,9 +22,16 @@ export async function loader({context}: LoaderFunctionArgs) {
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
-  const homeSlotTopPublished = (
-    await fetchContent<ContentSlot>(
-      [{key: 'home/slot/top'}],
+  const simpleBannerPublished = (
+    await fetchContent(
+      [{key: 'docs/story/simple-banner/dog-xmas-banner'}],
+      {hubName},
+      {locale},
+    )
+  )[0];
+  const cardListPublished = (
+    await fetchContent(
+      [{key: 'docs/story/cardlist/cardlist1'}],
       {hubName},
       {locale},
     )
@@ -37,7 +41,8 @@ export async function loader({context}: LoaderFunctionArgs) {
     locale,
     featuredCollection,
     recommendedProducts,
-    homeSlotTopPublished,
+    simpleBannerPublished,
+    cardListPublished,
   });
 }
 
@@ -47,10 +52,11 @@ export default function Homepage() {
     recommendedProducts,
     hubName,
     locale,
-    homeSlotTopPublished,
+    simpleBannerPublished,
+    cardListPublished,
   } = useLoaderData<typeof loader>();
-  const [homeSlotTop, setHomeSlotTop] =
-    useState<ContentSlot>(homeSlotTopPublished);
+  const [simpleBanner, setSimpleBanner] = useState(simpleBannerPublished);
+  const [cardList, setCardList] = useState(cardListPublished);
   const {hub, vse} = useAmplienceSearchParams();
 
   useEffect(() => {
@@ -60,14 +66,22 @@ export default function Homepage() {
         ...(vse ? {stagingHost: vse} : {}),
       };
       const params = {locale};
-      const homeSlotTopLatest = (
-        await fetchContent<ContentSlot>(
-          [{key: 'home/slot/top'}],
+      const simpleBannerLatest = (
+        await fetchContent(
+          [{key: 'docs/story/simple-banner/dog-xmas-banner'}],
           context,
           params,
         )
       )[0];
-      setHomeSlotTop(homeSlotTopLatest);
+      setSimpleBanner(simpleBannerLatest);
+      const cardListLatest = (
+        await fetchContent(
+          [{key: 'docs/story/cardlist/cardlist1'}],
+          context,
+          params,
+        )
+      )[0];
+      setCardList(cardListLatest);
     };
     fetch();
   }, [hub, hubName, locale, vse]);
@@ -76,7 +90,8 @@ export default function Homepage() {
     <div className="home">
       <FeaturedCollection collection={featuredCollection} />
       <RecommendedProducts products={recommendedProducts} />
-      <AmplienceSlot slot={homeSlotTop}></AmplienceSlot>
+      <AmplienceContent content={simpleBanner}></AmplienceContent>
+      <AmplienceContent content={cardList}></AmplienceContent>
     </div>
   );
 }

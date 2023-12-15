@@ -1,6 +1,5 @@
 export type ContentItemRequest = {id?: string; key?: string};
 export type ContentItem = {[key: string]: any};
-export type ContentSlot = {contentTypes: ContentItem[]; [key: string]: any};
 
 export type ContentContext = {hubName: string; stagingHost?: string};
 export type ContentParams = {depth?: string; format?: string; locale?: string};
@@ -11,7 +10,7 @@ export const fetchContent = async <T>(
   items: ContentItemRequest[],
   context: ContentContext,
   params: ContentParams = {},
-): Promise<T[]> => {
+): Promise<ContentItem[]> => {
   const {hubName, stagingHost} = context;
   const host = stagingHost ?? `${hubName}.cdn.content.amplience.net`;
   const url = `https://${host}/content`;
@@ -20,7 +19,7 @@ export const fetchContent = async <T>(
     items.map(async (item) => {
       const path = item?.id ? `id/${item.id}` : `key/${item.key}`;
       const response = await fetch(`${url}/${path}?${qs}`);
-      const json = await response.json<{content: T}>();
+      const json = await response.json<{content: ContentItem}>();
       return json.content;
     }),
   );
