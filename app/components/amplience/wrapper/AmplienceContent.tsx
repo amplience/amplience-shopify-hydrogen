@@ -8,7 +8,7 @@ import CardList from '../card-list/CardList';
 import Container from '../container/Container';
 import SimpleBanner from '../simple-banner/SimpleBanner';
 
-type AmplienceWrapperProps = {
+type AmplienceContentProps = {
   content: ContentItem;
 };
 
@@ -51,10 +51,10 @@ const MappingNotFound = (content: ContentItem) => {
  * @param content object containing content data
  * @returns matching component or MappingNotFound component
  */
-const AmplienceWrapper = ({content}: AmplienceWrapperProps) => {
+const AmplienceContent = ({content}: AmplienceContentProps) => {
   const contentSchema = content?._meta?.schema;
   const Component = COMPONENT_MAPPING[contentSchema] ?? MappingNotFound;
   return <>{Component && <Component {...content}></Component>}</>;
 };
 
-export default AmplienceWrapper;
+export default AmplienceContent;

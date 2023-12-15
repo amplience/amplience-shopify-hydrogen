@@ -5,7 +5,7 @@ import {
   type ContentItem,
   fetchContent,
 } from '~/clients/amplience/fetch-content';
-import AmplienceWrapper from '~/components/amplience/wrapper/AmplienceWrapper';
+import AmplienceContent from '~/components/amplience/wrapper/AmplienceContent';
 import {useRealtimeVisualization} from '~/context/RealtimeVisualizationContext';
 import {useAmplienceSearchParams} from '~/hooks/useAmplienceSearchParams';
 
@@ -37,7 +37,11 @@ export default function Visualization() {
         ...(vse ? {stagingHost: vse} : {}),
       };
       const params = {locale};
-      const data = await fetchContent([{id: content || ''}], context, params);
+      const data = await fetchContent<ContentItem>(
+        [{id: content || ''}],
+        context,
+        params,
+      );
       setFetchedContent(data[0]);
     };
     fetch();
@@ -47,7 +51,7 @@ export default function Visualization() {
     <>
       {fetchedContent && (
         <div>
-          <AmplienceWrapper content={fetchedContent} />
+          <AmplienceContent content={fetchedContent} />
         </div>
       )}
     </>

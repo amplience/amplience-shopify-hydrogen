@@ -1,5 +1,5 @@
 import {type CmsContent} from '~/amplience/getImageURL';
-import AmplienceWrapper from '../wrapper/AmplienceWrapper';
+import AmplienceContent from '../wrapper/AmplienceContent';
 
 type CardProps = {
   className?: string;
@@ -20,7 +20,7 @@ const Card: React.FC<CardProps> = ({image, cardName, description, links}) => {
   return (
     <div className="amp-card" style={{width: '100%', margin: 4}}>
       <div>
-        <AmplienceWrapper content={image as CmsContent} />
+        <AmplienceContent content={image as CmsContent} />
       </div>
       <h3>{cardName}</h3>
       <p>{description}</p>
