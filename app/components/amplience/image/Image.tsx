@@ -2,7 +2,7 @@ import {
   type ImageTransformations,
   type CmsContent,
   getImageURL,
-} from '~/amplience/getImageURL';
+} from '~/utils/amplience/getImageURL';
 
 type ImageProps = {
   image: any;

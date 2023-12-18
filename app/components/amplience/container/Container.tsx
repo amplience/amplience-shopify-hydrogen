@@ -1,5 +1,5 @@
 import React from 'react';
-import {type CmsContent} from '~/amplience/getImageURL';
+import {type CmsContent} from '~/utils/amplience/getImageURL';
 import AmplienceContent from '../wrapper/AmplienceContent';
 
 interface Props {
