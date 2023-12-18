@@ -58,6 +58,9 @@ declare module '@shopify/remix-oxygen' {
     amplience: {
       hubName: string;
       locale: string;
+      stagingHost: string;
+      contentId: string;
+      standaloneMode: boolean;
     };
   }
 

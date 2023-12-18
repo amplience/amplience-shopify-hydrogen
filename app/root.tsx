@@ -67,7 +67,12 @@ export const useRootLoaderData = () => {
 };
 
 export async function loader({context}: LoaderFunctionArgs) {
-  const {storefront, session, cart} = context;
+  const {
+    storefront,
+    session,
+    cart,
+    amplience: {standaloneMode},
+  } = context;
   const customerAccessToken = await session.get('customerAccessToken');
   const publicStoreDomain = context.env.PUBLIC_STORE_DOMAIN;
 
@@ -103,6 +108,7 @@ export async function loader({context}: LoaderFunctionArgs) {
       header: await headerPromise,
       isLoggedIn,
       publicStoreDomain,
+      standaloneMode,
     },
     {headers},
   );
