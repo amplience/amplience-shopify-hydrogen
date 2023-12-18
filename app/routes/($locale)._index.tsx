@@ -1,17 +1,14 @@
 import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, type MetaFunction, Link, Await} from '@remix-run/react';
-import AmplienceWrapper from '~/components/amplience/wrapper/AmplienceWrapper';
 import type {
   FeaturedCollectionFragment,
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
 import {Suspense, useEffect, useState} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
-import {
-  type ContentItem,
-  fetchContent,
-} from '~/clients/amplience/fetch-content';
+import {fetchContent} from '~/clients/amplience/fetch-content';
 import {useAmplienceSearchParams} from '~/hooks/useAmplienceSearchParams';
+import AmplienceContent from '~/components/amplience/wrapper/AmplienceContent';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];
@@ -25,43 +22,27 @@ export async function loader({context}: LoaderFunctionArgs) {
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
-  const initialText = (
-    await fetchContent([{key: 'text'}], {hubName}, {locale})
+  const simpleBannerPublished = (
+    await fetchContent(
+      [{key: 'docs/story/simple-banner/dog-xmas-banner'}],
+      {hubName},
+      {locale},
+    )
   )[0];
-  const initialImage = (
-    await fetchContent([{key: 'image/example1'}], {hubName}, {locale})
-  )[0];
-  const initialVideo = (
-    await fetchContent([{key: 'docs/story/video/video1'}], {hubName}, {locale})
-  )[0];
-  const initialSplitBlock = (
-    await fetchContent([{key: 'split-block/example4'}], {hubName}, {locale})
-  )[0];
-  const initialCard = (
-    await fetchContent([{key: 'card/example1'}], {hubName}, {locale})
-  )[0];
-  const initialCardList = (
-    await fetchContent([{key: 'card-list/example1'}], {hubName}, {locale})
-  )[0];
-  const initialContainer = (
-    await fetchContent([{key: 'container/example1'}], {hubName}, {locale})
-  )[0];
-  const initialSimpleBanner = (
-    await fetchContent([{key: 'testing123'}], {hubName}, {locale})
+  const cardListPublished = (
+    await fetchContent(
+      [{key: 'docs/story/cardlist/cardlist1'}],
+      {hubName},
+      {locale},
+    )
   )[0];
   return defer({
     hubName,
     locale,
     featuredCollection,
     recommendedProducts,
-    initialText,
-    initialVideo,
-    initialImage,
-    initialSplitBlock,
-    initialCard,
-    initialCardList,
-    initialContainer,
-    initialSimpleBanner,
+    simpleBannerPublished,
+    cardListPublished,
   });
 }
 
@@ -71,17 +52,11 @@ export default function Homepage() {
     recommendedProducts,
     hubName,
     locale,
-    initialText,
-    initialVideo,
-    initialImage,
-    initialSplitBlock,
-    initialCard,
-    initialCardList,
-    initialContainer,
-    initialSimpleBanner,
+    simpleBannerPublished,
+    cardListPublished,
   } = useLoaderData<typeof loader>();
-  const [simpleBanner, setSimpleBanner] =
-    useState<ContentItem>(initialSimpleBanner);
+  const [simpleBanner, setSimpleBanner] = useState(simpleBannerPublished);
+  const [cardList, setCardList] = useState(cardListPublished);
   const {hub, vse} = useAmplienceSearchParams();
 
   useEffect(() => {
@@ -91,8 +66,22 @@ export default function Homepage() {
         ...(vse ? {stagingHost: vse} : {}),
       };
       const params = {locale};
-      const data = await fetchContent([{key: 'testing123'}], context, params);
-      setSimpleBanner(data[0]);
+      const simpleBannerLatest = (
+        await fetchContent(
+          [{key: 'docs/story/simple-banner/dog-xmas-banner'}],
+          context,
+          params,
+        )
+      )[0];
+      setSimpleBanner(simpleBannerLatest);
+      const cardListLatest = (
+        await fetchContent(
+          [{key: 'docs/story/cardlist/cardlist1'}],
+          context,
+          params,
+        )
+      )[0];
+      setCardList(cardListLatest);
     };
     fetch();
   }, [hub, hubName, locale, vse]);
@@ -101,22 +90,8 @@ export default function Homepage() {
     <div className="home">
       <FeaturedCollection collection={featuredCollection} />
       <RecommendedProducts products={recommendedProducts} />
-      <h2 style={{paddingTop: '20px'}}>Image Component</h2>
-      <AmplienceWrapper content={initialImage}></AmplienceWrapper>
-      <h2 style={{paddingTop: '20px'}}>Text Component</h2>
-      <AmplienceWrapper content={initialText}></AmplienceWrapper>
-      <h2 style={{paddingTop: '20px'}}>Video Component</h2>
-      <AmplienceWrapper content={initialVideo}></AmplienceWrapper>
-      <h2 style={{paddingTop: '20px'}}>Split Block Component</h2>
-      <AmplienceWrapper content={initialSplitBlock}></AmplienceWrapper>
-      <h2 style={{paddingTop: '20px'}}>Card Component</h2>
-      <AmplienceWrapper content={initialCard}></AmplienceWrapper>
-      <h2 style={{paddingTop: '20px'}}>Card List Component</h2>
-      <AmplienceWrapper content={initialCardList}></AmplienceWrapper>
-      <h2 style={{paddingTop: '20px'}}>Container Component</h2>
-      <AmplienceWrapper content={initialContainer}></AmplienceWrapper>
-      <h2 style={{paddingTop: '20px'}}>Simple Banner Component</h2>
-      <AmplienceWrapper content={simpleBanner}></AmplienceWrapper>
+      <AmplienceContent content={simpleBanner}></AmplienceContent>
+      <AmplienceContent content={cardList}></AmplienceContent>
     </div>
   );
 }

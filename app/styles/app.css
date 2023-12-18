@@ -474,7 +474,7 @@ aside li {
 
 /*
 * --------------------------------------------------
-* component/AmplienceWrapper
+* component/AmplienceContent
 * --------------------------------------------------
 */
 @media only screen and (max-width: 768px) {
@@ -552,8 +552,7 @@ aside li {
 * components/amplience/simple-banner
 * --------------------------------------------------
 */
-.amp-simple-banner-image
-{
+.amp-simple-banner-image {
   background-color: #ccc;
 }
 

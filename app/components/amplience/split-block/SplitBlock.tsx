@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react';
 import {type CmsContent} from '~/amplience/getImageURL';
-import AmplienceWrapper from '../wrapper/AmplienceWrapper';
+import AmplienceContent from '../wrapper/AmplienceContent';
 
 interface SplitBlockProps {
   className?: string;
@@ -40,7 +40,7 @@ const SplitBlock: React.FC<SplitBlockProps> = (props) => {
             key={index}
             style={{flex: splits[index], maxWidth: `${splits[index] * 100}%`}}
           >
-            <AmplienceWrapper content={content} />
+            <AmplienceContent content={content} />
           </div>
         );
       })}

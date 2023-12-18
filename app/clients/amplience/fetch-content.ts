@@ -1,5 +1,4 @@
 export type ContentItemRequest = {id?: string; key?: string};
-export type ContentItemResponse = {content: ContentItem};
 export type ContentItem = {[key: string]: any};
 
 export type ContentContext = {hubName: string; stagingHost?: string};
@@ -7,7 +6,7 @@ export type ContentParams = {depth?: string; format?: string; locale?: string};
 
 const DEFAULT_PARAMS = {depth: 'all', format: 'inlined', locale: 'en-US'};
 
-export const fetchContent = async (
+export const fetchContent = async <T>(
   items: ContentItemRequest[],
   context: ContentContext,
   params: ContentParams = {},
