@@ -620,3 +620,14 @@ aside li {
   background-color: #ccc;
   color: #333;
 }
+
+/*
+* --------------------------------------------------
+* components/amplience/rich-text
+* --------------------------------------------------
+*/
+
+.amp-dc-text {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
