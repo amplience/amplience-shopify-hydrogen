@@ -24,6 +24,7 @@ const COMPONENT_MAPPING: {
   'https://demostore.amplience.com/content/image': Image,
   'https://demostore.amplience.com/content/video': Video,
   'https://demostore.amplience.com/content/simple-banner': SimpleBanner,
+  'https://demostore.amplience.com/content/simple-localized-banner': SimpleBanner,
   'https://demostore.amplience.com/content/card': Card,
   'https://demostore.amplience.com/content/card-list': CardList,
   'https://demostore.amplience.com/content/split-block': SplitBlock,
