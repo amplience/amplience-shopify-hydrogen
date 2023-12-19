@@ -15,7 +15,7 @@ const RichText: React.FC<RichTextProps> = ({ text, align }) => {
   return (
     <div className="amp-markdown" style={{ textAlign: align }}>
       {
-        text.map((item: any, index: number) => {
+        text && text.length && text.map((item: any, index: number) => {
           const {
             type,
             data
