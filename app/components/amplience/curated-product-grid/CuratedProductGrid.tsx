@@ -26,7 +26,9 @@ const CuratedProductGrid = ({header, products}: CuratedProductGridProps) => {
 
   useEffect(() => {
     // load shopify product data when the products list changes
-    fetcher.load(`/api/products?ids=${products.join(',')}`);
+    if (products?.length) {
+      fetcher.load(`/api/products?ids=${products.join(',')}`);
+    }
   }, [products]);
 
   return (
