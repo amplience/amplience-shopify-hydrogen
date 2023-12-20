@@ -7,8 +7,7 @@ import Card from '../card/Card';
 import CardList from '../card-list/CardList';
 import Container from '../container/Container';
 import SimpleBanner from '../simple-banner/SimpleBanner';
-import CuratedProductGrid from '../curated-product-grid/CuratedProductGrid';
-import RichText from '../richtext/RichText';
+import RichText from '../rich-text/RichText';
 
 type AmplienceWrapperProps = {
   content: ContentItem;
@@ -29,8 +28,8 @@ const COMPONENT_MAPPING: {
   'https://demostore.amplience.com/content/card-list': CardList,
   'https://demostore.amplience.com/content/split-block': SplitBlock,
   'https://demostore.amplience.com/content/container': Container,
-  // 'https://demostore.amplience.com/content/curated-product-grid': CuratedProductGrid,
   'https://demostore.amplience.com/content/rich-text': RichText,
+  'https://demostore.amplience.com/content/product': RichText,
 };
 
 /**

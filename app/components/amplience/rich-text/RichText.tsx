@@ -11,9 +11,20 @@ type RichTextProps = {
  * @param align text alignment
  * @returns Rich Text component using markdown to HTML, displaying images and rendering other components with the Amplience Wrapper
  */
-const RichText: React.FC<RichTextProps> = ({ text, align }) => {
+const RichText: React.FC<RichTextProps> = ({
+  text,
+  align = 'left',
+  header
+}) => {
   return (
     <div className="amp-markdown" style={{ textAlign: align }}>
+      {
+        header && ( 
+            <h2>
+                {header}
+            </h2>
+        )
+      }
       {
         text && text.length && text.map((item: any, index: number) => {
           const {
