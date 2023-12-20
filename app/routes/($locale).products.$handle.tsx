@@ -26,6 +26,8 @@ import type {
   SelectedOption,
 } from '@shopify/hydrogen/storefront-api-types';
 import {getVariantUrl} from '~/utils';
+import { fetchContent } from '~/clients/amplience/fetch-content';
+import AmplienceWrapper from '~/components/amplience/wrapper/AmplienceWrapper';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
@@ -33,8 +35,10 @@ export const meta: MetaFunction<typeof loader> = ({data}) => {
 
 export async function loader({params, request, context}: LoaderFunctionArgs) {
   const {handle} = params;
-  const {storefront} = context;
-
+  const {
+    storefront,
+    amplience: {hubName, locale},
+  } = context;
   const selectedOptions = getSelectedProductOptions(request).filter(
     (option) =>
       // Filter out Shopify predictive search query params
@@ -59,6 +63,12 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
   if (!product?.id) {
     throw new Response(null, {status: 404});
   }
+
+  const gid = product.id.split('/');
+  const productId = gid[gid.length - 1];
+  const richText = (
+    await fetchContent([{key: `product/${productId}`}], {hubName}, {locale})
+  )[0];
 
   const firstVariant = product.variants.nodes[0];
   const firstVariantIsDefault = Boolean(
@@ -87,7 +97,7 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
     variables: {handle},
   });
 
-  return defer({product, variants});
+  return defer({product, variants, richText});
 }
 
 function redirectToFirstVariant({
@@ -114,7 +124,7 @@ function redirectToFirstVariant({
 }
 
 export default function Product() {
-  const {product, variants} = useLoaderData<typeof loader>();
+  const {product, variants, richText} = useLoaderData<typeof loader>();
   const {selectedVariant} = product;
   return (
     <div className="product">
@@ -124,6 +134,10 @@ export default function Product() {
         product={product}
         variants={variants}
       />
+      {
+        richText && Object.keys(richText).length > 0 &&
+        <AmplienceWrapper content={richText} />
+      }
     </div>
   );
 }
