@@ -16,6 +16,8 @@ const CuratedProductGrid = ({header, products}: CuratedProductGridProps) => {
   const [hydratedProducts, setHydratedProducts] = useState<Product[]>();
   const [isLoading, setIsLoading] = useState(true);
 
+  const hasProducts = (products?: Product[]) => products && products.length > 0;
+
   useEffect(() => {
     // set the hydrated products when the fetcher data changes
     if (fetcher.data) {
@@ -39,7 +41,7 @@ const CuratedProductGrid = ({header, products}: CuratedProductGridProps) => {
       {isLoading && (
         <div className="skeleton-placeholder h-80 w-[150px] m-auto"></div>
       )}
-      {!isLoading && (
+      {!isLoading && hasProducts(hydratedProducts) && (
         <SideScroller>
           {hydratedProducts &&
             hydratedProducts.map(

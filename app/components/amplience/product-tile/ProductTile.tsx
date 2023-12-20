@@ -8,7 +8,7 @@ import {
 export type ProductTileProps = {
   title: string;
   image?: Maybe<ImageType>;
-  price: MoneyV2;
+  price?: MoneyV2;
 };
 
 const ProductTile = ({title, image, price}: ProductTileProps) => {

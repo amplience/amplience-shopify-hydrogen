@@ -30,12 +30,15 @@ async function fetchProducts({
 
   const data = await storefront.query(PRODUCTS_QUERY, {variables: {query}});
 
-  const orderedProducts = ids.map(
-    (id) =>
-      data?.products?.edges?.find(
-        (p) => p.node.id === `gid://shopify/Product/${id}`,
-      )?.node,
-  );
+  const orderedProducts = ids
+    .map(
+      (id) =>
+        data?.products?.edges?.find(
+          (p) => p.node.id === `gid://shopify/Product/${id}`,
+        )?.node,
+    )
+    // remove missing products
+    .filter((p) => p);
 
   return orderedProducts;
 }
