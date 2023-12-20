@@ -22,11 +22,12 @@ export async function loader({context}: LoaderFunctionArgs) {
     ...(stagingHost ? {stagingHost} : {}),
   };
   const params = {locale};
-  const data = await fetchContent<ContentItem>(
+  const data = await fetchContent(
     [{id: contentId || ''}],
     fetchContext,
     params,
   );
+
   return defer({content: data[0]});
 }
 
