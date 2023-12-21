@@ -59,9 +59,9 @@ export default function Homepage() {
 
   return (
     <div className="home">
+      <AmplienceContent content={simpleBanner}></AmplienceContent>
       <FeaturedCollection collection={featuredCollection} />
       <RecommendedProducts products={recommendedProducts} />
-      <AmplienceContent content={simpleBanner}></AmplienceContent>
       <AmplienceContent content={cardList}></AmplienceContent>
     </div>
   );
