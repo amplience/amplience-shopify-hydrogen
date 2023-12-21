@@ -21,6 +21,7 @@ import type {CustomerAccessToken} from '@shopify/hydrogen/storefront-api-types';
 import favicon from '../public/favicon.svg';
 import resetStyles from './styles/reset.css';
 import appStyles from './styles/app.css';
+import tailwindStyles from './styles/tailwind.css';
 import {Layout} from '~/components/Layout';
 import {RealtimeVisualizationProvider} from './context/RealtimeVisualizationContext';
 
@@ -47,6 +48,7 @@ export const shouldRevalidate: ShouldRevalidateFunction = ({
 
 export function links() {
   return [
+    {rel: 'stylesheet', href: tailwindStyles},
     {rel: 'stylesheet', href: resetStyles},
     {rel: 'stylesheet', href: appStyles},
     {
@@ -67,7 +69,12 @@ export const useRootLoaderData = () => {
 };
 
 export async function loader({context}: LoaderFunctionArgs) {
-  const {storefront, session, cart} = context;
+  const {
+    storefront,
+    session,
+    cart,
+    amplience: {standaloneMode},
+  } = context;
   const customerAccessToken = await session.get('customerAccessToken');
   const publicStoreDomain = context.env.PUBLIC_STORE_DOMAIN;
 
@@ -103,6 +110,7 @@ export async function loader({context}: LoaderFunctionArgs) {
       header: await headerPromise,
       isLoggedIn,
       publicStoreDomain,
+      standaloneMode,
     },
     {headers},
   );

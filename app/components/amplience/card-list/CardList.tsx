@@ -1,5 +1,5 @@
 import React from 'react';
-import {type CmsContent} from '~/amplience/getImageURL';
+import {type CmsContent} from '~/utils/amplience/getImageURL';
 import Card from '../card/Card';
 
 type CardListProps = {

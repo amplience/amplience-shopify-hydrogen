@@ -4,10 +4,9 @@ import type {
   FeaturedCollectionFragment,
   RecommendedProductsQuery,
 } from 'storefrontapi.generated';
-import {Suspense, useEffect, useState} from 'react';
+import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import {fetchContent} from '~/clients/amplience/fetch-content';
-import {useAmplienceSearchParams} from '~/hooks/useAmplienceSearchParams';
 import AmplienceContent from '~/components/amplience/wrapper/AmplienceContent';
 
 export const meta: MetaFunction = () => {
@@ -17,74 +16,46 @@ export const meta: MetaFunction = () => {
 export async function loader({context}: LoaderFunctionArgs) {
   const {
     storefront,
-    amplience: {hubName, locale},
+    amplience: {locale, hubName, stagingHost},
   } = context;
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
-  const simpleBannerPublished = (
+
+  // Fetching Amplience content
+  const fetchContext = {
+    hubName,
+    ...(stagingHost ? {stagingHost} : {}),
+  };
+  const fetchParams = {locale};
+  const simpleBanner = (
     await fetchContent(
       [{key: 'docs/story/simple-banner/dog-xmas-banner'}],
-      {hubName},
-      {locale},
+      fetchContext,
+      fetchParams,
     )
   )[0];
-  const cardListPublished = (
+  const cardList = (
     await fetchContent(
       [{key: 'docs/story/cardlist/cardlist1'}],
-      {hubName},
-      {locale},
+      fetchContext,
+      fetchParams,
     )
   )[0];
+
   return defer({
     hubName,
     locale,
     featuredCollection,
     recommendedProducts,
-    simpleBannerPublished,
-    cardListPublished,
+    simpleBanner,
+    cardList,
   });
 }
 
 export default function Homepage() {
-  const {
-    featuredCollection,
-    recommendedProducts,
-    hubName,
-    locale,
-    simpleBannerPublished,
-    cardListPublished,
-  } = useLoaderData<typeof loader>();
-  const [simpleBanner, setSimpleBanner] = useState(simpleBannerPublished);
-  const [cardList, setCardList] = useState(cardListPublished);
-  const {hub, vse} = useAmplienceSearchParams();
-
-  useEffect(() => {
-    const fetch = async () => {
-      const context = {
-        hubName: hub ?? hubName,
-        ...(vse ? {stagingHost: vse} : {}),
-      };
-      const params = {locale};
-      const simpleBannerLatest = (
-        await fetchContent(
-          [{key: 'docs/story/simple-banner/dog-xmas-banner'}],
-          context,
-          params,
-        )
-      )[0];
-      setSimpleBanner(simpleBannerLatest);
-      const cardListLatest = (
-        await fetchContent(
-          [{key: 'docs/story/cardlist/cardlist1'}],
-          context,
-          params,
-        )
-      )[0];
-      setCardList(cardListLatest);
-    };
-    fetch();
-  }, [hub, hubName, locale, vse]);
+  const {featuredCollection, recommendedProducts, simpleBanner, cardList} =
+    useLoaderData<typeof loader>();
 
   return (
     <div className="home">

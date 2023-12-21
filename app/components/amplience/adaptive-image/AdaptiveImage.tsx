@@ -3,7 +3,7 @@ import {
   type CmsImage,
   type ImageTransformations,
   getImageURL,
-} from '~/amplience/getImageURL';
+} from '~/utils/amplience/getImageURL';
 
 export interface AdaptiveImageProps
   extends React.DetailedHTMLProps<

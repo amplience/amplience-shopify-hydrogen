@@ -3,7 +3,7 @@ import {
   ImageScaleFit,
   ImageScaleMode,
   type ImageTransformations,
-} from '~/amplience/getImageURL';
+} from '~/utils/amplience/getImageURL';
 import {useEffect, useRef, useState} from 'react';
 import DefaultAdaptiveImageRef from '../adaptive-image/DefaultAdaptiveImage';
 import DefaultAdaptiveImageSkeleton from '../adaptive-image/DefaultAdaptiveImageSkeleton';
@@ -119,8 +119,7 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
           diParams={image?.di}
         />
       </div>
-      {
-        isOverlayVisible &&
+      {isOverlayVisible && (
         <div
           style={{
             backgroundColor: `rgba(255, 255, 255, ${opacity})`,
@@ -131,12 +130,14 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
             ampfloatingCenter:
               textPositioning.textPositionHorizontal === 'center' &&
               !(textPositioning.textPositionVertical === 'middle'),
-            ampfloatingRight: textPositioning.textPositionHorizontal === 'right',
+            ampfloatingRight:
+              textPositioning.textPositionHorizontal === 'right',
             ampfloatingTop: textPositioning.textPositionVertical === 'top',
             ampfloatingMiddle:
               textPositioning.textPositionVertical === 'middle' &&
               !(textPositioning.textPositionHorizontal === 'center'),
-            ampfloatingBottom: textPositioning.textPositionVertical === 'bottom',
+            ampfloatingBottom:
+              textPositioning.textPositionVertical === 'bottom',
             ampfloatingCenterMiddle:
               textPositioning.textPositionHorizontal === 'center' &&
               textPositioning.textPositionVertical === 'middle',
@@ -145,14 +146,13 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
           <h1>{bannerText?.header}</h1>
           <h2>{bannerText?.subheader}</h2>
           <p style={{marginBottom: '20px'}}>{bannerText?.description}</p>
-          {
-            ctaSettings && ctaSettings.buttonText &&
+          {ctaSettings && ctaSettings.buttonText && (
             <a className="amp-button" href={ctaSettings?.linkUrl}>
               {ctaSettings?.buttonText}
             </a>
-          }
+          )}
         </div>
-      }
+      )}
     </div>
   );
 };
