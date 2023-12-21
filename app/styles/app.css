@@ -562,6 +562,10 @@ aside li {
   max-width: 500px;
 }
 
+.amp-simple-banner h1 {
+  margin-top: 0;
+}
+
 @media only screen and (min-width: 768px) {
   .amp-simple-banner-text {
     position: absolute;
@@ -614,4 +618,20 @@ aside li {
   text-decoration: none;
   background-color: #ccc;
   color: #333;
+}
+
+/*
+* --------------------------------------------------
+* components/amplience/rich-text
+* --------------------------------------------------
+*/
+
+.amp-dc-text {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.amp-markdown p {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
