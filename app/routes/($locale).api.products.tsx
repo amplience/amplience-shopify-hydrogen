@@ -1,3 +1,4 @@
+import {type Product} from '@shopify/hydrogen/storefront-api-types';
 import {type LoaderFunctionArgs, json} from '@shopify/remix-oxygen';
 
 /**
@@ -34,7 +35,7 @@ async function fetchProducts({
     .map(
       (id) =>
         data?.products?.edges?.find(
-          (p: any) => p.node.id === `gid://shopify/Product/${id}`,
+          (p: {node: Product}) => p.node.id === `gid://shopify/Product/${id}`,
         )?.node,
     )
     // remove missing products
