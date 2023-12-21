@@ -44,8 +44,8 @@ async function fetchProducts({
   return orderedProducts;
 }
 
-const PRODUCT_VARIANT_FRAGMENT = `#graphql
-  fragment ProductApiVariant on ProductVariant {
+export const PRODUCT_VARIANT_FRAGMENT = `#graphql
+  fragment ApiProductVariant on ProductVariant {
     availableForSale
     compareAtPrice {
       amount
@@ -81,7 +81,7 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
 ` as const;
 
 const PRODUCTS_QUERY = `#graphql
-query Products($query: String!) {
+query ApiProducts($query: String!) {
   products(first: 20, query: $query) {
     edges {
       node {
@@ -97,7 +97,7 @@ query Products($query: String!) {
         }
         variants(first: 1) {
           nodes {
-            ...ProductApiVariant
+            ...ApiProductVariant
           }
         }
       }
@@ -105,4 +105,25 @@ query Products($query: String!) {
   }
 }
 ${PRODUCT_VARIANT_FRAGMENT}
+` as const;
+
+export const PRODUCT_ITEM_FRAGMENT = `#graphql
+  fragment ApiProductItem on Product {
+    id
+    handle
+    title
+    featuredImage {
+      id
+      altText
+      url
+      width
+      height
+    }
+    variants(first: 1) {
+      nodes {
+        ...ApiProductVariant
+      }
+    }
+  }
+  ${PRODUCT_VARIANT_FRAGMENT}
 ` as const;
