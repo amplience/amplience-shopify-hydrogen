@@ -1,6 +1,6 @@
 import React from 'react';
-import {type CmsContent} from '~/amplience/getImageURL';
-import AmplienceWrapper from '../wrapper/AmplienceWrapper';
+import {type CmsContent} from '~/utils/amplience/getImageURL';
+import AmplienceContent from '../wrapper/AmplienceContent';
 
 interface Props {
   contentTypes: CmsContent[];
@@ -9,7 +9,7 @@ interface Props {
 /**
  * Container component
  * @param contentTypes list of content items
- * @returns All content items in the container using AmplienceWrapper
+ * @returns All content items in the container using AmplienceContent
  */
 const Container: React.FC<Props> = ({contentTypes = []}) => {
   return (
@@ -17,7 +17,7 @@ const Container: React.FC<Props> = ({contentTypes = []}) => {
       {contentTypes.map((item, index) => {
         return (
           <div key={index}>
-            <AmplienceWrapper content={item} />
+            <AmplienceContent content={item} />
           </div>
         );
       })}

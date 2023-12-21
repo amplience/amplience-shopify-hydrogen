@@ -26,8 +26,8 @@ import type {
   SelectedOption,
 } from '@shopify/hydrogen/storefront-api-types';
 import {getVariantUrl} from '~/utils';
-import { fetchContent } from '~/clients/amplience/fetch-content';
-import AmplienceWrapper from '~/components/amplience/wrapper/AmplienceWrapper';
+import {fetchContent} from '~/clients/amplience/fetch-content';
+import AmplienceContent from '~/components/amplience/wrapper/AmplienceContent';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
   return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
@@ -134,10 +134,9 @@ export default function Product() {
         product={product}
         variants={variants}
       />
-      {
-        richText && Object.keys(richText).length > 0 &&
-        <AmplienceWrapper content={richText} />
-      }
+      {richText && Object.keys(richText).length > 0 && (
+        <AmplienceContent content={richText} />
+      )}
     </div>
   );
 }

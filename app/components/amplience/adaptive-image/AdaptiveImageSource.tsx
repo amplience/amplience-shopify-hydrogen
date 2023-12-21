@@ -1,5 +1,8 @@
 import React, {useContext, useMemo} from 'react';
-import {type ImageTransformations, getImageURL} from '~/amplience/getImageURL';
+import {
+  type ImageTransformations,
+  getImageURL,
+} from '~/utils/amplience/getImageURL';
 import {AdaptiveImageContext} from './AdaptiveImage';
 
 interface Props

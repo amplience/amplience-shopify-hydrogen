@@ -69,9 +69,16 @@ export default {
        * Create an Amplience Context
        */
 
+      const {searchParams} = new URL(request.url);
+
       const amplience = {
-        locale: `${i18n.language.toLocaleLowerCase()}-${i18n.country}`,
-        hubName: env.HUB_NAME,
+        locale:
+          searchParams.get('locale') ??
+          `${i18n.language.toLocaleLowerCase()}-${i18n.country}`,
+        hubName: searchParams.get('hub') ?? env.HUB_NAME,
+        stagingHost: searchParams.get('vse'),
+        contentId: searchParams.get('content'),
+        standaloneMode: searchParams.get('standalone') === 'true',
       };
 
       /**

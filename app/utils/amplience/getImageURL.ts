@@ -49,7 +49,7 @@ export type ImageTransformations = {
 
   quality?: number;
 
-  poi?: { x: number; y: number };
+  poi?: {x: number; y: number};
   scaleMode?: ImageScaleMode;
   scaleFit?: ImageScaleFit;
   aspectRatio?: string;
@@ -82,7 +82,7 @@ function limitSize(
   width: number,
   height: number,
   maxPixels: number,
-): { width: number; height: number } | undefined {
+): {width: number; height: number} | undefined {
   const pixels = width * height;
 
   if (pixels <= maxPixels) {
@@ -129,10 +129,10 @@ function constrainMaxSize(
     return newSize == null
       ? transformations
       : {
-        ...transformations,
-        width: newSize.width,
-        height: newSize.height,
-      };
+          ...transformations,
+          width: newSize.width,
+          height: newSize.height,
+        };
   }
 
   // Can only control scale if we know the aspect.
@@ -159,9 +159,9 @@ function constrainMaxSize(
     return newSize == null
       ? transformations
       : {
-        ...transformations,
-        width: newSize.width,
-      };
+          ...transformations,
+          width: newSize.width,
+        };
   } else if (transformations.height != null) {
     // Height must be defined instead.
     const newSize = limitSize(
@@ -173,9 +173,9 @@ function constrainMaxSize(
     return newSize == null
       ? transformations
       : {
-        ...transformations,
-        height: newSize.height,
-      };
+          ...transformations,
+          height: newSize.height,
+        };
   }
 
   // Not really possible to get here, but typescript doesn't know that.
@@ -224,8 +224,8 @@ export function getImageURL(
     typeof image === 'string'
       ? image
       : `https://${image.defaultHost}/i/${encodeURIComponent(
-        image.endpoint,
-      )}/${encodeURIComponent(image.name)}`;
+          image.endpoint,
+        )}/${encodeURIComponent(image.name)}`;
 
   if (seoFileName) {
     url += `/${encodeURIComponent(seoFileName)}`;

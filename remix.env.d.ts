@@ -43,16 +43,6 @@ declare global {
     country: CountryCode;
     pathPrefix: string;
   };
-
-  /**
-   * Content client containing a fetch by id or key method
-   */
-  type ContentClient = {
-    fetchContent: (
-      items: ContentItemRequest[],
-      params: any,
-    ) => Promise<ContentItem[]>;
-  };
 }
 
 declare module '@shopify/remix-oxygen' {
@@ -68,6 +58,9 @@ declare module '@shopify/remix-oxygen' {
     amplience: {
       hubName: string;
       locale: string;
+      stagingHost: string;
+      contentId: string;
+      standaloneMode: boolean;
     };
   }
 

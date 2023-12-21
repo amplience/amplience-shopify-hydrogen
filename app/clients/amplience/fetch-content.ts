@@ -1,5 +1,4 @@
 export type ContentItemRequest = {id?: string; key?: string};
-export type ContentItemResponse = {content: ContentItem};
 export type ContentItem = {[key: string]: any};
 
 export type ContentContext = {hubName: string; stagingHost?: string};

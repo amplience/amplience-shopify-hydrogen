@@ -24,6 +24,7 @@ export default async function handleRequest(
       "'self'",
       'https://monorail-edge.shopifysvc.com',
       '*.staging.bigcontent.io',
+      '*.cdn.content.amplience.net',
     ],
   });
 

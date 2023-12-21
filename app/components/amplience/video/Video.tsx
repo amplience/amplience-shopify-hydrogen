@@ -1,5 +1,5 @@
 import {type FC} from 'react';
-import {type CmsContent} from '~/amplience/getImageURL';
+import {type CmsContent} from '~/utils/amplience/getImageURL';
 
 type VideoProps = {} & CmsContent;
 

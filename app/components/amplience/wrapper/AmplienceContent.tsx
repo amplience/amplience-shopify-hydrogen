@@ -8,8 +8,9 @@ import CardList from '../card-list/CardList';
 import Container from '../container/Container';
 import SimpleBanner from '../simple-banner/SimpleBanner';
 import RichText from '../rich-text/RichText';
+import CuratedProductGrid from '../curated-product-grid/CuratedProductGrid';
 
-type AmplienceWrapperProps = {
+type AmplienceContentProps = {
   content: ContentItem;
 };
 
@@ -23,13 +24,16 @@ const COMPONENT_MAPPING: {
   'https://demostore.amplience.com/content/image': Image,
   'https://demostore.amplience.com/content/video': Video,
   'https://demostore.amplience.com/content/simple-banner': SimpleBanner,
-  'https://demostore.amplience.com/content/simple-localized-banner': SimpleBanner,
+  'https://demostore.amplience.com/content/simple-localized-banner':
+    SimpleBanner,
   'https://demostore.amplience.com/content/card': Card,
   'https://demostore.amplience.com/content/card-list': CardList,
   'https://demostore.amplience.com/content/split-block': SplitBlock,
   'https://demostore.amplience.com/content/container': Container,
   'https://demostore.amplience.com/content/rich-text': RichText,
   'https://demostore.amplience.com/content/product': RichText,
+  'https://demostore.amplience.com/content/curated-product-grid':
+    CuratedProductGrid,
 };
 
 /**
@@ -55,10 +59,10 @@ const MappingNotFound = (content: ContentItem) => {
  * @param content object containing content data
  * @returns matching component or MappingNotFound component
  */
-const AmplienceWrapper = ({content}: AmplienceWrapperProps) => {
+const AmplienceContent = ({content}: AmplienceContentProps) => {
   const contentSchema = content?._meta?.schema;
   const Component = COMPONENT_MAPPING[contentSchema] ?? MappingNotFound;
   return <>{Component && <Component {...content}></Component>}</>;
 };
 
-export default AmplienceWrapper;
+export default AmplienceContent;
