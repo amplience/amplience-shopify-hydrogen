@@ -17,16 +17,36 @@ const SideScroller = ({children}: SideScrollerProps) => {
     });
   };
 
-  useEffect(() => {
-    if (scrollRef.current) {
-      new ResizeObserver(() => {
-        const scrollWidth = scrollRef?.current?.scrollWidth;
-        const clientWidth = scrollRef?.current?.clientWidth;
-        if (scrollWidth && clientWidth) {
-          setIsScrollable(Boolean(scrollWidth > clientWidth));
-        }
-      }).observe(scrollRef.current);
+  const handleScrollState = (element: HTMLDivElement) => {
+    const scrollWidth = element?.scrollWidth;
+    const clientWidth = element?.clientWidth;
+    if (scrollWidth && clientWidth) {
+      setIsScrollable(Boolean(scrollWidth > clientWidth));
     }
+  };
+
+  useEffect(() => {
+    // setup observer to handle scroll element resize changes
+    const observer = new MutationObserver(() => {
+      if (scrollRef.current) {
+        handleScrollState(scrollRef.current);
+      }
+    });
+
+    if (scrollRef.current) {
+      // observer the scoll element for changes
+      observer.observe(scrollRef.current, {
+        childList: true,
+        subtree: true,
+      });
+
+      // set the initial scrollable state
+      handleScrollState(scrollRef.current);
+    }
+    return () => {
+      // clean up observer when done
+      observer.disconnect();
+    };
   }, []);
 
   return (
