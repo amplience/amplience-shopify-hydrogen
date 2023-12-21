@@ -27,6 +27,7 @@ const COMPONENT_MAPPING: {
   'https://demostore.amplience.com/content/card-list': CardList,
   'https://demostore.amplience.com/content/split-block': SplitBlock,
   'https://demostore.amplience.com/content/container': Container,
+  'https://demostore.amplience.com/content/content-page': Container,
   'https://demostore.amplience.com/content/curated-product-grid':
     CuratedProductGrid,
 };
