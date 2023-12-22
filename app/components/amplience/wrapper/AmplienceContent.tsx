@@ -9,6 +9,7 @@ import Container from '../container/Container';
 import SimpleBanner from '../simple-banner/SimpleBanner';
 import RichText from '../rich-text/RichText';
 import CuratedProductGrid from '../curated-product-grid/CuratedProductGrid';
+import DynamicProductGrid from '../dynamic-product-grid/DynamicProductGrid';
 
 type AmplienceContentProps = {
   content: ContentItem;
@@ -34,6 +35,7 @@ const COMPONENT_MAPPING: {
   'https://demostore.amplience.com/content/product': RichText,
   'https://demostore.amplience.com/content/curated-product-grid':
     CuratedProductGrid,
+  'https://demostore.amplience.com/content/product-grid': DynamicProductGrid,
 };
 
 /**
