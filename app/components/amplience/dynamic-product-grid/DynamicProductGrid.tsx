@@ -14,7 +14,7 @@ const DynamicProductGrid = ({
   category,
   limit,
 }: DynamicProductGridProps) => {
-  const fetcher = useFetcher();
+  const {load, ...fetcher} = useFetcher();
   const [collection, setCollection] = useState<Collection>();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -29,9 +29,9 @@ const DynamicProductGrid = ({
   useEffect(() => {
     // load shopify product data when the products list changes
     if (category && limit) {
-      fetcher.load(`/api/collection?id=${category}&limit=${limit}`);
+      load(`/api/collection?id=${category}&limit=${limit}`);
     }
-  }, [category, limit]);
+  }, [category, limit, load]);
   return (
     <>
       {isLoading && (
