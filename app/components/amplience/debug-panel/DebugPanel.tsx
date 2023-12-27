@@ -50,10 +50,10 @@ const DebugPanel = ({
             <div className="p-4">
               <h2>Preview</h2>
               <h2>Environment</h2>
-              { locale && <p>Locale: {locale}</p> }
-              { hubName && <p>Hub Name: {hubName}</p> }
-              { stagingHost && <p>Staging Host: {stagingHost}</p> }
-              { contentId && <p>Content ID: {contentId}</p> }
+              { locale && <p className="text-xs">Locale: <b>{locale}</b></p> }
+              { hubName && <p className="text-xs">Hub Name: <b>{hubName}</b></p> }
+              { stagingHost && <p className="text-xs">Staging Host: <b>{stagingHost}</b></p> }
+              { contentId && <p className="text-xs">Content ID: <b>{contentId}</b></p> }
             </div>
           </article>
         </section>
