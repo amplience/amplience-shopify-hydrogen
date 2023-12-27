@@ -13,7 +13,6 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
-import DebugPanel from './amplience/debug-panel/DebugPanel';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -22,10 +21,6 @@ export type LayoutProps = {
   header: HeaderQuery;
   isLoggedIn: boolean;
   standaloneMode: boolean;
-  hubName: string;
-  locale: string;
-  stagingHost: string;
-  contentId: string;
 };
 
 export function Layout({
@@ -34,11 +29,7 @@ export function Layout({
   footer,
   header,
   isLoggedIn,
-  standaloneMode,
-  hubName,
-  locale,
-  stagingHost,
-  contentId
+  standaloneMode
 }: LayoutProps) {
   return (
     <>
@@ -50,7 +41,6 @@ export function Layout({
           <SearchAside />
           <MobileMenuAside menu={header.menu} shop={header.shop} />
           <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />
-          <DebugPanel hubName={hubName} locale={locale} stagingHost={stagingHost} contentId={contentId}/>
           <main>{children}</main>
           <Suspense>
             <Await resolve={footer}>

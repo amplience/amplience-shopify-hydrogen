@@ -24,6 +24,7 @@ import appStyles from './styles/app.css';
 import tailwindStyles from './styles/tailwind.css';
 import {Layout} from '~/components/Layout';
 import {RealtimeVisualizationProvider} from './context/RealtimeVisualizationContext';
+import DebugPanel from './components/amplience/debug-panel/DebugPanel';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -134,6 +135,7 @@ export default function App() {
       </head>
       <body>
         <RealtimeVisualizationProvider>
+          <DebugPanel {...data}/>
           <Layout {...data}>
             <Outlet />
           </Layout>
