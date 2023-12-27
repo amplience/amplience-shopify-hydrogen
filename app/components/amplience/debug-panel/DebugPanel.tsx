@@ -18,7 +18,7 @@ const DebugPanel = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex justify-between p-4">
+    <div className="flex justify-end p-4">
       <button
         className="bg-orange-500 text-white rounded px-4 py-1"
         onClick={() => setIsOpen(true)}
