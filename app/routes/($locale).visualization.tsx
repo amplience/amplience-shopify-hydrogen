@@ -1,12 +1,15 @@
 import {type MetaFunction, useLoaderData} from '@remix-run/react';
 import {type LoaderFunctionArgs, defer} from '@shopify/remix-oxygen';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {
   type AmplienceContentItem,
   fetchContent,
 } from '~/clients/amplience/fetch-content';
 import AmplienceContent from '~/components/amplience/wrapper/AmplienceContent';
-import {useRealtimeVisualization} from '~/context/RealtimeVisualizationContext';
+import {
+  useInitialRealtimeContent,
+  useRealtimeVisualization,
+} from '~/context/RealtimeVisualizationContext';
 
 export const meta: MetaFunction = () => {
   return [{title: `Hydrogen | 'Amplience Content Visualization'}`}];
@@ -28,23 +31,29 @@ export async function loader({context}: LoaderFunctionArgs) {
     params,
   );
 
-  return defer({content: data[0]});
+  return defer({initialContent: data[0]});
 }
 
 export default function Visualization() {
-  const {content} = useLoaderData<typeof loader>();
-  const [fetchedContent, setFetchedContent] =
-    useState<AmplienceContentItem>(content);
+  const {initialContent} = useLoaderData<typeof loader>();
+  const [content, setContent] = useState<AmplienceContentItem>(initialContent);
 
-  useRealtimeVisualization((realtimeContent) => {
-    setFetchedContent(realtimeContent);
-  });
+  const updateRealtimeContent = useCallback(
+    (realtimeContent: AmplienceContentItem) => {
+      setContent(realtimeContent);
+    },
+    [],
+  );
+
+  useInitialRealtimeContent(updateRealtimeContent);
+
+  useRealtimeVisualization(updateRealtimeContent);
 
   return (
     <>
-      {fetchedContent && (
+      {content && (
         <div>
-          <AmplienceContent content={fetchedContent} />
+          <AmplienceContent content={content} />
         </div>
       )}
     </>
