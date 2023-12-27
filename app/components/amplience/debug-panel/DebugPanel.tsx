@@ -17,7 +17,7 @@ const DebugPanel = () => {
   return (
     <div className="flex justify-between p-4">
       <button
-        className="bg-green-600 text-white rounded px-4 py-1"
+        className="bg-orange-500 text-white rounded px-4 py-1"
         onClick={() => setIsOpen(true)}
       >
         open
@@ -42,11 +42,13 @@ const DebugPanel = () => {
                 setIsOpen(false);
               }}
               className="p-4 font-bold text-lg">Header</header>
-            <h3 className="p-4">Preview</h3>
-            <h3 className="p-4">Environment</h3>
-            <p>Locale: {locale}</p>
-            <p>Hub Name: {hubName}</p>
-            <p>Staging Host: {stagingHost}</p>
+            <div className="p-4">
+              <h2>Preview</h2>
+              <h2>Environment</h2>
+              <p>Locale: {locale}</p>
+              <p>Hub Name: {hubName}</p>
+              <p>Staging Host: {stagingHost}</p>
+            </div>
           </article>
         </section>
         <section
