@@ -1,8 +1,6 @@
-import {
-  type ImageTransformations,
-  type CmsContent,
-  getImageURL,
-} from '~/utils/amplience/getImageURL';
+import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
+
+import {buildSrcUrl} from './Image.utils';
 
 type ImageProps = {
   image: any;
@@ -10,66 +8,20 @@ type ImageProps = {
   format?: string;
   imageAltText?: string;
   di?: string;
-} & CmsContent;
+} & AmplienceContentItem;
 
-/**
- * Image component
- * @param display display type for instance Point of Interest
- * @param image object containinng all image information
- * @param imageAltText
- * @param seoText
- * @param di
- * @param query
- * @returns
- */
-const Image: React.FC<ImageProps> = ({
+const Image = ({
   display,
   image,
   imageAltText,
   seoText,
   di = '',
   query,
-}) => {
+}: ImageProps) => {
   if (!image) {
     return null;
   }
 
-  /**
-   * Build the complete image source using transformations
-   * @param width image witdh
-   * @param poiAspect Point of interest aspect
-   * @returns
-   */
-  const buildSrcUrl = ({width, poiAspect, format}: any) => {
-    let baseUrl = `https://${image.defaultHost}/i/${
-      image.endpoint
-    }/${encodeURIComponent(image.name)}`;
-    const transformations: ImageTransformations = {};
-
-    if (seoText) {
-      baseUrl += `/${encodeURIComponent(seoText)}`;
-    }
-
-    transformations.width = width;
-    transformations.upscale = false;
-    transformations.strip = true;
-    let queryString = '';
-
-    if (display == 'Point of Interest' && poiAspect) {
-      transformations.aspectRatio = poiAspect;
-      queryString += `&{($root.layer0.metadata.pointOfInterest.w==0)?0.5:$root.layer0.metadata.pointOfInterest.x},{($root.layer0.metadata.pointOfInterest.w==0)?0.5:$root.layer0.metadata.pointOfInterest.y},{$root.layer0.metadata.pointOfInterest.w},{$root.layer0.metadata.pointOfInterest.h}&scaleFit=poi&sm=aspect`;
-    }
-    if (query) {
-      queryString += `&${query}`;
-    }
-    return getImageURL(`${baseUrl}?${queryString}`, transformations, false, di);
-  };
-
-  /**
-   * Source component
-   * @param param0
-   * @returns Source tag with all source set information
-   */
   const source = ({
     minWidth,
     maxWidth,
@@ -80,10 +32,22 @@ const Image: React.FC<ImageProps> = ({
   }: any) => {
     return (
       <source
-        srcSet={`${buildSrcUrl({width, format, poiAspect})} 1x, ${buildSrcUrl({
-          width: highDensityWidth,
-          format,
+        srcSet={`${buildSrcUrl({
+          width,
           poiAspect,
+          image,
+          seoText,
+          display,
+          di,
+          query,
+        })} 1x, ${buildSrcUrl({
+          width: highDensityWidth,
+          poiAspect,
+          image,
+          seoText,
+          display,
+          di,
+          query,
         })}`}
         media={
           minWidth
@@ -139,7 +103,7 @@ const Image: React.FC<ImageProps> = ({
 
         <img
           loading="lazy"
-          src={buildSrcUrl({})}
+          src={buildSrcUrl({image, seoText, display, di, query})}
           className="amp-dc-image-pic"
           alt={imageAltText}
           title={seoText}

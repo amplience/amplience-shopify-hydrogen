@@ -5,7 +5,7 @@ import {
   type MoneyV2,
 } from '@shopify/hydrogen/storefront-api-types';
 
-export type ProductTileProps = {
+type ProductTileProps = {
   title: string;
   image?: Maybe<ImageType>;
   price?: MoneyV2;

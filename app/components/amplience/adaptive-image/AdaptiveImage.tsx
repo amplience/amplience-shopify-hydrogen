@@ -1,28 +1,17 @@
-import React, {createContext, forwardRef} from 'react';
 import {
-  type CmsImage,
+  type MutableRefObject,
+  type ReactNode,
+  createContext,
+  forwardRef,
+} from 'react';
+import {
+  type AmplienceImage,
   type ImageTransformations,
-  getImageURL,
-} from '~/utils/amplience/getImageURL';
+} from '../image/Image.types';
+import {getImageURL} from '../image/Image.utils';
 
-export interface AdaptiveImageProps
-  extends React.DetailedHTMLProps<
-    React.ImgHTMLAttributes<HTMLImageElement>,
-    HTMLImageElement
-  > {
-  image: CmsImage;
-  transformations?: ImageTransformations;
-  imageRef?: any;
-  children?: React.ReactElement[];
-  imageAltText?: string;
-  diParams?: string;
-}
-
-/**
- * Content State with image, transformations and additional parameters
- */
 type ContextState = {
-  image: CmsImage;
+  image: AmplienceImage;
   transformations?: ImageTransformations;
   diParams?: string;
   srcset?: {
@@ -30,32 +19,27 @@ type ContextState = {
   };
 };
 
-/**
- * React context with image, transformations and additional information
- */
 export const AdaptiveImageContext = createContext<ContextState | null>(null);
 
-/**
- * Adaptive Image component
- * @param image object containint image information
- * @param imageAltText image alternative text
- * @param transformations all image transformations
- * @param diParams additional dynamic image parameters
- * @param children children components
- * @param imageRef image reference
- * @returns adaptive image with all transformations
- */
-const AdaptiveImage: React.FC<AdaptiveImageProps> = (props) => {
-  const {
-    image,
-    imageAltText = '',
-    transformations,
-    diParams = '',
-    children,
-    imageRef,
-    ...other
-  } = props;
+export type AdaptiveImageProps = {
+  image: AmplienceImage;
+  transformations?: ImageTransformations;
+  imageRef?: any;
+  children?: ReactNode[];
+  imageAltText?: string;
+  diParams?: string;
+  onLoad: () => void;
+};
 
+const AdaptiveImage = ({
+  image,
+  imageAltText = '',
+  transformations,
+  diParams = '',
+  children,
+  imageRef,
+  ...other
+}: AdaptiveImageProps) => {
   if (!image) {
     return null;
   }
@@ -84,13 +68,10 @@ const AdaptiveImage: React.FC<AdaptiveImageProps> = (props) => {
   );
 };
 
-/**
- * AdaptiveImage component with forward reference
- */
 const AdaptiveImageRef = forwardRef((props: AdaptiveImageProps, ref) => (
   <AdaptiveImage
     {...props}
-    imageRef={ref as React.MutableRefObject<HTMLImageElement>}
+    imageRef={ref as MutableRefObject<HTMLImageElement>}
   >
     {props.children}
   </AdaptiveImage>

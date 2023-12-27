@@ -1,10 +1,4 @@
-import React from 'react';
-
-/**
- * Default Adaptive Image skeleton
- * @returns "Loading..." text
- */
-const DefaultAdaptiveImageSkeleton: React.FC = () => {
+const DefaultAdaptiveImageSkeleton = () => {
   return <p>Loading...</p>;
 };
 

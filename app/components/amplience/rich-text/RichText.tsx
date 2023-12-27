@@ -1,23 +1,40 @@
+import {type Property} from 'csstype';
 import ReactMarkdown from 'markdown-to-jsx';
-
-import {getImageURL, type CmsContent} from '~/utils/amplience/getImageURL';
 import AmplienceContent from '../wrapper/AmplienceContent';
+import {getImageURL} from '../image/Image.utils';
+import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
+import {type AmplienceImage} from '../image/Image.types';
 
-type RichTextProps = CmsContent;
+type RichTextMarkdown = {
+  type: 'markdown';
+  data: string;
+};
 
-/**
- * Text component
- * @param text array containing markdown text, images and other components
- * @param align text alignment
- * @returns Rich Text component using markdown to HTML, displaying images and rendering other components with the Amplience Wrapper
- */
-const RichText: React.FC<RichTextProps> = ({text, align = 'left', header}) => {
+type RichTextContent = {
+  type: 'dc-content-link';
+  data: AmplienceContentItem;
+};
+
+type RichTextImage = {
+  type: 'dc-image-link';
+  data: AmplienceImage;
+};
+
+type RichTextType = RichTextMarkdown | RichTextContent | RichTextImage;
+
+type RichTextProps = {
+  text: RichTextType[];
+  align?: Property.TextAlign;
+  header: string;
+};
+
+const RichText = ({text, align = 'left', header}: RichTextProps) => {
   return (
     <div className="amp-markdown" style={{textAlign: align}}>
       {header && <h2>{header}</h2>}
       {text &&
         text.length &&
-        text.map((item: any, index: number) => {
+        text.map((item: RichTextType, index: number) => {
           const {type, data} = item;
 
           switch (type) {

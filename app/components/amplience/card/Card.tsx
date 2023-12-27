@@ -1,26 +1,19 @@
-import {type CmsContent} from '~/utils/amplience/getImageURL';
+import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
 import AmplienceContent from '../wrapper/AmplienceContent';
 
-type CardProps = {
+export type CardProps = {
   className?: string;
-  image?: CmsContent;
+  image?: AmplienceContentItem;
   cardName?: string;
   description?: string;
-  links: any[];
+  links?: any[];
 };
 
-/**
- * Card component
- * @param image image content item
- * @param cardName title of the card
- * @param description description
- * @returns Card component
- */
-const Card: React.FC<CardProps> = ({image, cardName, description, links}) => {
+const Card = ({image, cardName, description, links}: CardProps) => {
   return (
     <div className="amp-card" style={{width: '100%', margin: 4}}>
       <div>
-        <AmplienceContent content={image as CmsContent} />
+        <AmplienceContent content={image as AmplienceContentItem} />
       </div>
       <h3>{cardName}</h3>
       <p>{description}</p>

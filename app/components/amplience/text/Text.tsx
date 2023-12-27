@@ -1,24 +1,12 @@
+import {type Property} from 'csstype';
 import ReactMarkdown from 'markdown-to-jsx';
 
 type TextProps = {
   text: string;
-  align:
-    | 'start'
-    | 'end'
-    | 'left'
-    | 'right'
-    | 'center'
-    | 'justify'
-    | 'match-parent';
+  align: Property.TextAlign;
 };
 
-/**
- * Text component
- * @param text string containing markdown text
- * @param align text alignment
- * @returns Text component using markdown to HTML
- */
-const Text: React.FC<TextProps> = ({text, align}) => {
+const Text = ({text, align}: TextProps) => {
   return (
     <div className="amp-markdown" style={{textAlign: align}}>
       {text && <ReactMarkdown>{text}</ReactMarkdown>}

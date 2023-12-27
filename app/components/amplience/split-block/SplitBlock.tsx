@@ -1,28 +1,17 @@
-import React, {useMemo} from 'react';
-import {type CmsContent} from '~/utils/amplience/getImageURL';
+import {type CSSProperties, useMemo} from 'react';
 import AmplienceContent from '../wrapper/AmplienceContent';
+import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
 
 interface SplitBlockProps {
   className?: string;
-  style?: React.CSSProperties;
-
+  style?: CSSProperties;
   split: string;
   bgcol: string;
-  content: CmsContent[];
+  content: AmplienceContentItem[];
 }
 
-/**
- * Split Block component
- * @param props component props
- * @returns Split Block of components using splits for column sizes
- */
-const SplitBlock: React.FC<SplitBlockProps> = (props) => {
-  const {split = '50/50', bgcol, content = [], ...other} = props;
-
-  /**
-   * Array of split
-   * @returns Returns an array with the different split
-   */
+const SplitBlock = (props: SplitBlockProps) => {
+  const {split = '50/50', bgcol, content = []} = props;
   const splits = useMemo(() => {
     return split.split('/').map((x) => Number(x) / 100);
   }, [split]);

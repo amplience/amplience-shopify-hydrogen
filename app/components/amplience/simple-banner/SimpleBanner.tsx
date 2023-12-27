@@ -1,19 +1,19 @@
-import {
-  type CmsImage,
-  ImageScaleFit,
-  ImageScaleMode,
-  type ImageTransformations,
-} from '~/utils/amplience/getImageURL';
 import {useEffect, useRef, useState} from 'react';
 import DefaultAdaptiveImageRef from '../adaptive-image/DefaultAdaptiveImage';
 import DefaultAdaptiveImageSkeleton from '../adaptive-image/DefaultAdaptiveImageSkeleton';
 import clsx from 'clsx';
+import {
+  ImageScaleMode,
+  type AmplienceImage,
+  ImageScaleFit,
+  type ImageTransformations,
+} from '../image/Image.types';
 
 type SimpleBannerProps = {
   image: {
     img: {
       image: ImageTransformations & {
-        image: CmsImage;
+        image: AmplienceImage;
       };
     };
     disablePoiAspectRatio: boolean;
@@ -36,16 +36,7 @@ type SimpleBannerProps = {
   };
 };
 
-/**
- * Simple Banner component
- * @param image image content item
- * @param bannerText all banner texts
- * @param ctaSettings call to action settinds
- * @param opacity panel opacity
- * @param textPositioning text position configuration
- * @returns Simple Banner component
- */
-const SimpleBanner: React.FC<SimpleBannerProps> = ({
+const SimpleBanner = ({
   image,
   bannerText,
   ctaSettings,
@@ -54,8 +45,7 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
     textPositionHorizontal: 'center',
     textPositionVertical: 'middle',
   },
-  ...other
-}) => {
+}: SimpleBannerProps) => {
   const [imageLoading, setImageLoading] = useState(true);
   const imageRef = useRef<any>();
 

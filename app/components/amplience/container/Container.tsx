@@ -1,17 +1,11 @@
-import React from 'react';
-import {type CmsContent} from '~/utils/amplience/getImageURL';
+import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
 import AmplienceContent from '../wrapper/AmplienceContent';
 
-interface Props {
-  contentTypes: CmsContent[];
-}
+type ContainerProps = {
+  contentTypes: AmplienceContentItem[];
+};
 
-/**
- * Container component
- * @param contentTypes list of content items
- * @returns All content items in the container using AmplienceContent
- */
-const Container: React.FC<Props> = ({contentTypes = []}) => {
+const Container = ({contentTypes = []}: ContainerProps) => {
   return (
     <div className="amp-container">
       {contentTypes.map((item, index) => {

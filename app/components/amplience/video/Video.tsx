@@ -1,14 +1,8 @@
-import {type FC} from 'react';
-import {type CmsContent} from '~/utils/amplience/getImageURL';
+import {type AmplienceVideo} from './Video.types';
 
-type VideoProps = {} & CmsContent;
+type VideoProps = {video: AmplienceVideo};
 
-/**
- * Video Component
- * @param video object containing all video information
- * @returns Video component
- */
-const Video: FC<VideoProps> = ({video}) => {
+const Video = ({video}: VideoProps) => {
   if (!video) {
     return null;
   }
@@ -21,6 +15,7 @@ const Video: FC<VideoProps> = ({video}) => {
         controls
         src={`https://${video.defaultHost}/v/${video.endpoint}/${video.name}/mp4_720p?protocol=https`}
       >
+        <track kind="captions" {...video.track} />
         <source
           src={`https://${video.defaultHost}/v/${video.endpoint}/${video.name}/mp4_720p?protocol=https`}
           data-res="High"

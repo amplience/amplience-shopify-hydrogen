@@ -1,25 +1,18 @@
-import React from 'react';
-import {type CmsContent} from '~/utils/amplience/getImageURL';
+import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
 import Card from '../card/Card';
 
 type CardListProps = {
   header?: string;
-  cards?: CmsContent[];
+  cards?: AmplienceContentItem[];
 };
 
-/**
- * CardList component
- * @param header card list header
- * @param cards list of cards
- * @returns CardList component
- */
-const CardList: React.FC<CardListProps> = ({header, cards}) => {
+const CardList = ({header, cards}: CardListProps) => {
   return (
     <div className="amp-card-list" data-testid="CardList">
       {header && <h2>{header}</h2>}
       {cards && (
         <div className="amp-card-list-container">
-          {cards.map((card: any, index: number) => {
+          {cards.map((card: AmplienceContentItem, index: number) => {
             return <Card key={index} {...card} />;
           })}
         </div>
