@@ -2,17 +2,20 @@ import { useLoaderData } from "@remix-run/react";
 import { LoaderFunctionArgs, defer } from "@shopify/remix-oxygen";
 import { useState } from "react";
 
-export async function loader({context}: LoaderFunctionArgs) {
-  const {
-    amplience: {locale, hubName, stagingHost},
-  } = context;
+export type DebugPanelProps = {
+  hubName: string;
+  locale: string;
+  stagingHost: string;
+  contentId: string;
+};
 
-  return defer({locale, hubName, stagingHost});
-}
-
-const DebugPanel = () => {
+const DebugPanel = ({
+  hubName,
+  locale,
+  stagingHost,
+  contentId
+}: DebugPanelProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const {locale, hubName, stagingHost} = useLoaderData<typeof loader>();
 
   return (
     <div className="flex justify-between p-4">
@@ -50,6 +53,7 @@ const DebugPanel = () => {
               { locale && <p>Locale: {locale}</p> }
               { hubName && <p>Hub Name: {hubName}</p> }
               { stagingHost && <p>Staging Host: {stagingHost}</p> }
+              { contentId && <p>Content ID: {contentId}</p> }
             </div>
           </article>
         </section>

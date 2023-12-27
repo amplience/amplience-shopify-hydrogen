@@ -73,7 +73,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     storefront,
     session,
     cart,
-    amplience: {standaloneMode},
+    amplience: {hubName, locale, stagingHost, contentId, standaloneMode},
   } = context;
   const customerAccessToken = await session.get('customerAccessToken');
   const publicStoreDomain = context.env.PUBLIC_STORE_DOMAIN;
@@ -111,6 +111,10 @@ export async function loader({context}: LoaderFunctionArgs) {
       isLoggedIn,
       publicStoreDomain,
       standaloneMode,
+      hubName,
+      locale,
+      stagingHost,
+      contentId, 
     },
     {headers},
   );

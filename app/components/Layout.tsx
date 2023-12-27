@@ -22,6 +22,10 @@ export type LayoutProps = {
   header: HeaderQuery;
   isLoggedIn: boolean;
   standaloneMode: boolean;
+  hubName: string;
+  locale: string;
+  stagingHost: string;
+  contentId: string;
 };
 
 export function Layout({
@@ -31,6 +35,10 @@ export function Layout({
   header,
   isLoggedIn,
   standaloneMode,
+  hubName,
+  locale,
+  stagingHost,
+  contentId
 }: LayoutProps) {
   return (
     <>
@@ -42,7 +50,7 @@ export function Layout({
           <SearchAside />
           <MobileMenuAside menu={header.menu} shop={header.shop} />
           <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />
-          <DebugPanel />
+          <DebugPanel hubName={hubName} locale={locale} stagingHost={stagingHost} contentId={contentId}/>
           <main>{children}</main>
           <Suspense>
             <Await resolve={footer}>
