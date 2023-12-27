@@ -1,7 +1,18 @@
+import { useLoaderData } from "@remix-run/react";
+import { LoaderFunctionArgs } from "@shopify/remix-oxygen";
 import { useState } from "react";
 
-const DebugPanel: React.FC = () => {
+export async function loader({context}: LoaderFunctionArgs) {
+  const {
+    amplience: {locale, hubName, stagingHost},
+  } = context;
+
+  return {locale, hubName, stagingHost};
+}
+
+const DebugPanel = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const {locale, hubName, stagingHost}= useLoaderData<typeof loader>();
 
   return (
     <div className="flex justify-between p-4">
@@ -33,6 +44,9 @@ const DebugPanel: React.FC = () => {
               className="p-4 font-bold text-lg">Header</header>
             <h3 className="p-4">Preview</h3>
             <h3 className="p-4">Environment</h3>
+            <p>Locale: {locale}</p>
+            <p>Hub Name: {hubName}</p>
+            <p>Staging Host: {stagingHost}</p>
           </article>
         </section>
         <section
