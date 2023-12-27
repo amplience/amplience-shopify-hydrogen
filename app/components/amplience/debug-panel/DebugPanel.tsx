@@ -1,5 +1,5 @@
 import { useLoaderData } from "@remix-run/react";
-import { LoaderFunctionArgs } from "@shopify/remix-oxygen";
+import { LoaderFunctionArgs, defer } from "@shopify/remix-oxygen";
 import { useState } from "react";
 
 export async function loader({context}: LoaderFunctionArgs) {
@@ -7,12 +7,12 @@ export async function loader({context}: LoaderFunctionArgs) {
     amplience: {locale, hubName, stagingHost},
   } = context;
 
-  return {locale, hubName, stagingHost};
+  return defer({locale, hubName, stagingHost});
 }
 
 const DebugPanel = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const {locale, hubName, stagingHost}= useLoaderData<typeof loader>();
+  const {locale, hubName, stagingHost} = useLoaderData<typeof loader>();
 
   return (
     <div className="flex justify-between p-4">
@@ -41,13 +41,15 @@ const DebugPanel = () => {
               onClick={() => {
                 setIsOpen(false);
               }}
-              className="p-4 font-bold text-lg">Header</header>
+              className="p-4 font-bold text-lg">
+                Header
+            </header>
             <div className="p-4">
               <h2>Preview</h2>
               <h2>Environment</h2>
-              <p>Locale: {locale}</p>
-              <p>Hub Name: {hubName}</p>
-              <p>Staging Host: {stagingHost}</p>
+              { locale && <p>Locale: {locale}</p> }
+              { hubName && <p>Hub Name: {hubName}</p> }
+              { stagingHost && <p>Staging Host: {stagingHost}</p> }
             </div>
           </article>
         </section>
