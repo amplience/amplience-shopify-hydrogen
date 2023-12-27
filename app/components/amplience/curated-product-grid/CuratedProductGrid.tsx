@@ -10,7 +10,7 @@ type CuratedProductGridProps = {
 };
 
 const CuratedProductGrid = ({header, products}: CuratedProductGridProps) => {
-  const fetcher = useFetcher();
+  const {load, ...fetcher} = useFetcher();
   const [hydratedProducts, setHydratedProducts] = useState<Product[]>();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -25,9 +25,9 @@ const CuratedProductGrid = ({header, products}: CuratedProductGridProps) => {
   useEffect(() => {
     // load shopify product data when the products list changes
     if (products?.length) {
-      fetcher.load(`/api/products?ids=${products.join(',')}`);
+      load(`/api/products?ids=${products.join(',')}`);
     }
-  }, [products]);
+  }, [products, load]);
 
   return (
     <>

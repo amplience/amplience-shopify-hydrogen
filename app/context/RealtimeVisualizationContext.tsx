@@ -56,3 +56,19 @@ export function useRealtimeVisualization(
 
   return useContext(RealtimeVisualizationContext);
 }
+
+export function useInitialRealtimeContent(
+  onChangeFn: (model: Record<string, unknown>) => void,
+) {
+  const amplienceVisualizationSdk = useContext(RealtimeVisualizationContext);
+
+  useEffect(() => {
+    if (amplienceVisualizationSdk) {
+      amplienceVisualizationSdk?.form
+        .get()
+        .then((model) => onChangeFn(model.content));
+    }
+  }, [amplienceVisualizationSdk, onChangeFn]);
+
+  return useContext(RealtimeVisualizationContext);
+}
