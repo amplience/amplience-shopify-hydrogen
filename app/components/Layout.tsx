@@ -13,6 +13,7 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
+import DebugPanel from './amplience/debug-panel/DebugPanel';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -41,6 +42,7 @@ export function Layout({
           <SearchAside />
           <MobileMenuAside menu={header.menu} shop={header.shop} />
           <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />
+          <DebugPanel />
           <main>{children}</main>
           <Suspense>
             <Await resolve={footer}>
