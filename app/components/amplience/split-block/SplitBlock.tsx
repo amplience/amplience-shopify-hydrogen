@@ -18,7 +18,7 @@ const SplitBlock = (props: SplitBlockProps) => {
 
   return (
     <div
-      className="amp-split-block"
+      className="flex flex-row basis-[1px] items-center"
       style={{
         backgroundColor: bgcol,
       }}

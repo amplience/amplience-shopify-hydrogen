@@ -63,18 +63,17 @@ const Image = ({
 
   const imageTag =
     display == 'Static' ? (
-      <picture className="amp-dc-image">
+      <picture>
         <img
           loading="lazy"
-          src={`//${image.endpoint}.a.bigcontent.io/v1/static/${image.name}`}
-          className="amp-dc-image-pic"
+          src={`https://${image.endpoint}.a.bigcontent.io/v1/static/${image.name}`}
           width="100%"
           alt={imageAltText}
           title={seoText}
         />
       </picture>
     ) : (
-      <picture className="amp-dc-image">
+      <picture>
         {/* High density widths selected to be below max avif image size at aspect ratio. (2.5mil pixels) */}
         {source({
           minWidth: '1280',
@@ -104,7 +103,6 @@ const Image = ({
         <img
           loading="lazy"
           src={buildSrcUrl({image, seoText, display, di, query})}
-          className="amp-dc-image-pic"
           alt={imageAltText}
           title={seoText}
           width="100%"
@@ -112,7 +110,7 @@ const Image = ({
       </picture>
     );
 
-  return <div className="amp-image">{imageTag}</div>;
+  return <div className="w-auto relative">{imageTag}</div>;
 };
 
 export default Image;

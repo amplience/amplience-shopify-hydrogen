@@ -11,24 +11,22 @@ export type CardProps = {
 
 const Card = ({image, cardName, description, links}: CardProps) => {
   return (
-    <div className="amp-card" style={{width: '100%', margin: 4}}>
+    <div className="w-full m-[4px]">
       <div>
         <AmplienceContent content={image as AmplienceContentItem} />
       </div>
       <h3>{cardName}</h3>
       <p>{description}</p>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          gap: 8,
-        }}
-      >
+      <div className="flex flex-row gap-[8px]">
         {links &&
           links.map((link: any, i: number) => {
             if (link.label) {
               return (
-                <a className="amp-button" href={link.value} key={i}>
+                <a
+                  className="mt-4 font-bold font text-xs no-underline hover:no-underline bg-[#333] hover:bg-[#eee] text-[#eee] hover:text-[#333] py-2.5 px-3.5 rounded"
+                  href={link.value}
+                  key={i}
+                >
                   {link.label}
                 </a>
               );

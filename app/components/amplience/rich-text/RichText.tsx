@@ -30,7 +30,10 @@ type RichTextProps = {
 
 const RichText = ({text, align = 'left', header}: RichTextProps) => {
   return (
-    <div className="amp-markdown" style={{textAlign: align}}>
+    <div
+      className="[&_ul]:block [&_ul]:list-disc [&_ul]:ps-[40px] [&_ul]:ms-[0px] [&_ul]:me-[0px] [&_img]:w-full [&_p]:my-2.5"
+      style={{textAlign: align}}
+    >
       {header && <h2>{header}</h2>}
       {text &&
         text.length &&
@@ -40,11 +43,7 @@ const RichText = ({text, align = 'left', header}: RichTextProps) => {
           switch (type) {
             case 'markdown':
               return (
-                <div
-                  key={index}
-                  className="amp-dc-text"
-                  style={{textAlign: align}}
-                >
+                <div key={index} className="my-5" style={{textAlign: align}}>
                   {data && <ReactMarkdown>{data}</ReactMarkdown>}
                 </div>
               );
@@ -53,10 +52,9 @@ const RichText = ({text, align = 'left', header}: RichTextProps) => {
             case 'dc-image-link':
               return (
                 data && (
-                  <picture key={data.name} className="amp-dc-image">
+                  <picture key={data.name}>
                     <img
                       src={getImageURL(data, {strip: true})}
-                      className="amp-dc-image-pic"
                       alt={data.name}
                     />
                   </picture>

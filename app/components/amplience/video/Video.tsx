@@ -9,7 +9,6 @@ const Video = ({video}: VideoProps) => {
   return (
     <div>
       <video
-        className="amp-dc-video"
         style={{width: '100%'}}
         poster={`https://${video.defaultHost}/v/${video.endpoint}/${video.name}?protocol=https`}
         controls

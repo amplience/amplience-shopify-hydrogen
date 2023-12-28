@@ -7,7 +7,7 @@ type ContainerProps = {
 
 const Container = ({contentTypes = []}: ContainerProps) => {
   return (
-    <div className="amp-container">
+    <div>
       {contentTypes.map((item, index) => {
         return (
           <div key={index}>

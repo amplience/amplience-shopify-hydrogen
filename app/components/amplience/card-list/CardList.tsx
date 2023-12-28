@@ -8,10 +8,10 @@ type CardListProps = {
 
 const CardList = ({header, cards}: CardListProps) => {
   return (
-    <div className="amp-card-list" data-testid="CardList">
+    <div data-testid="CardList">
       {header && <h2>{header}</h2>}
       {cards && (
-        <div className="amp-card-list-container">
+        <div className="flex flex-col md:flex-row">
           {cards.map((card: AmplienceContentItem, index: number) => {
             return <Card key={index} {...card} />;
           })}

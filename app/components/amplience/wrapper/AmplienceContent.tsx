@@ -35,10 +35,7 @@ const COMPONENT_MAPPING: {
 const MappingNotFound = (content: AmplienceContentItem) => {
   return (
     <pre>
-      <code
-        className="amp-json-code"
-        style={{display: 'block', wordWrap: 'break-word'}}
-      >
+      <code className="text-xs md:text-sm block break-words">
         {JSON.stringify(content, null, 2)}
       </code>
     </pre>
