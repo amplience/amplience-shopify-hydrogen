@@ -12,10 +12,6 @@ import type {
 } from '@shopify/hydrogen/storefront-api-types';
 import type {CustomerAccessToken} from '@shopify/hydrogen/storefront-api-types';
 import type {HydrogenSession} from './server';
-import type {
-  ContentItem,
-  ContentItemRequest,
-} from '~/clients/amplience/create-dc-content-client.types';
 
 declare global {
   /**
