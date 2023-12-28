@@ -3,7 +3,7 @@ import {type Collection} from '@shopify/hydrogen/storefront-api-types';
 import {useEffect, useState} from 'react';
 import ProductGrid from '../product-grid/ProductGrid';
 
-export type DynamicProductGridProps = {
+type DynamicProductGridProps = {
   header: string;
   category: string;
   limit: number;

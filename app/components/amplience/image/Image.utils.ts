@@ -1,73 +1,9 @@
-export type CmsImage = {
-  defaultHost: string;
-  name: string;
-  endpoint: string;
-};
-
-export type CmsContent = {
-  [key: string]: any;
-};
-
-export enum ImageFormat {
-  WEBP = 'webp',
-  JPEG = 'jpeg',
-  PNG = 'png',
-  GIF = 'gif',
-  AVIF = 'avif',
-  DEFAULT = 'default',
-}
-
-export enum ImageScaleMode {
-  ASPECT_RATIO = 'aspect',
-  CROP = 'c',
-  STRETCH = 's',
-
-  TOP_LEFT = 'tl',
-  TOP_CENTER = 'tc',
-  TOP_RIGHT = 'tr',
-
-  MIDDLE_LEFT = 'ml',
-  MIDDLE_CENTER = 'mc',
-  MIDDLE_RIGHT = 'mr',
-
-  BOTTOM_LEFT = 'bl',
-  BOTTOM_CENTER = 'bc',
-  BOTTOM_RIGHT = 'br',
-}
-
-export enum ImageScaleFit {
-  CENTER = 'center',
-  POINT_OF_INTEREST = 'poi',
-}
-
-export type ImageTransformations = {
-  format?: ImageFormat;
-  seoFileName?: string;
-
-  width?: number;
-  height?: number;
-
-  quality?: number;
-
-  poi?: {x: number; y: number};
-  scaleMode?: ImageScaleMode;
-  scaleFit?: ImageScaleFit;
-  aspectRatio?: string;
-  upscale?: boolean;
-
-  fliph?: boolean;
-  flipv?: boolean;
-
-  rot?: number;
-  hue?: number;
-  sat?: number;
-  bri?: number;
-  crop?: number[];
-
-  strip?: boolean;
-
-  templates?: string[];
-};
+import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
+import {
+  ImageFormat,
+  type AmplienceImage,
+  type ImageTransformations,
+} from './Image.types';
 
 const avifMaxPixels = 2500000;
 
@@ -191,7 +127,7 @@ function constrainMaxSize(
  * @returns final image URL
  */
 export function getImageURL(
-  image: string | CmsImage,
+  image: string | AmplienceImage,
   transformations: ImageTransformations = {},
   removeAllParams = false,
   diParams = '',
@@ -313,3 +249,44 @@ export function getImageURL(
 
   return url;
 }
+
+export const buildSrcUrl = ({
+  width,
+  poiAspect,
+  image,
+  seoText,
+  display,
+  query,
+  di,
+}: {
+  width?: number;
+  poiAspect?: string;
+  image: AmplienceContentItem;
+  seoText: string;
+  display: string;
+  query: string;
+  di: string;
+}) => {
+  let baseUrl = `https://${image.defaultHost}/i/${
+    image.endpoint
+  }/${encodeURIComponent(image.name)}`;
+  const transformations: ImageTransformations = {};
+
+  if (seoText) {
+    baseUrl += `/${encodeURIComponent(seoText)}`;
+  }
+
+  transformations.width = width;
+  transformations.upscale = false;
+  transformations.strip = true;
+  let queryString = '';
+
+  if (display == 'Point of Interest' && poiAspect) {
+    transformations.aspectRatio = poiAspect;
+    queryString += `&{($root.layer0.metadata.pointOfInterest.w==0)?0.5:$root.layer0.metadata.pointOfInterest.x},{($root.layer0.metadata.pointOfInterest.w==0)?0.5:$root.layer0.metadata.pointOfInterest.y},{$root.layer0.metadata.pointOfInterest.w},{$root.layer0.metadata.pointOfInterest.h}&scaleFit=poi&sm=aspect`;
+  }
+  if (query) {
+    queryString += `&${query}`;
+  }
+  return getImageURL(`${baseUrl}?${queryString}`, transformations, false, di);
+};

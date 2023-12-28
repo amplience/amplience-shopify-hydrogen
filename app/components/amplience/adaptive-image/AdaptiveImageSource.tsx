@@ -1,26 +1,24 @@
-import React, {useContext, useMemo} from 'react';
 import {
-  type ImageTransformations,
-  getImageURL,
-} from '~/utils/amplience/getImageURL';
+  useContext,
+  useMemo,
+  type SourceHTMLAttributes,
+  type DetailedHTMLProps,
+} from 'react';
 import {AdaptiveImageContext} from './AdaptiveImage';
+import {type ImageTransformations} from '../image/Image.types';
+import {getImageURL} from '../image/Image.utils';
 
-interface Props
-  extends React.DetailedHTMLProps<
-    React.SourceHTMLAttributes<HTMLSourceElement>,
-    HTMLSourceElement
-  > {
+type AdaptiveImageSourceProps = DetailedHTMLProps<
+  SourceHTMLAttributes<HTMLSourceElement>,
+  HTMLSourceElement
+> & {
   transformations?: ImageTransformations;
-}
+};
 
-/**
- * Adaptive Image Source component
- * @param transformations object containing all image transformations
- * @returns source component with source set and source information
- */
-const AdaptiveImageSource: React.FC<Props> = (props) => {
-  const {transformations, ...other} = props;
-
+const AdaptiveImageSource = ({
+  transformations,
+  ...other
+}: AdaptiveImageSourceProps) => {
   const {
     image,
     transformations: rootTransformations,

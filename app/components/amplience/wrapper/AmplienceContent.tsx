@@ -1,4 +1,4 @@
-import type {ContentItem} from '~/clients/amplience/fetch-content';
+import type {AmplienceContentItem} from '~/clients/amplience/fetch-content';
 import Text from '../text/Text';
 import Image from '../image/Image';
 import Video from '../video/Video';
@@ -11,13 +11,6 @@ import RichText from '../rich-text/RichText';
 import CuratedProductGrid from '../curated-product-grid/CuratedProductGrid';
 import DynamicProductGrid from '../dynamic-product-grid/DynamicProductGrid';
 
-type AmplienceContentProps = {
-  content: ContentItem;
-};
-
-/**
- * Component Mapping matching schemas and React components
- */
 const COMPONENT_MAPPING: {
   [key: string]: React.FC<any>;
 } = {
@@ -39,28 +32,21 @@ const COMPONENT_MAPPING: {
   'https://demostore.amplience.com/content/product-grid': DynamicProductGrid,
 };
 
-/**
- * Component used when no matching schema has been found
- * @param content object containing content data
- * @returns code block flushing the full content data
- */
-const MappingNotFound = (content: ContentItem) => {
+const MappingNotFound = (content: AmplienceContentItem) => {
   return (
     <pre>
-      <code
-        className="amp-json-code"
-        style={{display: 'block', wordWrap: 'break-word'}}
-      >
+      <code className="text-xs md:text-sm block break-words">
         {JSON.stringify(content, null, 2)}
       </code>
     </pre>
   );
 };
 
+type AmplienceContentProps = {
+  content: AmplienceContentItem;
+};
 /**
- * Wrapper component selecting the right component based on schema
- * @param content object containing content data
- * @returns matching component or MappingNotFound component
+ * Wrapper component maps Amplience components based on content schema
  */
 const AmplienceContent = ({content}: AmplienceContentProps) => {
   const contentSchema = content?._meta?.schema;

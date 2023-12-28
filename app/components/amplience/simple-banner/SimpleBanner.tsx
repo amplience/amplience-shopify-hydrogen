@@ -1,19 +1,19 @@
-import {
-  type CmsImage,
-  ImageScaleFit,
-  ImageScaleMode,
-  type ImageTransformations,
-} from '~/utils/amplience/getImageURL';
 import {useEffect, useRef, useState} from 'react';
 import DefaultAdaptiveImageRef from '../adaptive-image/DefaultAdaptiveImage';
 import DefaultAdaptiveImageSkeleton from '../adaptive-image/DefaultAdaptiveImageSkeleton';
 import clsx from 'clsx';
+import {
+  ImageScaleMode,
+  type AmplienceImage,
+  ImageScaleFit,
+  type ImageTransformations,
+} from '../image/Image.types';
 
 type SimpleBannerProps = {
   image: {
     img: {
       image: ImageTransformations & {
-        image: CmsImage;
+        image: AmplienceImage;
       };
     };
     disablePoiAspectRatio: boolean;
@@ -36,16 +36,7 @@ type SimpleBannerProps = {
   };
 };
 
-/**
- * Simple Banner component
- * @param image image content item
- * @param bannerText all banner texts
- * @param ctaSettings call to action settinds
- * @param opacity panel opacity
- * @param textPositioning text position configuration
- * @returns Simple Banner component
- */
-const SimpleBanner: React.FC<SimpleBannerProps> = ({
+const SimpleBanner = ({
   image,
   bannerText,
   ctaSettings,
@@ -54,8 +45,7 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
     textPositionHorizontal: 'center',
     textPositionVertical: 'middle',
   },
-  ...other
-}) => {
+}: SimpleBannerProps) => {
   const [imageLoading, setImageLoading] = useState(true);
   const imageRef = useRef<any>();
 
@@ -101,11 +91,25 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
     bannerText?.description ||
     ctaSettings?.buttonText;
 
+  const {textPositionHorizontal, textPositionVertical} = textPositioning;
+  const placements = {
+    'left-top': 'md:left-0 md:top-0',
+    'left-middle': 'md:left-0 md:top-1/2 md:-translate-y-1/2',
+    'left-bottom': 'md:left-0 md:bottom-0',
+    'center-top': 'md:top-0 md:left-1/2 md:-translate-x-1/2',
+    'center-middle':
+      'md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2',
+    'center-bottom': 'md:bottom-0 md:left-1/2 md:-translate-x-1/2',
+    'right-top': 'md:right-0 md:top-0',
+    'right-middle': 'md:right-0 md:top-1/2 md:-translate-y-1/2',
+    'right-bottom': 'md:right-0 md:bottom-0',
+  };
+
   return (
-    <div className="amp-simple-banner" style={{position: 'relative'}}>
+    <div className="relative">
       {imageLoading ? <DefaultAdaptiveImageSkeleton /> : null}
       <div
-        className="amp-simple-banner-image"
+        className="bg-[#ccc]"
         style={{
           display: `${imageLoading ? 'none' : 'block'}`,
         }}
@@ -123,31 +127,21 @@ const SimpleBanner: React.FC<SimpleBannerProps> = ({
         <div
           style={{
             backgroundColor: `rgba(255, 255, 255, ${opacity})`,
-            textAlign: textPositioning.textPositionHorizontal,
+            textAlign: textPositionHorizontal,
           }}
-          className={clsx('amp-simple-banner-text', {
-            ampfloatingLeft: textPositioning.textPositionHorizontal === 'left',
-            ampfloatingCenter:
-              textPositioning.textPositionHorizontal === 'center' &&
-              !(textPositioning.textPositionVertical === 'middle'),
-            ampfloatingRight:
-              textPositioning.textPositionHorizontal === 'right',
-            ampfloatingTop: textPositioning.textPositionVertical === 'top',
-            ampfloatingMiddle:
-              textPositioning.textPositionVertical === 'middle' &&
-              !(textPositioning.textPositionHorizontal === 'center'),
-            ampfloatingBottom:
-              textPositioning.textPositionVertical === 'bottom',
-            ampfloatingCenterMiddle:
-              textPositioning.textPositionHorizontal === 'center' &&
-              textPositioning.textPositionVertical === 'middle',
-          })}
+          className={clsx(
+            'py-6 px-10 text-center max-w-[500px] md:absolute',
+            placements[`${textPositionHorizontal}-${textPositionVertical}`],
+          )}
         >
-          <h1>{bannerText?.header}</h1>
+          <h1 className="mt-0">{bannerText?.header}</h1>
           <h2>{bannerText?.subheader}</h2>
           <p style={{marginBottom: '20px'}}>{bannerText?.description}</p>
           {ctaSettings && ctaSettings.buttonText && (
-            <a className="amp-button" href={ctaSettings?.linkUrl}>
+            <a
+              className="mt-4 font-bold font text-xs no-underline hover:no-underline bg-[#333] hover:bg-[#eee] text-[#eee] hover:text-[#333] py-2.5 px-3.5 rounded"
+              href={ctaSettings?.linkUrl}
+            >
               {ctaSettings?.buttonText}
             </a>
           )}
