@@ -2,7 +2,7 @@ import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/react/24/solid';
 import {type ReactNode, useEffect, useRef, useState} from 'react';
 import IconButton from '../IconButton';
 
-export type SideScrollerProps = {
+type SideScrollerProps = {
   children: ReactNode;
 };
 

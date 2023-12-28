@@ -1,33 +1,49 @@
+import {type Property} from 'csstype';
 import ReactMarkdown from 'markdown-to-jsx';
-
-import {getImageURL, type CmsContent} from '~/utils/amplience/getImageURL';
 import AmplienceContent from '../wrapper/AmplienceContent';
+import {getImageURL} from '../image/Image.utils';
+import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
+import {type AmplienceImage} from '../image/Image.types';
 
-type RichTextProps = CmsContent;
+type RichTextMarkdown = {
+  type: 'markdown';
+  data: string;
+};
 
-/**
- * Text component
- * @param text array containing markdown text, images and other components
- * @param align text alignment
- * @returns Rich Text component using markdown to HTML, displaying images and rendering other components with the Amplience Wrapper
- */
-const RichText: React.FC<RichTextProps> = ({text, align = 'left', header}) => {
+type RichTextContent = {
+  type: 'dc-content-link';
+  data: AmplienceContentItem;
+};
+
+type RichTextImage = {
+  type: 'dc-image-link';
+  data: AmplienceImage;
+};
+
+type RichTextType = RichTextMarkdown | RichTextContent | RichTextImage;
+
+type RichTextProps = {
+  text: RichTextType[];
+  align?: Property.TextAlign;
+  header: string;
+};
+
+const RichText = ({text, align = 'left', header}: RichTextProps) => {
   return (
-    <div className="amp-markdown" style={{textAlign: align}}>
+    <div
+      className="[&_ul]:block [&_ul]:list-disc [&_ul]:ps-[40px] [&_ul]:ms-[0px] [&_ul]:me-[0px] [&_img]:w-full [&_p]:my-2.5"
+      style={{textAlign: align}}
+    >
       {header && <h2>{header}</h2>}
       {text &&
         text.length &&
-        text.map((item: any, index: number) => {
+        text.map((item: RichTextType, index: number) => {
           const {type, data} = item;
 
           switch (type) {
             case 'markdown':
               return (
-                <div
-                  key={index}
-                  className="amp-dc-text"
-                  style={{textAlign: align}}
-                >
+                <div key={index} className="my-5" style={{textAlign: align}}>
                   {data && <ReactMarkdown>{data}</ReactMarkdown>}
                 </div>
               );
@@ -36,10 +52,9 @@ const RichText: React.FC<RichTextProps> = ({text, align = 'left', header}) => {
             case 'dc-image-link':
               return (
                 data && (
-                  <picture key={data.name} className="amp-dc-image">
+                  <picture key={data.name}>
                     <img
                       src={getImageURL(data, {strip: true})}
-                      className="amp-dc-image-pic"
                       alt={data.name}
                     />
                   </picture>
