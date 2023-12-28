@@ -21,9 +21,9 @@ const DebugPanel = ({
       {
         stagingHost &&
         (
-          <div className="flex justify-end p-2 bg-orange-200">
+          <div className="flex justify-end p-2 bg-red-200">
             <button
-              className="bg-orange-500 text-white rounded px-4 py-1"
+              className="bg-red-500 text-white rounded px-4 py-1"
               onClick={() => setIsOpen(true)}
             >
               open
@@ -53,8 +53,8 @@ const DebugPanel = ({
                   <div className="flex items-center justify-center ">
                     <div className="w-full mx-auto space-y-2  lg:max-w-md">
                       <details className="p-2 rounded-lg">
-                        <summary className="font-semibold bg-orange-200 px-4 py-2 text-lg cursor-pointer">Preview</summary>
-                        <div className=" bg-orange-100">
+                        <summary className="font-semibold bg-red-200 px-4 py-2 text-lg cursor-pointer">Preview</summary>
+                        <div className=" bg-red-100">
                           <p className="leading-6 px-3 py-2 text-gray-800">
                           </p>
                         </div>
@@ -64,8 +64,8 @@ const DebugPanel = ({
                   <div className="flex items-center justify-center ">
                     <div className="w-full mx-auto space-y-2  lg:max-w-md">
                       <details className="p-2 rounded-lg">
-                        <summary className="font-semibold bg-orange-200 px-4 py-2 text-lg cursor-pointer">Environment</summary>
-                        <div className=" bg-orange-100">
+                        <summary className="font-semibold bg-red-200 px-4 py-2 text-lg cursor-pointer">Environment</summary>
+                        <div className=" bg-red-100">
                           <p className="leading-6 px-3 py-2 text-gray-800">
                             {locale && <p className="text-xs">Locale: <b>{locale}</b></p>}
                             {hubName && <p className="text-xs">Hub Name: <b>{hubName}</b></p>}
