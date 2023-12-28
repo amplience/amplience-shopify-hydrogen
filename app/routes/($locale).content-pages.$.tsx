@@ -1,6 +1,6 @@
 import {defer, json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, type MetaFunction} from '@remix-run/react';
-import { fetchContent } from '~/clients/amplience/fetch-content';
+import {fetchContent} from '~/clients/amplience/fetch-content';
 import AmplienceContent from '~/components/amplience/wrapper/AmplienceContent';
 
 export async function loader({params, context}: LoaderFunctionArgs) {
@@ -21,11 +21,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
   };
   const fetchParams = {locale};
   const amplienceContent = (
-    await fetchContent(
-      [{key: handle}],
-      fetchContext,
-      fetchParams,
-    )
+    await fetchContent([{key: handle}], fetchContext, fetchParams)
   )[0];
 
   if (!amplienceContent) {
@@ -40,10 +36,9 @@ export default function Page() {
 
   return (
     <div className="page">
-      {
-        amplienceContent && Object.keys(amplienceContent).length > 0 &&
+      {amplienceContent && Object.keys(amplienceContent).length > 0 && (
         <AmplienceContent content={amplienceContent} />
-      }
+      )}
     </div>
   );
 }
