@@ -42,7 +42,7 @@ const DebugPanel = ({
                   (isOpen ? " translate-x-0 " : " translate-x-full ")
                 }
               >
-                <article className="relative w-screen max-w-lg pb-10 flex flex-col space-y-6 overflow-y-scroll h-full">
+                <article className="relative w-screen max-w-lg pb-10 flex flex-col space-y-6 overflow-y-auto h-full">
                   <header
                     onClick={() => {
                       setIsOpen(false);
@@ -51,27 +51,31 @@ const DebugPanel = ({
                     <img src={AmplienceLogo} alt="Amplience Logo" width="260" />
                   </header>
                   <div className="flex items-center justify-center ">
-                    <div className="w-full mx-auto space-y-2  lg:max-w-md">
-                      <details className="p-2 rounded-lg">
-                        <summary className="font-semibold bg-red-200 px-4 py-2 text-lg cursor-pointer">Preview</summary>
-                        <div className=" bg-red-100">
-                          <p className="leading-6 px-3 py-2 text-gray-800">
-                          </p>
-                        </div>
-                      </details>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center ">
-                    <div className="w-full mx-auto space-y-2  lg:max-w-md">
-                      <details className="p-2 rounded-lg">
+                    <div className="w-full mx-auto space-y-2  lg:max-w-lg">
+                      <details className="p-4 rounded-lg">
                         <summary className="font-semibold bg-red-200 px-4 py-2 text-lg cursor-pointer">Environment</summary>
-                        <div className=" bg-red-100">
-                          <p className="leading-6 px-3 py-2 text-gray-800">
-                            {locale && <p className="text-xs">Locale: <b>{locale}</b></p>}
-                            {hubName && <p className="text-xs">Hub Name: <b>{hubName}</b></p>}
-                            {stagingHost && <p className="text-xs">Staging Host: <b>{stagingHost}</b></p>}
-                            {contentId && <p className="text-xs">Content ID: <b>{contentId}</b></p>}
-                          </p>
+                        <div className=" bg-red-100 leading-6 px-3 py-2 text-gray-800">
+                          <table className="table-auto leading-6 px-3 py-2 text-gray-800">
+                            <tbody>
+                              <tr>
+                                <th className="text-xs text-left px-2">Locale</th>
+                                <td className="text-xs">{locale}</td>
+                              </tr>
+                              <tr>
+                                <th className="text-xs text-left px-2">Hub Name</th>
+                                <td className="text-xs">{hubName}</td>
+                              </tr>
+                              <tr>
+                                <th className="text-xs text-left px-2">Staging Host</th>
+                                <td className="text-xs">{stagingHost}</td>
+                              </tr>
+                              <tr>
+                                <th className="text-xs text-left px-2">Content ID</th>
+                                <td className="text-xs">{contentId}</td>
+                              </tr>
+
+                            </tbody>
+                          </table>
                         </div>
                       </details>
                     </div>
