@@ -21,6 +21,7 @@ export type LayoutProps = {
   header: HeaderQuery;
   isLoggedIn: boolean;
   standaloneMode: boolean;
+  amplienceNavigation: any;
 };
 
 export function Layout({
@@ -30,6 +31,7 @@ export function Layout({
   header,
   isLoggedIn,
   standaloneMode,
+  amplienceNavigation,
 }: LayoutProps) {
   return (
     <>
@@ -40,7 +42,12 @@ export function Layout({
           <CartAside cart={cart} />
           <SearchAside />
           <MobileMenuAside menu={header.menu} shop={header.shop} />
-          <Header header={header} cart={cart} isLoggedIn={isLoggedIn} />
+          <Header
+            header={header}
+            cart={cart}
+            isLoggedIn={isLoggedIn}
+            amplienceNavigation={amplienceNavigation}
+          />
           <main>{children}</main>
           <Suspense>
             <Await resolve={footer}>

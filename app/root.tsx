@@ -24,6 +24,7 @@ import appStyles from './styles/app.css';
 import tailwindStyles from './styles/tailwind.css';
 import {Layout} from '~/components/Layout';
 import {RealtimeVisualizationProvider} from './context/RealtimeVisualizationContext';
+import {fetchHierarchy} from './clients/amplience/fetch-hierarchy';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -73,7 +74,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     storefront,
     session,
     cart,
-    amplience: {standaloneMode},
+    amplience: {standaloneMode, hubName, stagingHost},
   } = context;
   const customerAccessToken = await session.get('customerAccessToken');
   const publicStoreDomain = context.env.PUBLIC_STORE_DOMAIN;
@@ -103,6 +104,16 @@ export async function loader({context}: LoaderFunctionArgs) {
     },
   });
 
+  // TODO: load amplience navigation hierachy data here
+  const fetchContext = {
+    hubName,
+    ...(stagingHost ? {stagingHost} : {}),
+  };
+  const amplienceNavigation = await fetchHierarchy(
+    '77f8387f-f71a-4764-93a7-a8ede799ddf6',
+    fetchContext,
+  );
+
   return defer(
     {
       cart: cartPromise,
@@ -111,6 +122,7 @@ export async function loader({context}: LoaderFunctionArgs) {
       isLoggedIn,
       publicStoreDomain,
       standaloneMode,
+      amplienceNavigation,
     },
     {headers},
   );

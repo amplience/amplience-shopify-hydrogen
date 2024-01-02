@@ -3,12 +3,21 @@ import {Suspense} from 'react';
 import type {HeaderQuery} from 'storefrontapi.generated';
 import type {LayoutProps} from './Layout';
 import {useRootLoaderData} from '~/root';
+import AmplienceNavigation from './amplience/navigation/AmplienceNavigation';
 
-type HeaderProps = Pick<LayoutProps, 'header' | 'cart' | 'isLoggedIn'>;
+type HeaderProps = Pick<
+  LayoutProps,
+  'header' | 'cart' | 'isLoggedIn' | 'amplienceNavigation'
+>;
 
 type Viewport = 'desktop' | 'mobile';
 
-export function Header({header, isLoggedIn, cart}: HeaderProps) {
+export function Header({
+  header,
+  isLoggedIn,
+  cart,
+  amplienceNavigation,
+}: HeaderProps) {
   const {shop, menu} = header;
   return (
     <header className="header">
@@ -20,6 +29,9 @@ export function Header({header, isLoggedIn, cart}: HeaderProps) {
         viewport="desktop"
         primaryDomainUrl={header.shop.primaryDomain.url}
       />
+      <AmplienceNavigation
+        hierarchy={amplienceNavigation}
+      ></AmplienceNavigation>
       <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
     </header>
   );
