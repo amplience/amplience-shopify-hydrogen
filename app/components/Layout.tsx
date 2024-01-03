@@ -13,6 +13,7 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
+import {type AmplienceNavigationNode} from '~/clients/amplience/fetch-types';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -21,7 +22,7 @@ export type LayoutProps = {
   header: HeaderQuery;
   isLoggedIn: boolean;
   standaloneMode: boolean;
-  amplienceNavigation: any;
+  amplienceNavigation: AmplienceNavigationNode;
 };
 
 export function Layout({

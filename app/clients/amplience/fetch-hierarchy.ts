@@ -1,9 +1,15 @@
+import {
+  type AmplienceContentItem,
+  type ContentContext,
+  type ContentParams,
+} from './fetch-types';
+
 const DEFAULT_PARAMS = {depth: 'all', format: 'inlined', locale: 'en-US'};
 
 export const fetchHierarchy = async (
   id: string,
-  context: any,
-  params?: any,
+  context: ContentContext,
+  params?: ContentParams,
 ) => {
   const request = {
     filterBy: [
@@ -29,7 +35,7 @@ export const fetchHierarchy = async (
     headers: {'Content-Type': 'application/json'},
     body,
   });
-  const json = await response.json<{responses: any}>();
+  const json = await response.json<{responses: AmplienceContentItem[]}>();
 
   const responses = json?.responses || [];
 

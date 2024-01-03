@@ -25,6 +25,8 @@ import tailwindStyles from './styles/tailwind.css';
 import {Layout} from '~/components/Layout';
 import {RealtimeVisualizationProvider} from './context/RealtimeVisualizationContext';
 import {fetchHierarchy} from './clients/amplience/fetch-hierarchy';
+import {fetchContent} from './clients/amplience/fetch-content';
+import {type AmplienceContentItem} from './clients/amplience/fetch-types';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -97,32 +99,51 @@ export async function loader({context}: LoaderFunctionArgs) {
   });
 
   // await the header query (above the fold)
-  const headerPromise = storefront.query(HEADER_QUERY, {
+  const header = await storefront.query(HEADER_QUERY, {
     cache: storefront.CacheLong(),
     variables: {
       headerMenuHandle: 'main-menu', // Adjust to your header menu handle
     },
   });
 
-  // TODO: load amplience navigation hierachy data here
+  // await Amplience navigation hierarchy data
   const fetchContext = {
     hubName,
     ...(stagingHost ? {stagingHost} : {}),
   };
-  const amplienceNavigation = await fetchHierarchy(
-    '77f8387f-f71a-4764-93a7-a8ede799ddf6',
+  const [amplienceNavigationRootNode] = await fetchContent(
+    [{key: 'homepage-shopify'}],
+    fetchContext,
+    {depth: 'root', format: 'linked'},
+  );
+  const amplienceNavigationChildNodes = await fetchHierarchy(
+    amplienceNavigationRootNode._meta.deliveryId,
     fetchContext,
   );
+
+  // Remove duplicate collections from Shopify menu when matching Amplience collections are present
+  if (header.menu) {
+    header.menu.items =
+      header.menu?.items?.filter((m) => {
+        return !amplienceNavigationChildNodes.find(
+          (node: AmplienceContentItem) =>
+            `gid://shopify/Collection/${node.content.name}` === m.resourceId,
+        );
+      }) || [];
+  }
 
   return defer(
     {
       cart: cartPromise,
       footer: footerPromise,
-      header: await headerPromise,
+      header,
       isLoggedIn,
       publicStoreDomain,
       standaloneMode,
-      amplienceNavigation,
+      amplienceNavigation: {
+        content: amplienceNavigationRootNode,
+        children: amplienceNavigationChildNodes,
+      },
     },
     {headers},
   );

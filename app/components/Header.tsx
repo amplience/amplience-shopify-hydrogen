@@ -29,9 +29,7 @@ export function Header({
         viewport="desktop"
         primaryDomainUrl={header.shop.primaryDomain.url}
       />
-      <AmplienceNavigation
-        hierarchy={amplienceNavigation}
-      ></AmplienceNavigation>
+      <AmplienceNavigation rootNode={amplienceNavigation}></AmplienceNavigation>
       <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
     </header>
   );
