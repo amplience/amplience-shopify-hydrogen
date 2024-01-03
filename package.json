@@ -10,6 +10,7 @@
     "lint": "eslint --no-error-on-unmatched-pattern --ext .js,.ts,.jsx,.tsx .",
     "typecheck": "tsc --noEmit",
     "codegen": "shopify hydrogen codegen",
+    "format:check": "prettier --check \"{app,src,test}/**/*.{ts[x],js}\"",
     "format": "prettier --write \"{app,src,test}/**/*.{ts[x],js}\""
   },
   "prettier": "@shopify/prettier-config",
