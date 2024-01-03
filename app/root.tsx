@@ -26,7 +26,7 @@ import {Layout} from '~/components/Layout';
 import {RealtimeVisualizationProvider} from './context/RealtimeVisualizationContext';
 import {fetchHierarchy} from './clients/amplience/fetch-hierarchy';
 import {fetchContent} from './clients/amplience/fetch-content';
-import {type AmplienceContentItem} from './clients/amplience/fetch-types';
+import {buildAmplienceMenu} from './components/amplience/navigation/AmplienceNavigation.utils';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -111,26 +111,17 @@ export async function loader({context}: LoaderFunctionArgs) {
     hubName,
     ...(stagingHost ? {stagingHost} : {}),
   };
-  const [amplienceNavigationRootNode] = await fetchContent(
+  const [ampliencePage] = await fetchContent(
     [{key: 'homepage-shopify'}],
     fetchContext,
     {depth: 'root', format: 'linked'},
   );
-  const amplienceNavigationChildNodes = await fetchHierarchy(
-    amplienceNavigationRootNode._meta.deliveryId,
+  const ampliencePageNodes = await fetchHierarchy(
+    ampliencePage._meta.deliveryId,
     fetchContext,
   );
 
-  // Remove duplicate collections from Shopify menu when matching Amplience collections are present
-  if (header.menu) {
-    header.menu.items =
-      header.menu?.items?.filter((m) => {
-        return !amplienceNavigationChildNodes.find(
-          (node: AmplienceContentItem) =>
-            `gid://shopify/Collection/${node.content.name}` === m.resourceId,
-        );
-      }) || [];
-  }
+  const amplienceMenu = buildAmplienceMenu(ampliencePageNodes);
 
   return defer(
     {
@@ -140,10 +131,7 @@ export async function loader({context}: LoaderFunctionArgs) {
       isLoggedIn,
       publicStoreDomain,
       standaloneMode,
-      amplienceNavigation: {
-        content: amplienceNavigationRootNode,
-        children: amplienceNavigationChildNodes,
-      },
+      amplienceMenu,
     },
     {headers},
   );

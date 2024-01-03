@@ -13,7 +13,7 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
-import {type AmplienceNavigationNode} from '~/clients/amplience/fetch-types';
+import {type AmplienceMenuItem} from './amplience/navigation/AmplienceNavigation';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -22,7 +22,7 @@ export type LayoutProps = {
   header: HeaderQuery;
   isLoggedIn: boolean;
   standaloneMode: boolean;
-  amplienceNavigation: AmplienceNavigationNode;
+  amplienceMenu: AmplienceMenuItem[];
 };
 
 export function Layout({
@@ -32,7 +32,7 @@ export function Layout({
   header,
   isLoggedIn,
   standaloneMode,
-  amplienceNavigation,
+  amplienceMenu,
 }: LayoutProps) {
   return (
     <>
@@ -47,7 +47,7 @@ export function Layout({
             header={header}
             cart={cart}
             isLoggedIn={isLoggedIn}
-            amplienceNavigation={amplienceNavigation}
+            amplienceMenu={amplienceMenu}
           />
           <main>{children}</main>
           <Suspense>

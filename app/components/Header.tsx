@@ -7,17 +7,12 @@ import AmplienceNavigation from './amplience/navigation/AmplienceNavigation';
 
 type HeaderProps = Pick<
   LayoutProps,
-  'header' | 'cart' | 'isLoggedIn' | 'amplienceNavigation'
+  'header' | 'cart' | 'isLoggedIn' | 'amplienceMenu'
 >;
 
 type Viewport = 'desktop' | 'mobile';
 
-export function Header({
-  header,
-  isLoggedIn,
-  cart,
-  amplienceNavigation,
-}: HeaderProps) {
+export function Header({header, isLoggedIn, cart, amplienceMenu}: HeaderProps) {
   const {shop, menu} = header;
   return (
     <header className="header">
@@ -29,7 +24,7 @@ export function Header({
         viewport="desktop"
         primaryDomainUrl={header.shop.primaryDomain.url}
       />
-      <AmplienceNavigation rootNode={amplienceNavigation}></AmplienceNavigation>
+      <AmplienceNavigation menu={amplienceMenu}></AmplienceNavigation>
       <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
     </header>
   );

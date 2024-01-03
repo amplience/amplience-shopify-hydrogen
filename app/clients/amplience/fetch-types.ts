@@ -1,5 +1,14 @@
 export type ContentItemRequest = {id?: string; key?: string};
-export type AmplienceContentItem = Record<string, any>;
+export type AmplienceContentItem = {
+  _meta: {
+    name: string;
+    schema: string;
+    deliveryId: string;
+    deliveryKey?: string;
+    hierarchy?: {parentId: string; root: boolean};
+  };
+  [key: string]: any;
+};
 
 export type AmplienceNavigationNode = {
   content: AmplienceContentItem;
