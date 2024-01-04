@@ -1,4 +1,4 @@
-import {useNonce} from '@shopify/hydrogen';
+import {getPaginationVariables, useNonce} from '@shopify/hydrogen';
 import {
   defer,
   type SerializeFrom,
@@ -26,7 +26,9 @@ import {Layout} from '~/components/Layout';
 import {RealtimeVisualizationProvider} from './context/RealtimeVisualizationContext';
 import {fetchHierarchy} from './clients/amplience/fetch-hierarchy';
 import {fetchContent} from './clients/amplience/fetch-content';
-import {buildAmplienceMenu} from './components/amplience/navigation/AmplienceNavigation.utils';
+import {enrichCollectionNodes} from './utils/amplience/enrich';
+import {transformNodesToMenuItems} from './components/amplience/navigation/AmplienceNavigation.utils';
+import {transformCollectionsToMenuItems} from './utils/amplience/collections';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -71,7 +73,7 @@ export const useRootLoaderData = () => {
   return root?.data as SerializeFrom<typeof loader>;
 };
 
-export async function loader({context}: LoaderFunctionArgs) {
+export async function loader({context, request}: LoaderFunctionArgs) {
   const {
     storefront,
     session,
@@ -106,7 +108,15 @@ export async function loader({context}: LoaderFunctionArgs) {
     },
   });
 
-  // await Amplience navigation hierarchy data
+  // Get active Shopify collections from Shopify API
+  const paginationVariables = getPaginationVariables(request, {
+    pageBy: 4,
+  });
+  const {collections} = await context.storefront.query(COLLECTIONS_QUERY, {
+    variables: paginationVariables,
+  });
+
+  // Fetch Amplience navigation hierarchy root item
   const fetchContext = {
     hubName,
     ...(stagingHost ? {stagingHost} : {}),
@@ -116,12 +126,31 @@ export async function loader({context}: LoaderFunctionArgs) {
     fetchContext,
     {depth: 'root', format: 'linked'},
   );
+  // Fetch Amplience navigation hierarchy nodes
   const ampliencePageNodes = await fetchHierarchy(
     ampliencePage._meta.deliveryId,
     fetchContext,
   );
 
-  const amplienceMenu = buildAmplienceMenu(ampliencePageNodes);
+  // Enrich collection data from shopify API
+  const enrichedAmplienceNodes = enrichCollectionNodes(
+    ampliencePageNodes,
+    collections.nodes,
+  );
+
+  // Transform hierarchy nodes into Amplience menu items
+  const amplienceMenuItems = transformNodesToMenuItems(enrichedAmplienceNodes);
+
+  // Transform Shopify collections into Amplience menu items
+  const shopifyMenuItems = transformCollectionsToMenuItems(collections.nodes);
+
+  // Remove Shopify collection menu items if we have an Amplience collection override
+  const filteredShopifyMenuItems = shopifyMenuItems.filter(
+    (s) => !amplienceMenuItems.find((a) => a.href === s.href),
+  );
+
+  // Combine Shopify collection menu items with Amplience menu items
+  const amplienceMenu = [...filteredShopifyMenuItems, ...amplienceMenuItems];
 
   return defer(
     {
@@ -309,4 +338,44 @@ const FOOTER_QUERY = `#graphql
     }
   }
   ${MENU_FRAGMENT}
+` as const;
+
+const COLLECTIONS_QUERY = `#graphql
+  fragment Collection on Collection {
+    id
+    title
+    handle
+    image {
+      id
+      url
+      altText
+      width
+      height
+    }
+  }
+  query StoreCollections(
+    $country: CountryCode
+    $endCursor: String
+    $first: Int
+    $language: LanguageCode
+    $last: Int
+    $startCursor: String
+  ) @inContext(country: $country, language: $language) {
+    collections(
+      first: $first,
+      last: $last,
+      before: $startCursor,
+      after: $endCursor
+    ) {
+      nodes {
+        ...Collection
+      }
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+    }
+  }
 ` as const;

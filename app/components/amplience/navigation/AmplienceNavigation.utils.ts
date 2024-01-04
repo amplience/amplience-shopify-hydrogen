@@ -1,7 +1,7 @@
 import {type AmplienceContentItem} from '~/clients/amplience/fetch-types';
 import {type AmplienceMenuItem} from './AmplienceNavigation';
 
-const schemaTypeMapping: {[key: string]: string} = {
+const schemaToTypeMapping: {[key: string]: string} = {
   'https://demostore.amplience.com/site/pages/landing': 'page',
   'https://demostore.amplience.com/site/pages/external': 'external',
   'https://demostore.amplience.com/site/pages/page-group': 'group',
@@ -20,27 +20,34 @@ const buildNodeHref = (node: AmplienceContentItem) => {
   return path ? `/${path}` : undefined;
 };
 
-const buildAmplienceMenuItem = (
+const transformNodeToMenuItem = (
   node: AmplienceContentItem,
 ): AmplienceMenuItem => {
-  const type = schemaTypeMapping[node.content?._meta?.schema];
+  const type = schemaToTypeMapping[node.content?._meta?.schema];
   return {
     id: node.content?._meta?.deliveryId,
     type,
-    title: node.content?.title || 'Collection', // TODO: Collection titles need to be enriched from shopify collection api
+    title: node.content?.title,
     href: node.content?.href ? node?.content?.href : buildNodeHref(node),
-    children: node.children?.map(buildAmplienceMenuItem),
+    children: node.children?.map(transformNodeToMenuItem),
   };
+};
+
+const sortNodes = (nodes: AmplienceContentItem[]) => {
+  nodes.sort(
+    (a: AmplienceContentItem, b: AmplienceContentItem) =>
+      a.content.menu.priority - b.content.menu.priority,
+  );
+
+  return nodes;
 };
 
 const filterInactiveNode = (node: AmplienceContentItem) =>
   node?.content?.active !== false;
 
-export const buildAmplienceMenu = (nodes: AmplienceContentItem[]) => {
-  nodes.sort(
-    (a: AmplienceContentItem, b: AmplienceContentItem) =>
-      b.content.menu.priority - b.content.menu.priority,
-  );
+export const transformNodesToMenuItems = (nodes: AmplienceContentItem[]) => {
+  const activeNodes = nodes.filter(filterInactiveNode);
+  const sortedNodes = sortNodes(activeNodes);
 
-  return nodes.filter(filterInactiveNode).map(buildAmplienceMenuItem);
+  return sortedNodes.map(transformNodeToMenuItem);
 };

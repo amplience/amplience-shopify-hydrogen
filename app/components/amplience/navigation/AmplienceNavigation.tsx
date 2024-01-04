@@ -10,20 +10,41 @@ export type AmplienceMenuItem = {
   type: string;
   title: string;
   href: string;
-  children?: AmplienceContentItem[];
+  children?: AmplienceMenuItem[];
   category?: string;
 };
 
 const AmplienceNavigation = ({menu}: AmplienceNavigationProps) => {
   return (
     <nav className="header-menu-desktop">
-      {menu?.map((item: AmplienceMenuItem) => (
-        <NavLink key={item?.title} className="header-menu-item" to={item?.href}>
-          {item?.title}
+      <NavLink end prefetch="intent" to="/" style={activeLinkStyle}>
+        Home
+      </NavLink>
+      {menu?.map(({id, title, href}: AmplienceMenuItem) => (
+        <NavLink
+          key={id}
+          className="header-menu-item"
+          to={href}
+          style={activeLinkStyle}
+        >
+          {title}
         </NavLink>
       ))}
     </nav>
   );
 };
+
+function activeLinkStyle({
+  isActive,
+  isPending,
+}: {
+  isActive: boolean;
+  isPending: boolean;
+}) {
+  return {
+    fontWeight: isActive ? 'bold' : undefined,
+    color: isPending ? 'grey' : 'black',
+  };
+}
 
 export default AmplienceNavigation;
