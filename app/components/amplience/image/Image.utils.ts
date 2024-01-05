@@ -1,4 +1,4 @@
-import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
+import {type AmplienceContentItem} from '~/clients/amplience/fetch-types';
 import {
   ImageFormat,
   type AmplienceImage,

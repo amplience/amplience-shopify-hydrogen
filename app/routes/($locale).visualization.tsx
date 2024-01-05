@@ -1,10 +1,7 @@
 import {type MetaFunction, useLoaderData} from '@remix-run/react';
 import {type LoaderFunctionArgs, defer} from '@shopify/remix-oxygen';
 import {useCallback, useState} from 'react';
-import {
-  type AmplienceContentItem,
-  fetchContent,
-} from '~/clients/amplience/fetch-content';
+import {fetchContent} from '~/clients/amplience/fetch-content';
 import AmplienceContent from '~/components/amplience/wrapper/AmplienceContent';
 import {
   useInitialRealtimeContent,
@@ -36,10 +33,11 @@ export async function loader({context}: LoaderFunctionArgs) {
 
 export default function Visualization() {
   const {initialContent} = useLoaderData<typeof loader>();
-  const [content, setContent] = useState<AmplienceContentItem>(initialContent);
+  const [content, setContent] =
+    useState<Record<string, unknown>>(initialContent);
 
   const updateRealtimeContent = useCallback(
-    (realtimeContent: AmplienceContentItem) => {
+    (realtimeContent: Record<string, unknown>) => {
       setContent(realtimeContent);
     },
     [],

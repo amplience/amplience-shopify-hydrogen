@@ -1,5 +1,4 @@
 import {NavLink} from '@remix-run/react';
-import {type AmplienceContentItem} from '~/clients/amplience/fetch-types';
 
 type Viewport = 'desktop' | 'mobile';
 

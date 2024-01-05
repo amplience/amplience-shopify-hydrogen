@@ -2,7 +2,7 @@ import {type Property} from 'csstype';
 import ReactMarkdown from 'markdown-to-jsx';
 import AmplienceContent from '../wrapper/AmplienceContent';
 import {getImageURL} from '../image/Image.utils';
-import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
+import {type AmplienceContentItem} from '~/clients/amplience/fetch-types';
 import {type AmplienceImage} from '../image/Image.types';
 
 type RichTextMarkdown = {

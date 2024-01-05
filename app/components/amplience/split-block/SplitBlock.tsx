@@ -1,6 +1,6 @@
 import {type CSSProperties, useMemo} from 'react';
 import AmplienceContent from '../wrapper/AmplienceContent';
-import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
+import {type AmplienceContentItem} from '~/clients/amplience/fetch-types';
 
 interface SplitBlockProps {
   className?: string;
