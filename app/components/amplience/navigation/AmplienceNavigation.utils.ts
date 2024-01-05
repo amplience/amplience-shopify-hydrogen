@@ -11,7 +11,7 @@ const schemaToTypeMapping: {[key: string]: string} = {
 const buildNodeHref = (node: AmplienceContentItem) => {
   const typeMap: {[key: string]: string} = {
     category: 'collections',
-    page: 'content-page',
+    page: 'content-pages',
   };
   const re = new RegExp(Object.keys(typeMap).join('|'), 'gi');
   const deliveryKey = node.content._meta?.deliveryKey;

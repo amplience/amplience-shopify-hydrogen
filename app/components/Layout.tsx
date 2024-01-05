@@ -13,7 +13,9 @@ import {
   PredictiveSearchForm,
   PredictiveSearchResults,
 } from '~/components/Search';
-import {type AmplienceMenuItem} from './amplience/navigation/AmplienceNavigation';
+import AmplienceNavigation, {
+  type AmplienceMenuItem,
+} from './amplience/navigation/AmplienceNavigation';
 
 export type LayoutProps = {
   cart: Promise<CartApiQueryFragment | null>;
@@ -42,7 +44,8 @@ export function Layout({
         <>
           <CartAside cart={cart} />
           <SearchAside />
-          <MobileMenuAside menu={header.menu} shop={header.shop} />
+          {/* <MobileMenuAside menu={header.menu} shop={header.shop} /> */}
+          <MobileAmplienceMenuAside amplienceMenu={amplienceMenu} />
           <Header
             header={header}
             cart={cart}
@@ -116,6 +119,14 @@ function MobileMenuAside({
         viewport="mobile"
         primaryDomainUrl={shop.primaryDomain.url}
       />
+    </Aside>
+  );
+}
+
+function MobileAmplienceMenuAside({amplienceMenu}: {amplienceMenu: any}) {
+  return (
+    <Aside id="mobile-amplience-menu-aside" heading="MENU">
+      <AmplienceNavigation menu={amplienceMenu} viewport="mobile" />
     </Aside>
   );
 }

@@ -144,7 +144,7 @@ export async function loader({context, request}: LoaderFunctionArgs) {
   // Transform Shopify collections into Amplience menu items
   const shopifyMenuItems = transformCollectionsToMenuItems(collections.nodes);
 
-  // Remove Shopify collection menu items if we have an Amplience collection override
+  // Remove Shopify collection menu items if we have an Amplience collection to override
   const filteredShopifyMenuItems = shopifyMenuItems.filter(
     (s) => !amplienceMenuItems.find((a) => a.href === s.href),
   );

@@ -19,11 +19,11 @@ export function Header({header, isLoggedIn, cart, amplienceMenu}: HeaderProps) {
       <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
         <strong>{shop.name}</strong>
       </NavLink>
-      <HeaderMenu
+      {/* <HeaderMenu
         menu={menu}
         viewport="desktop"
         primaryDomainUrl={header.shop.primaryDomain.url}
-      />
+      /> */}
       <AmplienceNavigation menu={amplienceMenu}></AmplienceNavigation>
       <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
     </header>
@@ -96,7 +96,8 @@ function HeaderCtas({
 }: Pick<HeaderProps, 'isLoggedIn' | 'cart'>) {
   return (
     <nav className="header-ctas" role="navigation">
-      <HeaderMenuMobileToggle />
+      {/* <HeaderMenuMobileToggle /> */}
+      <HeaderMobileAmplienceMenuToggle />
       <NavLink prefetch="intent" to="/account" style={activeLinkStyle}>
         {isLoggedIn ? 'Account' : 'Sign in'}
       </NavLink>
@@ -109,6 +110,17 @@ function HeaderCtas({
 function HeaderMenuMobileToggle() {
   return (
     <a className="header-menu-mobile-toggle" href="#mobile-menu-aside">
+      <h3>☰</h3>
+    </a>
+  );
+}
+
+function HeaderMobileAmplienceMenuToggle() {
+  return (
+    <a
+      className="header-menu-mobile-toggle"
+      href="#mobile-amplience-menu-aside"
+    >
       <h3>☰</h3>
     </a>
   );

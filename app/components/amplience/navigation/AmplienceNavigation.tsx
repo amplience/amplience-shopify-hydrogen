@@ -1,8 +1,11 @@
 import {NavLink} from '@remix-run/react';
 import {type AmplienceContentItem} from '~/clients/amplience/fetch-types';
 
+type Viewport = 'desktop' | 'mobile';
+
 export type AmplienceNavigationProps = {
   menu: AmplienceMenuItem[];
+  viewport?: Viewport;
 };
 
 export type AmplienceMenuItem = {
@@ -14,23 +17,31 @@ export type AmplienceMenuItem = {
   category?: string;
 };
 
-const AmplienceNavigation = ({menu}: AmplienceNavigationProps) => {
-  return (
-    <nav className="header-menu-desktop">
+const AmplienceNavigation = ({
+  menu,
+  viewport = 'desktop',
+}: AmplienceNavigationProps) => {
+  const items = (
+    <>
       <NavLink end prefetch="intent" to="/" style={activeLinkStyle}>
         Home
       </NavLink>
       {menu?.map(({id, title, href}: AmplienceMenuItem) => (
-        <NavLink
-          key={id}
-          className="header-menu-item"
-          to={href}
-          style={activeLinkStyle}
-        >
+        <NavLink key={id} className="pointer" to={href} style={activeLinkStyle}>
           {title}
         </NavLink>
       ))}
-    </nav>
+    </>
+  );
+  return (
+    <>
+      {viewport === 'mobile' && (
+        <nav className="flex flex-col gap-4 ml-12">{items}</nav>
+      )}
+      {viewport !== 'mobile' && (
+        <nav className="md:flex gap-4 ml-12 hidden">{items}</nav>
+      )}
+    </>
   );
 };
 
