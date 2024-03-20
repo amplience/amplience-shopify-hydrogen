@@ -12,6 +12,7 @@ import type {
 } from '@shopify/hydrogen/storefront-api-types';
 import type {CustomerAccessToken} from '@shopify/hydrogen/storefront-api-types';
 import type {HydrogenSession} from './server';
+import {ContentClient} from 'dc-delivery-sdk-js';
 
 declare global {
   /**
@@ -58,6 +59,7 @@ declare module '@shopify/remix-oxygen' {
       contentId: string;
       standaloneMode: boolean;
     };
+    amplienceClient: ContentClient;
   }
 
   /**

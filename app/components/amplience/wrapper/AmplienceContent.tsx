@@ -1,4 +1,3 @@
-import type {AmplienceContentItem} from '~/clients/amplience/fetch-content';
 import Text from '../text/Text';
 import Image from '../image/Image';
 import Video from '../video/Video';
@@ -10,6 +9,7 @@ import SimpleBanner from '../simple-banner/SimpleBanner';
 import RichText from '../rich-text/RichText';
 import CuratedProductGrid from '../curated-product-grid/CuratedProductGrid';
 import DynamicProductGrid from '../dynamic-product-grid/DynamicProductGrid';
+import {type DefaultContentBody} from 'dc-delivery-sdk-js';
 
 const COMPONENT_MAPPING: {
   [key: string]: React.FC<any>;
@@ -32,7 +32,7 @@ const COMPONENT_MAPPING: {
   'https://demostore.amplience.com/content/product-grid': DynamicProductGrid,
 };
 
-const MappingNotFound = (content: AmplienceContentItem) => {
+const MappingNotFound = (content: DefaultContentBody) => {
   return (
     <pre>
       <code className="text-xs md:text-sm block break-words">
@@ -43,7 +43,7 @@ const MappingNotFound = (content: AmplienceContentItem) => {
 };
 
 type AmplienceContentProps = {
-  content: AmplienceContentItem;
+  content: DefaultContentBody;
 };
 /**
  * Wrapper component maps Amplience components based on content schema
