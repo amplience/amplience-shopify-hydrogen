@@ -20,7 +20,7 @@ export async function loader({context}: LoaderFunctionArgs) {
 
   const data = (await amplienceClient.getContentItemById(contentId)).toJSON();
 
-  return defer({initialContent: data[0]});
+  return defer({initialContent: data});
 }
 
 export default function Visualization() {
