@@ -37,9 +37,7 @@ export function RealtimeVisualizationProvider({
   );
 }
 
-export function useRealtimeVisualization(
-  onChangeFn: (model: Record<string, unknown>) => void,
-) {
+export function useRealtimeVisualization(onChangeFn: (model: any) => void) {
   const amplienceVisualizationSdk = useContext(RealtimeVisualizationContext);
 
   useEffect(() => {
@@ -57,9 +55,7 @@ export function useRealtimeVisualization(
   return useContext(RealtimeVisualizationContext);
 }
 
-export function useInitialRealtimeContent(
-  onChangeFn: (model: Record<string, unknown>) => void,
-) {
+export function useInitialRealtimeContent(onChangeFn: (model: any) => void) {
   const amplienceVisualizationSdk = useContext(RealtimeVisualizationContext);
 
   useEffect(() => {

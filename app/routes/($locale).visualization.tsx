@@ -1,10 +1,7 @@
 import {type MetaFunction, useLoaderData} from '@remix-run/react';
 import {type LoaderFunctionArgs, defer} from '@shopify/remix-oxygen';
+import {type DefaultContentBody} from 'dc-delivery-sdk-js';
 import {useCallback, useState} from 'react';
-import {
-  type AmplienceContentItem,
-  fetchContent,
-} from '~/clients/amplience/fetch-content';
 import AmplienceContent from '~/components/amplience/wrapper/AmplienceContent';
 import {
   useInitialRealtimeContent,
@@ -17,29 +14,21 @@ export const meta: MetaFunction = () => {
 
 export async function loader({context}: LoaderFunctionArgs) {
   const {
-    amplience: {locale, hubName, stagingHost, contentId},
+    amplience: {contentId},
+    amplienceClient,
   } = context;
 
-  const fetchContext = {
-    hubName,
-    ...(stagingHost ? {stagingHost} : {}),
-  };
-  const params = {locale};
-  const data = await fetchContent(
-    [{id: contentId || ''}],
-    fetchContext,
-    params,
-  );
+  const data = (await amplienceClient.getContentItemById(contentId)).toJSON();
 
-  return defer({initialContent: data[0]});
+  return defer({initialContent: data});
 }
 
 export default function Visualization() {
   const {initialContent} = useLoaderData<typeof loader>();
-  const [content, setContent] = useState<AmplienceContentItem>(initialContent);
+  const [content, setContent] = useState<DefaultContentBody>(initialContent);
 
   const updateRealtimeContent = useCallback(
-    (realtimeContent: AmplienceContentItem) => {
+    (realtimeContent: DefaultContentBody) => {
       setContent(realtimeContent);
     },
     [],

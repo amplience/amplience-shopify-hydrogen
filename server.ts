@@ -14,6 +14,7 @@ import {
   type SessionStorage,
   type Session,
 } from '@shopify/remix-oxygen';
+import {createAmplienceClient} from '~/clients/amplience';
 
 /**
  * Export a fetch handler in module format.
@@ -66,7 +67,7 @@ export default {
       });
 
       /**
-       * Create an Amplience Context
+       * Create an Amplience Context & client
        */
 
       const {searchParams} = new URL(request.url);
@@ -78,6 +79,14 @@ export default {
         contentId: searchParams.get('content'),
         standaloneMode: searchParams.get('standalone') === 'true',
       };
+
+      const amplienceClient = createAmplienceClient({
+        hubName: amplience.hubName,
+        locale: amplience.locale,
+        ...(amplience.stagingHost
+          ? {stagingEnvironment: amplience.stagingHost}
+          : {}),
+      });
 
       /**
        * Create a Remix request handler and pass
@@ -93,6 +102,7 @@ export default {
           env,
           waitUntil,
           amplience,
+          amplienceClient,
         }),
       });
 

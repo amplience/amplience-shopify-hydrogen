@@ -1,6 +1,5 @@
-import {defer, json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
-import {useLoaderData, type MetaFunction} from '@remix-run/react';
-import {fetchContent} from '~/clients/amplience/fetch-content';
+import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {useLoaderData} from '@remix-run/react';
 import AmplienceContent from '~/components/amplience/wrapper/AmplienceContent';
 
 export async function loader({params, context}: LoaderFunctionArgs) {
@@ -9,36 +8,29 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     throw new Error('Missing page handle');
   }
 
-  const {
-    storefront,
-    amplience: {locale, hubName, stagingHost},
-  } = context;
+  const {amplienceClient} = context;
 
-  // Fetching Amplience content
-  const fetchContext = {
-    hubName,
-    ...(stagingHost ? {stagingHost} : {}),
-  };
-  const fetchParams = {locale};
-  const amplienceContent = (
-    await fetchContent([{key: handle}], fetchContext, fetchParams)
-  )[0];
+  let amplienceContent;
 
-  if (!amplienceContent) {
+  try {
+    amplienceContent = (
+      await amplienceClient.getContentItemByKey(handle)
+    ).toJSON();
+  } catch (e) {
     throw new Response(`${handle} not Found`, {status: 404});
   }
 
-  return defer({amplienceContent, handle});
+  return defer({amplienceContent});
 }
 
 export default function Page() {
-  const {amplienceContent, handle} = useLoaderData<typeof loader>();
+  const {amplienceContent} = useLoaderData<typeof loader>();
 
   return (
-    <div className="page">
-      {amplienceContent && Object.keys(amplienceContent).length > 0 && (
+    <>
+      <div className="page">
         <AmplienceContent content={amplienceContent} />
-      )}
-    </div>
+      </div>
+    </>
   );
 }

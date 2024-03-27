@@ -26,7 +26,6 @@ import type {
   SelectedOption,
 } from '@shopify/hydrogen/storefront-api-types';
 import {getVariantUrl} from '~/utils';
-import {fetchContent} from '~/clients/amplience/fetch-content';
 import AmplienceContent from '~/components/amplience/wrapper/AmplienceContent';
 
 export const meta: MetaFunction<typeof loader> = ({data}) => {
@@ -35,10 +34,7 @@ export const meta: MetaFunction<typeof loader> = ({data}) => {
 
 export async function loader({params, request, context}: LoaderFunctionArgs) {
   const {handle} = params;
-  const {
-    storefront,
-    amplience: {hubName, locale},
-  } = context;
+  const {storefront, amplienceClient} = context;
   const selectedOptions = getSelectedProductOptions(request).filter(
     (option) =>
       // Filter out Shopify predictive search query params
@@ -66,9 +62,10 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
 
   const gid = product.id.split('/');
   const productId = gid[gid.length - 1];
+
   const richText = (
-    await fetchContent([{key: `product/${productId}`}], {hubName}, {locale})
-  )[0];
+    await amplienceClient.getContentItemByKey(`product/${productId}`)
+  ).toJSON();
 
   const firstVariant = product.variants.nodes[0];
   const firstVariantIsDefault = Boolean(

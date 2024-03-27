@@ -6,7 +6,6 @@ import type {
 } from 'storefrontapi.generated';
 import {Suspense} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
-import {fetchContent} from '~/clients/amplience/fetch-content';
 import AmplienceContent from '~/components/amplience/wrapper/AmplienceContent';
 
 export const meta: MetaFunction = () => {
@@ -14,38 +13,21 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader({context}: LoaderFunctionArgs) {
-  const {
-    storefront,
-    amplience: {locale, hubName, stagingHost},
-  } = context;
+  const {storefront, amplienceClient} = context;
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
   const featuredCollection = collections.nodes[0];
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
 
-  // Fetching Amplience content
-  const fetchContext = {
-    hubName,
-    ...(stagingHost ? {stagingHost} : {}),
-  };
-  const fetchParams = {locale};
   const simpleBanner = (
-    await fetchContent(
-      [{key: 'docs/story/simple-banner/dog-xmas-banner'}],
-      fetchContext,
-      fetchParams,
+    await amplienceClient.getContentItemByKey(
+      'docs/story/simple-banner/dog-xmas-banner',
     )
-  )[0];
+  ).toJSON();
   const cardList = (
-    await fetchContent(
-      [{key: 'docs/story/cardlist/cardlist1'}],
-      fetchContext,
-      fetchParams,
-    )
-  )[0];
+    await amplienceClient.getContentItemByKey('docs/story/cardlist/cardlist1')
+  ).toJSON();
 
   return defer({
-    hubName,
-    locale,
     featuredCollection,
     recommendedProducts,
     simpleBanner,
