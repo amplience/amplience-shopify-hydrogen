@@ -10,6 +10,8 @@ import RichText from '../rich-text/RichText';
 import CuratedProductGrid from '../curated-product-grid/CuratedProductGrid';
 import DynamicProductGrid from '../dynamic-product-grid/DynamicProductGrid';
 import {type DefaultContentBody} from 'dc-delivery-sdk-js';
+import Blog from '../blog/Blog';
+import BlogSnippet from '../blog-snippet/BlogSnippet';
 
 const COMPONENT_MAPPING: {
   [key: string]: React.FC<any>;
@@ -30,6 +32,8 @@ const COMPONENT_MAPPING: {
   'https://demostore.amplience.com/content/curated-product-grid':
     CuratedProductGrid,
   'https://demostore.amplience.com/content/product-grid': DynamicProductGrid,
+  'https://demostore.amplience.com/content/blog': Blog,
+  'https://demostore.amplience.com/content/blog-snippet': BlogSnippet,
 };
 
 const MappingNotFound = (content: DefaultContentBody) => {
