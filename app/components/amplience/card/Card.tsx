@@ -1,9 +1,9 @@
-import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
+import type {DefaultContentBody} from 'dc-delivery-sdk-js';
 import AmplienceContent from '../wrapper/AmplienceContent';
 
 export type CardProps = {
   className?: string;
-  image?: AmplienceContentItem;
+  image?: DefaultContentBody;
   cardName?: string;
   description?: string;
   links?: any[];
@@ -13,7 +13,7 @@ const Card = ({image, cardName, description, links}: CardProps) => {
   return (
     <div className="w-full m-[4px]">
       <div>
-        <AmplienceContent content={image as AmplienceContentItem} />
+        <AmplienceContent content={image as DefaultContentBody} />
       </div>
       <h3>{cardName}</h3>
       <p>{description}</p>

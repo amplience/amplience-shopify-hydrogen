@@ -1,16 +1,16 @@
-import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
 import AmplienceContent from '../wrapper/AmplienceContent';
+import type {DefaultContentBody} from 'dc-delivery-sdk-js';
 
 type ContainerProps = {
-  contentTypes: AmplienceContentItem[];
+  contentTypes: DefaultContentBody[];
 };
 
 const Container = ({contentTypes = []}: ContainerProps) => {
   return (
     <div>
-      {contentTypes.map((item, index) => {
+      {contentTypes.map((item) => {
         return (
-          <div key={index}>
+          <div key={item?._meta?.deliveryId}>
             <AmplienceContent content={item} />
           </div>
         );

@@ -1,6 +1,5 @@
-import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
-
 import {buildSrcUrl} from './Image.utils';
+import type {DefaultContentBody} from 'dc-delivery-sdk-js';
 
 type ImageProps = {
   image: any;
@@ -8,7 +7,7 @@ type ImageProps = {
   format?: string;
   imageAltText?: string;
   di?: string;
-} & AmplienceContentItem;
+} & DefaultContentBody;
 
 const Image = ({
   display,

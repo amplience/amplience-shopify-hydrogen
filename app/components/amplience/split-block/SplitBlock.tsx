@@ -1,13 +1,13 @@
 import {type CSSProperties, useMemo} from 'react';
 import AmplienceContent from '../wrapper/AmplienceContent';
-import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
+import type {DefaultContentBody} from 'dc-delivery-sdk-js';
 
 interface SplitBlockProps {
   className?: string;
   style?: CSSProperties;
   split: string;
   bgcol: string;
-  content: AmplienceContentItem[];
+  content: DefaultContentBody[];
 }
 
 const SplitBlock = (props: SplitBlockProps) => {
@@ -26,7 +26,7 @@ const SplitBlock = (props: SplitBlockProps) => {
       {content.map((content, index) => {
         return (
           <div
-            key={index}
+            key={content?._meta?.deliveryId}
             style={{flex: splits[index], maxWidth: `${splits[index] * 100}%`}}
           >
             <AmplienceContent content={content} />

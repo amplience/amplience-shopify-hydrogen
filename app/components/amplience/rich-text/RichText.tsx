@@ -2,8 +2,8 @@ import {type Property} from 'csstype';
 import ReactMarkdown from 'markdown-to-jsx';
 import AmplienceContent from '../wrapper/AmplienceContent';
 import {getImageURL} from '../image/Image.utils';
-import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
 import {type AmplienceImage} from '../image/Image.types';
+import type {DefaultContentBody} from 'dc-delivery-sdk-js';
 
 type RichTextMarkdown = {
   type: 'markdown';
@@ -12,7 +12,7 @@ type RichTextMarkdown = {
 
 type RichTextContent = {
   type: 'dc-content-link';
-  data: AmplienceContentItem;
+  data: DefaultContentBody;
 };
 
 type RichTextImage = {
