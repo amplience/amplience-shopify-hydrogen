@@ -82,7 +82,7 @@ const Card = ({image, cardName, description, links}: CardProps) => {
           diParams={image?.di}
         />
       </div>
-      <h3>{cardName}</h3>
+      <h2 className="mt-4">{cardName}</h2>
       <p>{description}</p>
       <div className="flex flex-row gap-[8px]">
         {links &&
