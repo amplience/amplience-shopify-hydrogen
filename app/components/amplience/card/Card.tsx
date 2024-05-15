@@ -1,5 +1,3 @@
-import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
-import AmplienceContent from '../wrapper/AmplienceContent';
 import {
   AmplienceImage,
   ImageScaleFit,
