@@ -1,9 +1,9 @@
-import {type AmplienceContentItem} from '~/clients/amplience/fetch-content';
 import {
   ImageFormat,
   type AmplienceImage,
   type ImageTransformations,
 } from './Image.types';
+import type {DefaultContentBody} from 'dc-delivery-sdk-js';
 
 const avifMaxPixels = 2500000;
 
@@ -261,7 +261,7 @@ export const buildSrcUrl = ({
 }: {
   width?: number;
   poiAspect?: string;
-  image: AmplienceContentItem;
+  image: DefaultContentBody;
   seoText: string;
   display: string;
   query: string;
