@@ -10,11 +10,11 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader({context}: LoaderFunctionArgs) {
-  const {storefront, amplienceClient} = context;
+  const {storefront, amplience, amplienceClient} = context;
 
   const [flexibleSlot] = await Promise.all([
     (
-      await amplienceClient.getContentItemByKey('homepage')
+      await amplienceClient.getContentItemByKey(amplience.flexibleSlotKey)
     ).toJSON() as DefaultContentBody,
   ]);
   const allItemIds = flexibleSlot.slots.map((content: any) => content.id);
