@@ -16,28 +16,35 @@ Hydrogen is Shopify’s stack for headless commerce. Hydrogen is designed to dov
 - GraphQL generator
 - TypeScript and JavaScript flavors
 - Minimal setup of components and routes
+- Amplience Components
 
-## Getting started
+## Amplience Contents
 
-## Configure
+### 🏁 Quick Start
 
-Copy the `.env.example` and rename to be `.env` and populate the environment variables.
+- [Getting Started](./docs/amplience/getting-started.md)
+- [Deploying to Vercel](./docs/amplience/deploying-to-vercel.md)
 
-| Env var             | Description                 |
-| ------------------- | --------------------------- |
-| SESSION_SECRET      | Shopify session secret      |
-| PUBLIC_STORE_DOMAIN | Shopify public store domain |
-| HUB_NAME            | Dynamic Content hub name    |
+### ⚙️ Core Functionalities
 
-## Install
+- [Amplience Configuration](./docs/amplience/amplience-configuration.md)
+- [Amplience API](./docs/amplience/amplience-api.md)
+- [Visualisation](./docs/amplience/visualisation.md)
+- [Preview](./docs/amplience/preview.md)
+- [Amplience Account](./docs/amplience/amplience-account.md)
 
-```bash
-nvm use
-npm install
-```
+### 🧩 Components & Extensions
 
-## Local development
-
-```bash
-npm run dev
-```
+- [Amplience Extensions List](./docs/amplience/amplience-extensions-list.md)
+  - eComm Toolkit
+- [Amplience Components List](./docs/amplience/amplience-components-list.md)
+  - Blog
+  - Blog Snippet
+  - Image
+  - Text
+  - Sample Banner
+  - Curated Product Grid
+  - Dynamic Product Grid
+  - Amplience Content wrapper
+- [Amplience Slots List](./docs/amplience/amplience-slots-list.md)
+  - Flexible Slot
