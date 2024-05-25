@@ -65,7 +65,8 @@ Here is the list of Content Types to update:
 - Text
 
 The URL to use is the following:
-`http://localhost:3000/{{locales}}/visualization?content={{content.sys.id}}&vse={{vse.domain}}&hub={{hub.name}}`
+
+- `http://localhost:3000/{{locales}}/visualization?content={{content.sys.id}}&vse={{vse.domain}}&hub={{hub.name}}`
 
 ### Preview URL
 
