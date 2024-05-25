@@ -1,6 +1,6 @@
 # Getting started
 
-## BigCommerce configuration
+## Shopify configuration
 
 Copy the `.env.example` and rename to be `.env` and populate the environment variables.
 
