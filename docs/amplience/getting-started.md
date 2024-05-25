@@ -35,9 +35,9 @@ From there you can update the Installation Parameters of the eComm Toolkit exten
 {
   "vendor": "shopify",
   "codec_params": {
-    "access_token": "<access token>",
-    "admin_access_token": "<admin access token>",
-    "site_id": "<site id>",
+    "access_token": "<access_token>",
+    "admin_access_token": "<admin_access_token>",
+    "site_id": "<site_id>",
     "version": "2024-04"
   }
 }
