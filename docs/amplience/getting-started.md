@@ -45,7 +45,12 @@ From there you can update the Installation Parameters of the eComm Toolkit exten
 
 ### Content Types visualisation URL
 
-You wil need to update / add a new visualisation URL to the following Content Types:
+You wil need to update / add new visualisation URLs:
+
+- BigCommerce Catalyst Development
+- BigCommerce Catalyst Production
+
+Here is the list of Content Types to update:
 
 - Blog
 - Card
@@ -60,6 +65,7 @@ You wil need to update / add a new visualisation URL to the following Content Ty
 - Text
 
 The URL to use is the following:
+`http://localhost:3000/{{locales}}/visualization?content={{content.sys.id}}&vse={{vse.domain}}&hub={{hub.name}}`
 
 ### Preview URL
 
