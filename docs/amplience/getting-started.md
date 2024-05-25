@@ -8,7 +8,7 @@ Copy the `.env.example` and rename to be `.env` and populate the environment var
 | ----------------------------- | ---------------------------------------------------------------------- |
 | SESSION_SECRET                | Shopify session secret                                                 |
 | PUBLIC_STORE_DOMAIN           | Shopify public store domain, <store id>.myshopify.com                  |
-| PUBLIC_STOREFRONT_ID          | Storefront ID you can get from the store URL, <store id>.myshopify.com |
+| PUBLIC_STOREFRONT_ID          | Storefront ID you can get from the store URL, [store_id].myshopify.com |
 | PUBLIC_STOREFRONT_API_TOKEN   | API Token from the Shopify App                                         |
 | PUBLIC_STOREFRONT_API_VERSION | Storefront API version, for instance 2023-01, 2024-04, ...             |
 
