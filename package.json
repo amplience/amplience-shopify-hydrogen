@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "codegen": "shopify hydrogen codegen",
     "format:check": "prettier --check \"{app,src,test}/**/*.{ts[x],js}\"",
-    "format": "prettier --write \"{app,src,test}/**/*.{ts[x],js}\""
+    "format": "prettier --write \"{app,src,test}/**/*.{ts[x],js}\"",
+    "update-content-types": "ts-node scripts/amplience/index.ts update-content-types"
   },
   "prettier": "@shopify/prettier-config",
   "dependencies": {
@@ -24,13 +25,17 @@
     "@shopify/remix-oxygen": "^2.0.2",
     "clsx": "^2.0.0",
     "dc-delivery-sdk-js": "^0.12.1",
+    "dc-management-sdk-js": "github:amplience/dc-management-sdk-js",
     "dc-visualization-sdk": "^1.1.0",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
+    "handlebars": "^4.7.8",
     "isbot": "^3.6.6",
+    "lodash": "^4.17.21",
     "markdown-to-jsx": "^7.3.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "yargs": "^15.4.1"
   },
   "devDependencies": {
     "@remix-run/dev": "2.1.0",
@@ -41,6 +46,8 @@
     "@tailwindcss/typography": "^0.5.9",
     "@total-typescript/ts-reset": "^0.4.2",
     "@types/eslint": "^8.4.10",
+    "@types/lodash": "^4.17.4",
+    "@types/yargs": "^15.0.12",
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",
     "eslint": "^8.20.0",
