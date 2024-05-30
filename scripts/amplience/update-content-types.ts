@@ -56,7 +56,7 @@ export const updateArgs = (yargs: Argv) => {
     })
     .option('prodUrl', {
       describe: 'production url',
-      required: true,
+      required: false,
       type: 'string',
     })
     .option('hubId', {
