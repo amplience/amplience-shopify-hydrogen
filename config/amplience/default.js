@@ -62,4 +62,14 @@ module.exports = {
       ]
     },
   ],
+  applications: [
+    {
+      name: 'Shopify Hydrogen Production',
+      templatedUri: '{{prodUrl}}?vse={{vse.domain}}',
+    },
+    {
+      name: 'Shopify Hydrogen Development',
+      templatedUri: 'http://localhost:3000?vse={{vse.domain}}',
+    }
+  ],
 };
