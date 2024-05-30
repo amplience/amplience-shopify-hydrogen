@@ -1,10 +1,4 @@
 import {Arguments, Argv} from 'yargs';
-import {execSync} from 'child_process';
-import {compile} from 'handlebars';
-import {promises, mkdirSync, rmSync} from 'fs';
-import {tmpdir} from 'os';
-import {join} from 'path';
-import {nanoid} from 'nanoid';
 import {Context} from './cli';
 import {
   ContentType,
