@@ -126,10 +126,10 @@ export const updateHandler = async (
 
   console.log(`Processing Settings`);
   const settings = hub.settings;
-  const applications = settings?.applications || [];
+  let applications = settings?.applications || [];
   if (settings) {
     contentTypesPatch.applications.forEach(async (application: any) => {
-      const filteredApp = applications.filter(
+      applications = applications.filter(
         (item: any) => item.name !== application.name,
       );
       if (application.templatedUri.indexOf('{{prodUrl}}') > -1) {
@@ -139,33 +139,20 @@ export const updateHandler = async (
             context.prodUrl,
           );
           console.log(`... adding preview ${application.name}`);
-          filteredApp.push(application);
+          applications.push(application);
         }
       } else {
         console.log(`... adding preview ${application.name}`);
-        filteredApp.push(application);
+        applications.push(application);
       }
-      settings.applications = filteredApp;
     });
     console.log(`... updating settings`);
     await hub.related.settings.update(
       new Settings({
-        applications: settings.applications,
+        applications: applications,
       }),
     );
   }
-
-  // console.log(`Updating settings...`);
-  // const masterLocale = hub.settings?.localization?.locales[0];
-  // await hub.related.settings.update(
-  //   new Settings({
-  //     devices: [],
-  //     applications: [],
-  //     localization: {
-  //       locales: [masterLocale],
-  //     },
-  //   }),
-  // );
 
   try {
     console.log(`Done!`);
