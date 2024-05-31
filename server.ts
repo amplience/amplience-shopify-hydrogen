@@ -79,6 +79,7 @@ export default {
         contentId: searchParams.get('content'),
         standaloneMode: searchParams.get('standalone') === 'true',
         homepageDeliveryKey: env.HOMEPAGE_DELIVERY_KEY,
+        blogPostDeliveryKey: env.BLOG_POST_DELIVERY_KEY,
       };
 
       const amplienceClient = createAmplienceClient({
