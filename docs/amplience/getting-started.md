@@ -20,10 +20,10 @@ You can follow the guide on the `dc-integration-middleware` project to generate 
 
 Main Amplience configuration is set through an environment variable. You can set it locally in a `.env` file:
 
-| Environment variable | Description              |
-| -------------------- | ------------------------ |
-| HUB_NAME             | Dynamic Content Hub Name |
-| FLEXIBLE_SLOT_KEY    | Slot key or the homepage |
+| Environment variable  | Description              |
+| --------------------- | ------------------------ |
+| HUB_NAME              | Dynamic Content Hub Name |
+| HOMEPAGE_DELIVERY_KEY | Slot key or the homepage |
 
 Slot key is usually `homepage` in the case of Demostore automation.
 

@@ -78,7 +78,7 @@ export default {
         stagingHost: searchParams.get('vse'),
         contentId: searchParams.get('content'),
         standaloneMode: searchParams.get('standalone') === 'true',
-        flexibleSlotKey: env.FLEXIBLE_SLOT_KEY,
+        homepageDeliveryKey: env.HOMEPAGE_DELIVERY_KEY,
       };
 
       const amplienceClient = createAmplienceClient({

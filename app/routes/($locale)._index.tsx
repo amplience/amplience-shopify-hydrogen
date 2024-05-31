@@ -14,7 +14,7 @@ export async function loader({context}: LoaderFunctionArgs) {
 
   const [flexibleSlot] = await Promise.all([
     (
-      await amplienceClient.getContentItemByKey(amplience.flexibleSlotKey)
+      await amplienceClient.getContentItemByKey(amplience.homepageDeliveryKey)
     ).toJSON() as DefaultContentBody,
   ]);
   const allItemIds = flexibleSlot.slots.map((content: any) => content.id);

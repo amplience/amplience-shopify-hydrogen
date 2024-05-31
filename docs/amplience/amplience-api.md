@@ -13,7 +13,7 @@ await amplienceClient.getContentItemById(contentId);
 Getting content by key:
 
 ```js
-await amplienceClient.getContentItemByKey(amplience.flexibleSlotKey);
+await amplienceClient.getContentItemByKey(amplience.homepageDeliveryKey);
 ```
 
 You can instantiate an Amplience Client using your account details and then get content. For instance:
