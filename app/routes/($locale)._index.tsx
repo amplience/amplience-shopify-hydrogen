@@ -39,8 +39,11 @@ export default function Homepage() {
           marginTop: '30px',
         }}
       >
+        <h2 className="mb-4 text-xl font-bold md:text-2xl">
+          Sample Amplience Blog Post
+        </h2>
         <Link to={`/blog/${blogPostDeliveryKey}`}>
-          Link to a sample blog post
+          Click here to see a sample Blog Post from Amplience
         </Link>
       </div>
     </div>
