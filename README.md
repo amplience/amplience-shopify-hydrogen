@@ -39,12 +39,15 @@ Hydrogen is Shopify’s stack for headless commerce. Hydrogen is designed to dov
   - eComm Toolkit
 - [Amplience Components List](./docs/amplience/amplience-components-list.md)
   - Blog
-  - Blog Snippet
-  - Image
-  - Text
-  - Sample Banner
+  - Card
+  - Card List
   - Curated Product Grid
   - Dynamic Product Grid
+  - Homepage (Site Pages hierarchy root node)
+  - Image
+  - Rich Text
+  - Simple Banner
+  - Text
   - Amplience Content wrapper
 - [Amplience Slots List](./docs/amplience/amplience-slots-list.md)
   - Flexible Slot
