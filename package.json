@@ -25,7 +25,6 @@
     "@shopify/remix-oxygen": "^2.0.2",
     "clsx": "^2.0.0",
     "dc-delivery-sdk-js": "^0.12.1",
-    "dc-management-sdk-js": "github:amplience/dc-management-sdk-js",
     "dc-visualization-sdk": "^1.1.0",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
@@ -38,6 +37,7 @@
     "yargs": "^15.4.1"
   },
   "devDependencies": {
+    "dc-management-sdk-js": "github:amplience/dc-management-sdk-js",
     "@remix-run/dev": "2.1.0",
     "@remix-run/eslint-config": "2.1.0",
     "@shopify/oxygen-workers-types": "^4.0.0",
