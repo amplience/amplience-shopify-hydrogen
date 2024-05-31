@@ -23,7 +23,7 @@ Hydrogen is Shopify’s stack for headless commerce. Hydrogen is designed to dov
 ### 🏁 Quick Start
 
 - [Getting Started](./docs/amplience/getting-started.md)
-- [Deploying to Vercel](./docs/amplience/deploying-to-vercel.md)
+- [Deploying](./docs/amplience/deploying.md)
 
 ### ⚙️ Core Functionalities
 
