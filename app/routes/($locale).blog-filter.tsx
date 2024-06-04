@@ -37,9 +37,7 @@ export default function Blogs() {
           ? blogs.responses.map((blog, index) => {
               return (
                 <div className="collection-item" key={index}>
-                  <Link to={`/blog/${blog.content._meta.deliveryKey}`}>
-                    <BlogCard {...blog.content} />
-                  </Link>
+                  <BlogCard {...blog} />
                 </div>
               );
             })

@@ -1,9 +1,11 @@
+import {Link} from '@remix-run/react';
 import AmplienceContent from '../wrapper/AmplienceContent';
 
 export type BlogSnippetProps = {
   image: any;
   title: string;
   blogdate: string;
+  category: string[];
   author: string;
   description: string;
 };
@@ -11,6 +13,7 @@ export type BlogSnippetProps = {
 const BlogSnippet = ({
   image,
   title,
+  category = [],
   blogdate,
   author,
   description,
@@ -23,14 +26,28 @@ const BlogSnippet = ({
 
   return (
     <>
+      <AmplienceContent content={image} />
       <div>
-        <AmplienceContent content={image}></AmplienceContent>
+        {category?.length ? <small>{category.join(', ')}</small> : null}
+        {title ? (
+          <>
+            <h2 className="mb-4 mt-4 text-2xl font-black lg:text-3xl">
+              <Link to="/blog-filter">Blogs</Link>
+            </h2>
+            <h1 className="mb-4 mt-4 text-3xl font-black lg:text-5xl">
+              {title}
+            </h1>
+          </>
+        ) : null}
+        <div>
+          {author ? <h4 className="mb-2 text-gray-500">{author}</h4> : null}
+          {blogdate ? <h4 className="mb-2 text-gray-500">{blogdate}</h4> : null}
+        </div>
+
+        {description ? (
+          <h2 className="mb-4 text-xl font-bold lg:text-2xl">{description}</h2>
+        ) : null}
       </div>
-      <h1>{title}</h1>
-      <h2>
-        {publishedDate} &middot; {author}
-      </h2>
-      <h3>{description}</h3>
     </>
   );
 };
