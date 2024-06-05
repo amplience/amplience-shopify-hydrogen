@@ -1,7 +1,7 @@
 import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, type MetaFunction, Link, Await} from '@remix-run/react';
 import AmplienceContent from '~/components/amplience/wrapper/AmplienceContent';
-import {DefaultContentBody} from 'dc-delivery-sdk-js';
+import type {DefaultContentBody} from 'dc-delivery-sdk-js';
 
 export const meta: MetaFunction = () => {
   return [{title: 'Hydrogen | Home'}];

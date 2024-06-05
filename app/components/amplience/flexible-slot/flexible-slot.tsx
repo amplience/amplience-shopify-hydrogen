@@ -1,4 +1,4 @@
-import {DefaultContentBody} from 'dc-delivery-sdk-js';
+import type {DefaultContentBody} from 'dc-delivery-sdk-js';
 
 import AmplienceContent from '../wrapper/AmplienceContent';
 

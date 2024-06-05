@@ -1,15 +1,13 @@
-import {Arguments, Argv} from 'yargs';
-import {Context} from './cli';
-import {
-  ContentType,
+import type {Arguments, Argv} from 'yargs';
+import type {Context} from './cli';
+import type {
   ContentTypeVisualization,
-  DynamicContent,
   HalResource,
   Page,
   Pageable,
-  Settings,
   Sortable,
 } from 'dc-management-sdk-js';
+import {ContentType, DynamicContent, Settings} from 'dc-management-sdk-js';
 const contentTypesPatch: any = require('../../config/amplience/default');
 
 export const connectSDK = (context: Context) => {
@@ -149,13 +147,10 @@ export const updateHandler = async (
     console.log(`... updating settings`);
     await hub.related.settings.update(
       new Settings({
-        applications: applications,
+        applications,
       }),
     );
   }
 
-  try {
-    console.log(`Done!`);
-  } finally {
-  }
+  console.log(`Done!`);
 };

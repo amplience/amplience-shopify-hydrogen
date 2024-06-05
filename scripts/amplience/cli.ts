@@ -1,9 +1,6 @@
 import Yargs from 'yargs/yargs';
-import {Arguments, Argv} from 'yargs';
-import {
-  updateArgs,
-  updateHandler as updateHandler,
-} from './update-content-types';
+import type {Arguments, Argv} from 'yargs';
+import {updateArgs, updateHandler} from './update-content-types';
 
 export type Context = {
   automationDir: string;
