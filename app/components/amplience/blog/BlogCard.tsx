@@ -1,6 +1,7 @@
 import type {DefaultContentBody} from 'dc-delivery-sdk-js';
 import AmplienceContent from '../wrapper/AmplienceContent';
 import {Link} from '@remix-run/react';
+import Image from '../image/Image';
 
 export type BlogCardProps = {
   content?: DefaultContentBody;
@@ -10,9 +11,15 @@ const BlogCard = ({content}: BlogCardProps) => {
   return (
     <>
       <Link to={`/blog/${content?._meta.deliveryKey}`}>
-        <AmplienceContent content={content?.snippet.image} />
+        {content && (
+          <Image
+            image={content.snippet.image.image}
+            query="w=500&sm=aspect&aspect=16:9"
+            _meta={content.snippet.image.image._meta}
+          />
+        )}
         {content?.snippet.title ? (
-          <h1 className="mb-4 mt-4 text-xl font-black lg:text-2xl">
+          <h1 className="truncate mb-4 mt-4 text-xl font-black lg:text-2xl">
             {content.snippet.title}
           </h1>
         ) : null}
@@ -25,7 +32,7 @@ const BlogCard = ({content}: BlogCardProps) => {
           ) : null}
         </div>
         {content?.snippet.description ? (
-          <p className="mb-4">{content.snippet.description}</p>
+          <p className="mb-4 truncate">{content.snippet.description}</p>
         ) : null}
       </Link>
     </>

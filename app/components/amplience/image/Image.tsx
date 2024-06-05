@@ -2,7 +2,7 @@ import {buildSrcUrl} from './Image.utils';
 import type {DefaultContentBody} from 'dc-delivery-sdk-js';
 
 type ImageProps = {
-  image: any;
+  image: DefaultContentBody;
   query?: any;
   format?: string;
   imageAltText?: string;
