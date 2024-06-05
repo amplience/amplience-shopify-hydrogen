@@ -1,5 +1,6 @@
 import {Link} from '@remix-run/react';
 import AmplienceContent from '../wrapper/AmplienceContent';
+import Image from '../image/Image';
 
 export type BlogSnippetProps = {
   image: any;
@@ -26,7 +27,11 @@ const BlogSnippet = ({
 
   return (
     <>
-      <AmplienceContent content={image} />
+      <Image
+        query="w=1500&sm=aspect&aspect=16:9"
+        image={image.image}
+        _meta={image._meta}
+      />
       <div>
         {category?.length ? <small>{category.join(', ')}</small> : null}
         {title ? (
