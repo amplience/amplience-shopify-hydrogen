@@ -20,6 +20,7 @@ export type Context = {
 };
 
 const configureYargs = (yargInstance: Argv): Promise<Arguments> => {
+  // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve): Promise<void> => {
     let failInvoked = false;
     const isYError = (err?: Error | string): boolean =>

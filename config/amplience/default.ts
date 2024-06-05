@@ -1,4 +1,4 @@
-module.exports = {
+export const contentTypesPatch = {
   defaultVisualizations: [
     {
       label: 'Shopify Hydrogen Production',
