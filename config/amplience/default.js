@@ -28,8 +28,7 @@ module.exports = {
         'https://demostore.amplience.com/content/curated-product-grid',
     },
     {
-      contentTypeUri:
-        'https://demostore.amplience.com/content/product-grid',
+      contentTypeUri: 'https://demostore.amplience.com/content/product-grid',
     },
     {
       contentTypeUri: 'https://demostore.amplience.com/slots/flexible',
@@ -50,16 +49,16 @@ module.exports = {
       contentTypeUri: 'https://demostore.amplience.com/site/pages',
       visualizations: [
         {
-          "label": "Shopify Hydrogen Production",
-          "templatedUri": "{{prodUrl}}?vse={{vse.domain}}",
-          "default": false
+          label: 'Shopify Hydrogen Production',
+          templatedUri: '{{prodUrl}}?vse={{vse.domain}}',
+          default: false,
         },
         {
-          "label": "Shopify Hydrogen Development",
-          "templatedUri": "http://localhost:3000?vse={{vse.domain}}",
-          "default": false
-        }
-      ]
+          label: 'Shopify Hydrogen Development',
+          templatedUri: 'http://localhost:3000?vse={{vse.domain}}',
+          default: false,
+        },
+      ],
     },
   ],
   applications: [
@@ -70,6 +69,6 @@ module.exports = {
     {
       name: 'Shopify Hydrogen Development',
       templatedUri: 'http://localhost:3000?vse={{vse.domain}}',
-    }
+    },
   ],
 };
