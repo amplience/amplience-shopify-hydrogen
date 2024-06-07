@@ -20,14 +20,12 @@ You can follow the guide on the `dc-integration-middleware` project to generate 
 
 Main Amplience configuration is set through an environment variable. You can set it locally in a `.env` file:
 
-| Environment variable   | Description                |
-| ---------------------- | -------------------------- |
-| HUB_NAME               | Dynamic Content Hub Name   |
-| HOMEPAGE_DELIVERY_KEY  | Slot key or the homepage   |
-| BLOG_POST_DELIVERY_KEY | Delivery key for blog post |
+| Environment variable  | Description              |
+| --------------------- | ------------------------ |
+| HUB_NAME              | Dynamic Content Hub Name |
+| HOMEPAGE_DELIVERY_KEY | Slot key or the homepage |
 
 Slot key is usually `homepage` in the case of Demostore automation.
-Example blog post key from Demostore is `post/anna-barnett-for-the-love-of-food`.
 
 ### eComm Toolkit extension
 
