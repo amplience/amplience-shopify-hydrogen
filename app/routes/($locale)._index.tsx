@@ -18,16 +18,14 @@ export async function loader({context}: LoaderFunctionArgs) {
   const allItemIds = flexibleSlot.slots.map((content: any) => content.id);
   const allItems = (await amplienceClient.getContentItemsById(allItemIds))
     .responses;
-  const blogPostDeliveryKey = amplience.blogPostDeliveryKey;
 
   return defer({
     allItems,
-    blogPostDeliveryKey,
   });
 }
 
 export default function Homepage() {
-  const {allItems, blogPostDeliveryKey} = useLoaderData<typeof loader>();
+  const {allItems} = useLoaderData<typeof loader>();
 
   return (
     <div className="home">
@@ -38,14 +36,7 @@ export default function Homepage() {
         style={{
           marginTop: '30px',
         }}
-      >
-        <h2 className="mb-4 text-xl font-bold md:text-2xl">
-          Sample Amplience Blog Post
-        </h2>
-        <Link to={`/blog/${blogPostDeliveryKey}`}>
-          Click here to see a sample Blog Post from Amplience
-        </Link>
-      </div>
+      ></div>
     </div>
   );
 }

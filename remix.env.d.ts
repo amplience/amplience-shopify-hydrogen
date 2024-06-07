@@ -61,7 +61,6 @@ declare module '@shopify/remix-oxygen' {
       contentId: string;
       standaloneMode: boolean;
       homepageDeliveryKey: string;
-      blogPostDeliveryKey: string;
     };
     amplienceClient: ContentClient;
   }

@@ -88,7 +88,7 @@ export function HeaderMenu({
         style={activeLinkStyle}
         to="/blog-filter"
       >
-        Blog
+        Amplience Blog
       </NavLink>
     </nav>
   );
