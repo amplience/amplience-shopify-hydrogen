@@ -1,5 +1,4 @@
 import {Link} from '@remix-run/react';
-import AmplienceContent from '../wrapper/AmplienceContent';
 import Image from '../image/Image';
 
 export type BlogSnippetProps = {

@@ -1,5 +1,4 @@
 import type {DefaultContentBody} from 'dc-delivery-sdk-js';
-import AmplienceContent from '../wrapper/AmplienceContent';
 import {Link} from '@remix-run/react';
 import Image from '../image/Image';
 

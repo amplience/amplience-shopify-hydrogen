@@ -1,8 +1,4 @@
-import {
-  AppLoadContext,
-  json,
-  type LoaderFunctionArgs,
-} from '@shopify/remix-oxygen';
+import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, type MetaFunction} from '@remix-run/react';
 import BlogCard from '~/components/amplience/blog/BlogCard';
 import {
