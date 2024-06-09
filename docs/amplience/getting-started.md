@@ -132,6 +132,21 @@ You can also change visualisation URLs for a specific Content Type:
 
 ### Preview URL
 
+Preview Application URLs are also defined in the config file:
+
+```js
+  applications: [
+    {
+      name: 'Shopify Hydrogen Production',
+      templatedUri: '{{prodUrl}}?vse={{vse.domain}}',
+    },
+    {
+      name: 'Shopify Hydrogen Development',
+      templatedUri: 'http://localhost:3000?vse={{vse.domain}}',
+    },
+  ],
+```
+
 ## Install
 
 ```bash
