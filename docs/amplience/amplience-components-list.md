@@ -1,4 +1,6 @@
-# Amplience Components List
+# Amplience Components
+
+## Amplience Components list
 
 | Schema Id                                                    | React Component in `/app/components/amplience` | Description                                                         |
 | ------------------------------------------------------------ | ---------------------------------------------- | ------------------------------------------------------------------- |
@@ -9,3 +11,10 @@
 | https://demostore.amplience.com/content/text                 | `./image/Text`                                 | A basic text component using markdown                               |
 | https://demostore.amplience.com/content/blog                 | `./blog/Blog`                                  | Blog component including a Blog snippet and a list of content items |
 | https://demostore.amplience.com/content/blog-snippet         | `./blog-snippet/BlogSnippet`                   | Blog details component (date, title, etc.)                          |
+
+## Amplience Components rendering
+
+The components above all have a rendering UI. All the other Content Types from Demostore renders as JSON.
+
+![JSON Rendering](./media/json-rendering.png)
+
