@@ -17,6 +17,7 @@ Hydrogen is Shopify’s stack for headless commerce. Hydrogen is designed to dov
 - TypeScript and JavaScript flavors
 - Minimal setup of components and routes
 - Amplience Components
+- Automation script to update Content Types and Preview URLs in your Content Hub
 
 ## Amplience Contents
 
