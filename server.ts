@@ -1,5 +1,6 @@
 // Virtual entry point for the app
 import * as remixBuild from '@remix-run/dev/server-build';
+import {type HydrogenSession} from '@shopify/hydrogen';
 import {
   cartGetIdDefault,
   cartSetIdDefault,
@@ -36,7 +37,7 @@ export default {
       const waitUntil = executionContext.waitUntil.bind(executionContext);
       const [cache, session] = await Promise.all([
         caches.open('hydrogen'),
-        HydrogenSession.init(request, [env.SESSION_SECRET]),
+        AppSession.init(request, [env.SESSION_SECRET]),
       ]);
 
       const i18n = getLocaleFromRequest(request);
@@ -115,7 +116,12 @@ export default {
          * If the redirect doesn't exist, then `storefrontRedirect`
          * will pass through the 404 response.
          */
-        return storefrontRedirect({request, response, storefront});
+        return storefrontRedirect({
+          request,
+          response,
+          storefront,
+          matchQueryParams: true,
+        });
       }
 
       return response;
@@ -149,7 +155,7 @@ function getLocaleFromRequest(request: Request): I18nLocale {
  * Feel free to customize it to your needs, add helper methods, or
  * swap out the cookie-based implementation with something else!
  */
-export class HydrogenSession {
+export class AppSession implements HydrogenSession {
   #sessionStorage;
   #session;
 

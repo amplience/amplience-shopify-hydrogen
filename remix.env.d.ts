@@ -71,4 +71,6 @@ declare module '@shopify/remix-oxygen' {
   export interface SessionData {
     customerAccessToken: CustomerAccessToken;
   }
+
+  interface SessionData extends HydrogenSessionData {}
 }
