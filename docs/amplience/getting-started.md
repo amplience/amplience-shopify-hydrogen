@@ -147,6 +147,12 @@ Preview Application URLs are also defined in the config file:
   ],
 ```
 
+### Production URL
+
+You can find a deployed version of this project here: https://amplience-shopify-hydrogen-amplience.vercel.app
+
+You can use it for your Production visualisations and to test the integrated demonstration (images, content, blog posts, visualisation, preview, etc.).
+
 ## Install
 
 ```bash
