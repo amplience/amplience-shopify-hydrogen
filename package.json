@@ -37,7 +37,6 @@
     "yargs": "^15.4.1"
   },
   "devDependencies": {
-    "dc-management-sdk-js": "github:amplience/dc-management-sdk-js",
     "@graphql-codegen/cli": "^5.0.2",
     "@remix-run/dev": "^2.8.0",
     "@remix-run/eslint-config": "^2.8.0",
@@ -50,9 +49,10 @@
     "@total-typescript/ts-reset": "^0.4.2",
     "@types/eslint": "^8.4.10",
     "@types/lodash": "^4.17.4",
-    "@types/yargs": "^15.0.12",
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",
+    "@types/yargs": "^15.0.12",
+    "dc-management-sdk-js": "^2.0.0",
     "eslint": "^8.20.0",
     "eslint-plugin-hydrogen": "0.12.2",
     "postcss": "^8.4.21",
