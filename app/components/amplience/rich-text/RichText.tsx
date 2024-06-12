@@ -44,7 +44,11 @@ const RichText = ({text, align = 'left', header}: RichTextProps) => {
           switch (type) {
             case 'markdown':
               return (
-                <div key={index} className="my-5" style={{textAlign: align}}>
+                <div
+                  key={index}
+                  className="text-component my-5"
+                  style={{textAlign: align}}
+                >
                   {data && <ReactMarkdown>{data}</ReactMarkdown>}
                 </div>
               );

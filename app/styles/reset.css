@@ -137,6 +137,18 @@ ul {
   padding: 0;
 }
 
+.text-component ul {
+  list-style: disc;
+  margin: 0px;
+  padding-left: 40px;
+}
+
+.text-component ol {
+  list-style: decimal;
+  margin: 0px;
+  padding-left: 40px;
+}
+
 li {
   margin-bottom: 0.5rem;
 }
