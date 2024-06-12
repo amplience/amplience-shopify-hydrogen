@@ -30,6 +30,8 @@ declare global {
     PUBLIC_STORE_DOMAIN: string;
     PUBLIC_STOREFRONT_ID: string;
     HUB_NAME: string;
+    HOMEPAGE_DELIVERY_KEY: string;
+    BLOG_POST_DELIVERY_KEY: string;
   }
 
   /**
@@ -58,6 +60,7 @@ declare module '@shopify/remix-oxygen' {
       stagingHost: string;
       contentId: string;
       standaloneMode: boolean;
+      homepageDeliveryKey: string;
     };
     amplienceClient: ContentClient;
   }

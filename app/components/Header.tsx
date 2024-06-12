@@ -81,6 +81,15 @@ export function HeaderMenu({
           </NavLink>
         );
       })}
+      <NavLink
+        end
+        onClick={closeAside}
+        prefetch="intent"
+        style={activeLinkStyle}
+        to="/blog-filter"
+      >
+        Amplience Blog
+      </NavLink>
     </nav>
   );
 }

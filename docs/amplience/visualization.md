@@ -10,7 +10,7 @@ As the components can be in any location, we have set up a specific Visualizatio
 
 This route can be added to the Visualizations of your Amplience Content Types:
 
-`https://<your-app-domain-here>/{{locale}}/visualization?content={{content.sys.id}}&vse={{vse.domain}}&hub={{hub.name}}`
+`https://<your-app-domain-here>/{{locales}}/visualization?content={{content.sys.id}}&vse={{vse.domain}}&hub={{hub.name}}`
 
 ### Real Time Visualization
 

@@ -12,6 +12,7 @@ import DynamicProductGrid from '../dynamic-product-grid/DynamicProductGrid';
 import {type DefaultContentBody} from 'dc-delivery-sdk-js';
 import Blog from '../blog/Blog';
 import BlogSnippet from '../blog-snippet/BlogSnippet';
+import FlexibleSlot from '../flexible-slot/flexible-slot';
 
 const COMPONENT_MAPPING: {
   [key: string]: React.FC<any>;
@@ -20,8 +21,6 @@ const COMPONENT_MAPPING: {
   'https://demostore.amplience.com/content/image': Image,
   'https://demostore.amplience.com/content/video': Video,
   'https://demostore.amplience.com/content/simple-banner': SimpleBanner,
-  'https://demostore.amplience.com/content/simple-localized-banner':
-    SimpleBanner,
   'https://demostore.amplience.com/content/card': Card,
   'https://demostore.amplience.com/content/card-list': CardList,
   'https://demostore.amplience.com/content/split-block': SplitBlock,
@@ -34,15 +33,36 @@ const COMPONENT_MAPPING: {
   'https://demostore.amplience.com/content/product-grid': DynamicProductGrid,
   'https://demostore.amplience.com/content/blog': Blog,
   'https://demostore.amplience.com/content/blog-snippet': BlogSnippet,
+  'https://demostore.amplience.com/slots/flexible': FlexibleSlot,
 };
 
 const MappingNotFound = (content: DefaultContentBody) => {
   return (
-    <pre>
-      <code className="text-xs md:text-sm block break-words">
-        {JSON.stringify(content, null, 2)}
-      </code>
-    </pre>
+    <div
+      style={{
+        height: '400px',
+        backgroundColor: '#eee',
+        border: '1px solid black',
+        padding: '15px',
+        margin: '10px',
+      }}
+    >
+      <h3 className="text-xl font-black">{content._meta?.name}</h3>
+      <h4 className="italic">{content._meta?.deliveryId}</h4>
+      <p className="mb-4 mt-4">
+        No render available for this component. Showing JSON content.
+      </p>
+      <pre
+        style={{
+          maxHeight: '250px',
+          overflowY: 'scroll',
+        }}
+      >
+        <code className="block break-words text-xs md:text-sm">
+          {JSON.stringify(content, null, 2)}
+        </code>
+      </pre>
+    </div>
   );
 };
 

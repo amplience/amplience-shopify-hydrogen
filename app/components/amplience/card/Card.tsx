@@ -1,9 +1,5 @@
-import {
-  AmplienceImage,
-  ImageScaleFit,
-  ImageScaleMode,
-  ImageTransformations,
-} from '../image/Image.types';
+import type {AmplienceImage, ImageTransformations} from '../image/Image.types';
+import {ImageScaleFit, ImageScaleMode} from '../image/Image.types';
 import {useEffect, useRef, useState} from 'react';
 import DefaultAdaptiveImageSkeleton from '../adaptive-image/DefaultAdaptiveImageSkeleton';
 import DefaultAdaptiveImageRef from '../adaptive-image/DefaultAdaptiveImage';

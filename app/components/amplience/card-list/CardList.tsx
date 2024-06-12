@@ -13,7 +13,13 @@ const CardList = ({header, cards}: CardListProps) => {
       {cards && (
         <div className="flex flex-col md:flex-row">
           {cards.map((card: DefaultContentBody) => {
-            return <Card key={card?._meta?.deliveryId} {...card} />;
+            return (
+              <Card
+                image={card.image}
+                key={card?._meta?.deliveryId}
+                {...card}
+              />
+            );
           })}
         </div>
       )}

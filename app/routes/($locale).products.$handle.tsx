@@ -63,9 +63,14 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
   const gid = product.id.split('/');
   const productId = gid[gid.length - 1];
 
-  const richText = (
-    await amplienceClient.getContentItemByKey(`product/${productId}`)
-  ).toJSON();
+  let richText;
+  try {
+    (richText = await amplienceClient.getContentItemByKey(
+      `product/${productId}`,
+    )).toJSON();
+  } catch (e) {
+    console.log(e);
+  }
 
   const firstVariant = product.variants.nodes[0];
   const firstVariantIsDefault = Boolean(
