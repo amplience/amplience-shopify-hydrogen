@@ -62,7 +62,6 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
 
   const gid = product.id.split('/');
   const productId = gid[gid.length - 1];
-  console.log(productId);
 
   let richText;
   try {
