@@ -5,7 +5,7 @@ Hydrogen is Shopify’s stack for headless commerce. Hydrogen is designed to dov
 - [Check out Hydrogen docs](https://shopify.dev/custom-storefronts/hydrogen)
 - [Get familiar with Remix](https://remix.run/docs/en/v1)
 
-`amplience-shopify-hydrogen` project is intended for DEMO PURPOSES ONLY, and not for production-optimized environments. It will give developers the foundation to integrate Shopify Hydrogen and Amplience Dynamic Content.
+`amplience-shopify-hydrogen` project is intended for **DEMO PURPOSES ONLY**, and not for production-optimized environments. It will give developers the foundation to integrate Shopify Hydrogen and Amplience Dynamic Content.
 
 ## What's included
 
