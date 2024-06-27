@@ -4,6 +4,7 @@ import AmplienceContent from '../wrapper/AmplienceContent';
 import {getImageURL} from '../image/Image.utils';
 import {type AmplienceImage} from '../image/Image.types';
 import type {DefaultContentBody} from 'dc-delivery-sdk-js';
+import {Link} from '@remix-run/react';
 
 type RichTextMarkdown = {
   type: 'markdown';
@@ -43,7 +44,11 @@ const RichText = ({text, align = 'left', header}: RichTextProps) => {
           switch (type) {
             case 'markdown':
               return (
-                <div key={index} className="my-5" style={{textAlign: align}}>
+                <div
+                  key={index}
+                  className="text-component my-5"
+                  style={{textAlign: align}}
+                >
                   {data && <ReactMarkdown>{data}</ReactMarkdown>}
                 </div>
               );

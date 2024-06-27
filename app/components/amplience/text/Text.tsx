@@ -1,3 +1,4 @@
+import {Link} from '@remix-run/react';
 import {type Property} from 'csstype';
 import ReactMarkdown from 'markdown-to-jsx';
 
@@ -9,7 +10,7 @@ type TextProps = {
 const Text = ({text, align}: TextProps) => {
   return (
     <div
-      className="[&_ul]:block [&_ul]:list-disc [&_ul]:ps-[40px] [&_ul]:ms-[0px] [&_ul]:me-[0px] [&_img]:w-full"
+      className="text-component [&_ul]:block [&_ul]:list-disc [&_ul]:ps-[40px] [&_ul]:ms-[0px] [&_ul]:me-[0px] [&_img]:w-full"
       style={{textAlign: align}}
     >
       {text && <ReactMarkdown>{text}</ReactMarkdown>}
