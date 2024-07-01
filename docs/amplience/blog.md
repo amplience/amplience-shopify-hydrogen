@@ -27,7 +27,7 @@ This page uses the [Amplience Filter API](https://amplience.com/developers/docs/
 
 You can sort by the following values, using ascending or descending order:
 
-- default
+- date
 - author
 - title
 

@@ -45,24 +45,12 @@ From there you can update the Installation Parameters of the eComm Toolkit exten
 
 ### Content Types visualisation URL
 
-You wil need to update / add new visualisation URLs:
+You will need to update / add new visualisation URLs:
 
-- BigCommerce Catalyst Development
-- BigCommerce Catalyst Production
+- Shopify Hydrogen Development
+- Shopify Hydrogen Production
 
-Here is the list of Content Types to update:
-
-- Blog
-- Card
-- Card List
-- Curated Product Grid
-- Dynamic Product Grid
-- Flexible Slot
-- Homepage (Site Pages hierarchy root node)
-- Image
-- Rich Text
-- Simple Banner
-- Text
+Here is the list of Content Types to update: https://github.com/amplience/amplience-shopify-hydrogen/blob/main/docs/amplience/amplience-components-list.md
 
 The URL to use is the following:
 
@@ -96,13 +84,13 @@ Default visualisations are stored in the `defaultVisualizations` property:
 ```js
 defaultVisualizations: [
   {
-    label: 'BigCommerce Catalyst Production',
+    label: 'Shopify Hydrogen Production',
     templatedUri:
       '{{prodUrl}}/amplience/visualization?contentId={{content.sys.id}}&stagingEnvironment={{vse.domain}}&locale={{locales}}',
     default: false,
   },
   {
-    label: 'BigCommerce Catalyst Development',
+    label: 'Shopify Hydrogen Development',
     templatedUri:
       'https://localhost:3000/amplience/visualization?contentId={{content.sys.id}}&stagingEnvironment={{vse.domain}}&locale={{locales}}',
     default: false,
@@ -117,12 +105,12 @@ You can also change visualisation URLs for a specific Content Type:
   contentTypeUri: 'https://demostore.amplience.com/site/pages',
   visualizations: [
     {
-      label: 'BigCommerce Catalyst Production',
+      label: 'Shopify Hydrogen Production',
       templatedUri: '{{prodUrl}}?vse={{vse.domain}}',
       default: false,
     },
     {
-      label: 'BigCommerce Catalyst Development',
+      label: 'Shopify Hydrogen Development',
       templatedUri: 'https://localhost:3000?vse={{vse.domain}}',
       default: false,
     },
