@@ -1,18 +1,18 @@
 # How to port Amplience into an existing Hydrogen app
 
-This guide aimed at existing Hydrogen apps and the steps needed to fetch and visualize Amplience content.
+This guide is aimed at existing Hydrogen apps and the steps needed to fetch and visualize Amplience content.
 
 ## Add Amplience environment variables
 
 Update `.env.local` to include the Amplience hub you want to use:
 
 ```env
-AMPLIENCE_HUBNAME=youhubnamehere
+AMPLIENCE_HUBNAME=yourhubnamehere
 ```
 
 ## Implement the Amplience client
 
-To fetch any content from Amplience the first thing you will need a client to make the requests.
+To fetch any content from Amplience the first thing you will need is a client to make the requests.
 
 Install Amplience client dependencies:
 
@@ -106,7 +106,7 @@ interface AppLoadContext {
 
 With the client installed you can use it to fetch Amplience content on any page.
 
-In a page loader function get the amplience client from the loader context:
+In a page loader function get the Amplience client from the loader context:
 
 ```js
 const {amplienceClient} = context;
@@ -130,19 +130,19 @@ Next install Amplience component depedencies:
 npm install markdown-to-jsx clsx @heroicons/react
 ```
 
-Copy the amplience components directory `./components/amplience`:
+Copy the Amplience components directory `./components/amplience`:
 
 ```bash
 cp -R '/path/to/amplience-shopify-app/app/components/amplience' '/path/to/existing-hydrogen-app/app/components/amplience'
 ```
 
-Now you can use render Amplience content by simply passing Amplienc content to the `AmplenceContent` component:
+Now you can render Amplience content by simply passing Amplienc content to the `AmplenceContent` component:
 
 ```js
 <AmplienceContent content={simpleBanner} />
 ```
 
-Make sure amplience media can be requested by updating `createContentSecurityPolicy` options in `./app/entry.server.tsx` to include the following:
+Make sure Amplience media can be requested by updating `createContentSecurityPolicy` options in `./app/entry.server.tsx` to include the following:
 
 ```js
 {
